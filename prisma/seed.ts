@@ -1,6 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { connect } from "http2";
-
 
 const prisma = new PrismaClient()
 
@@ -35,6 +33,17 @@ async function main() {
       }
     })
   }
+  await prisma.student.create({
+    data:{
+      username: `Student`,
+      firstname: `Student`,
+      lastname: `Student`,
+      birthday: new Date(new Date().setFullYear(new Date().getFullYear() - 10)),
+      gender: 10 % 2 == 0 ? 'Male' : 'Female',
+      contact: `A0000`,
+      classId: 2
+    }
+  })
 
   // Subject Creation
   const array = [
@@ -76,7 +85,7 @@ async function main() {
   }
 
   //Attendence Creation
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 6; i++) {
     await prisma.attendance.create({
       data: {
         studentId: i,
@@ -112,6 +121,7 @@ async function main() {
       classId: 4
     }
   })
+  
 }
 
 

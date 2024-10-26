@@ -82,7 +82,7 @@ const menuItem = [
 export const Menu = () => {
   return (
     <>
-      <div className=" bg-white flex h-screen flex-col gap-4 p-2">
+      <div className=" bg-gray-600 flex h-screen flex-col gap-4 p-2">
         {menuItem.map((i) => (
           <div key={i.title} className="flex flex-col gap-4 w-full  ">
             <span className="font-semibold text-gray-500 hidden lg:block">{i.title}</span>

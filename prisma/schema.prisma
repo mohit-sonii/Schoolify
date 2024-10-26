@@ -51,6 +51,7 @@ model Result {
 
 model Exam {
   id        Int      @id @default(autoincrement())
+  title String
   lessonId Int
   lesson    Lesson   @relation(fields: [lessonId], references: [id])
   results   Result[]

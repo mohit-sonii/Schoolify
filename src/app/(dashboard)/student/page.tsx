@@ -1,10 +1,13 @@
+import Create from "@/components/buttons/Create";
 
-
-const page =()=>{
+const page = () => {
   return (
     <>
-    This is Student page
+      <div className="bg-red-400">
+        <Create innerText='Student'/>
+      </div>
     </>
   )
 }
-export  default page
+
+export default page;
