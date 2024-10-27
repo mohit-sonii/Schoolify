@@ -1,135 +1,170 @@
-import { PrismaClient } from "@prisma/client";
+import { EventType, Gender, Group, PrismaClient } from "@prisma/client"
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
-async function main() {
-  //admin creation
+const main = async () => {
+  // admin creation
   await prisma.admin.create({
     data: {
       username: "mohit"
     }
   })
 
-
   //class Creation
-  for (let i = 1; i <= 5; i++) {
-    await prisma.class.create({
-      data: {
-        name: `${i}A`,
-      }
-    })
-  }
-  // student creation
-  for (let i = 1; i <= 5; i++) {
-    await prisma.student.create({
-      data: {
-        username: `Student${i}`,
-        firstname: `Student${i}`,
-        lastname: `Student${i}`,
-        birthday: new Date(new Date().setFullYear(new Date().getFullYear() - 10)),
-        gender: i % 2 == 0 ? 'Male' : 'Female',
-        contact: `A0000${i}`,
-        classId: i
-      }
-    })
-  }
-  await prisma.student.create({
-    data:{
-      username: `Student`,
-      firstname: `Student`,
-      lastname: `Student`,
-      birthday: new Date(new Date().setFullYear(new Date().getFullYear() - 10)),
-      gender: 10 % 2 == 0 ? 'Male' : 'Female',
-      contact: `A0000`,
-      classId: 2
+  await prisma.class.createMany({
+    data: [{
+      className: '10B',
+      group: Group.Lily
+    },
+    {
+      className: '11A',
+      group: Group.Sunflower
     }
+    ]
   })
 
-  // Subject Creation
-  const array = [
-    { name: 'Maths' },
-    { name: 'Science' },
-    { name: 'Programming' },
-    { name: 'DevOops' },
-    { name: 'JavaScript' },
-  ]
-  for (const value of array) {
-    await prisma.subject.create({ data: value })
-  }
-
-  //Teacher Creation
-  for (let i = 1; i <= 5; i++) {
-    await prisma.teacher.create({
-      data: {
-        id: i,
-        firstname: `Teacher${i}`,
-        lastname: `LastName`,
-        gender: i % 3 == 0 ? 'Male' : 'Female',
-        username: `${i}A`,
-        contact: `1245785${i}`,
-        address: 'Kuva',
+  // Student Creation
+  await prisma.student.createMany({
+    data: [
+      {
+        username: "first",
+        firstname: "alex",
+        lastname: "rus",
+        motherName: "angel",
+        fatherName: "rolex",
+        gender: Gender.Male,
+        contactNo: '123456789',
+        address: "abc",
+        classId: 1
+      },
+      {
+        username: "second",
+        firstname: "alex",
+        lastname: "rus",
+        motherName: "angel",
+        fatherName: "rolex",
+        gender: Gender.Male,
+        contactNo: '123456789',
+        address: "abc",
+        classId: 2
       }
-    })
-  }
+    ]
+  })
 
-  // Lesson Creation
-  for (let i = 1; i <= 5; i++) {
-    await prisma.lesson.create({
-      data: {
-        name: `Lesson${i}`,
-        classId: i,
-        subjectId: i,
-        teacherId: i
+  //teacher creation
+  await prisma.teacher.createMany({
+    data: [
+      {
+        username: 'firstTeacher',
+        firstname: 'First',
+        lastname: 'lastname',
+        qualification: 'BCom',
+        classId: 1
+      },
+      {
+        username: 'secondTeacher',
+        firstname: 'Second',
+        lastname: 'lastname',
+        qualification: 'BCom',
+        classId: 2
       }
-    })
-  }
+    ]
+  })
 
-  //Attendence Creation
-  for (let i = 1; i <= 6; i++) {
-    await prisma.attendance.create({
-      data: {
-        studentId: i,
-        present: i % 4 == 0 ? true : false
+  //subject creation
+  await prisma.subject.createMany({
+    data: [
+      {
+        subjectName: 'Maths',
+        teacherId: 1,
+        classId: 1
+      },
+      {
+        subjectName: 'Science',
+        teacherId: 1,
+        classId: 2
+      },
+      {
+        subjectName: 'Social Science',
+        teacherId: 2,
+        classId: 1
+      },
+      {
+        subjectName: 'English',
+        teacherId: 2,
+        classId: 2
       }
-    })
-  }
-
-  // Exam Creation
-  for (let i = 1; i <= 5; i++) {
-    await prisma.exam.create({
-      data: {
-        id: i + 10,
-        lessonId: i
-      }
-    })
-  }
-  //Result Creation
-  for (let i = 1; i <= 5; i++) {
-    await prisma.result.create({
-      data: {
-        score: i + 100,
-        studentId: i,
-        examId: i + 10
-      }
-    })
-  }
-
+    ]
+  })
   //event creation
-  await prisma.event.create({
-    data: {
-      name: 'Mon Vart',
-      classId: 4
-    }
+  await prisma.event.createMany({
+    data: [
+      {
+        typeOfEvent: EventType.General,
+        startDate: new Date('2024-10-26T10:00:00Z'),
+        endDate: new Date('2024-10-26T10:00:00Z'),
+      },
+      {
+        typeOfEvent: EventType.Specific,
+        startDate: new Date('2024-11-02T10:00:00Z'),
+        endDate: new Date('2024-11-02T10:00:00Z'),
+        classId: 1
+      }
+    ]
   })
-  
+
+  //fee creation
+  await prisma.fee.createMany({
+    data: [
+      {
+        amount: 500,
+        classId: 1
+      }, {
+        amount: 600,
+        classId: 2
+      }
+    ]
+  })
+
+  // result creation
+  await prisma.result.createMany({
+    data: [
+      {
+        stuId: 1
+      },
+      {
+        stuId: 2
+      }
+    ]
+  })
+
+  //exam creation
+  await prisma.exam.createMany({
+    data: [
+      {
+        startTime: new Date('2024-11-02T10:00:00Z'),
+        endTime: new Date('2024-11-02T10:00:00Z'),
+        classId: 1,
+        subjectId: 1,
+        resultId: 1
+      },
+      {
+        startTime: new Date('2024-11-02T10:00:00Z'),
+        endTime: new Date('2024-11-02T10:00:00Z'),
+        classId: 2,
+        subjectId: 2,
+        resultId: 2
+      }
+    ]
+  })
+
 }
 
-
 main()
-  .then(async () => {
-    await prisma.$disconnect()
-  }).catch(async (e) => {
-    console.log(e);
-    prisma.$disconnect();
-    process.exit(1);
+  .then(() => {
+    prisma.$disconnect()
+  }).catch((error: any) => {
+    prisma.$disconnect()
+    console.log(error)
+    process.exit(1)
   })

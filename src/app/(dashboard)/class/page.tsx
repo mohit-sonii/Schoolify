@@ -1,5 +1,5 @@
 import Create from "@/components/buttons/Create";
-import ClassForm from "@/components/Forms/ClassForm";
+// import ClassForm from "@/components/Forms/ClassForm";
 
 const page = () => {
   
@@ -7,7 +7,6 @@ const page = () => {
     <>
       <div className="bg-red-400">
         <Create innerText='Class'/>
-        {/* <ClassForm type="create"/> */}
       </div>
     </>
   )
