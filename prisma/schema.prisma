@@ -75,7 +75,6 @@ model Subject {
   classId     Int
   class       Class   @relation(fields: [classId], references: [id])
   exam        Exam[]
-  
 }
 
 model Exam {
@@ -98,8 +97,10 @@ enum EventType {
 model Event {
   id          Int       @id @default(autoincrement())
   typeOfEvent EventType
+  eventName   String
   startDate   DateTime
   endDate     DateTime
+  description String
   classId     Int?
   class       Class?    @relation(fields: [classId], references: [id])
 }

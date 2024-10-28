@@ -4,6 +4,7 @@ import prisma from '@/utils/db'
 import Image from 'next/image'
 
 const AttendanceChartContainer = async () => {
+
   const data = await prisma.$transaction([
     prisma.attendance.count({
       where: {
@@ -12,20 +13,14 @@ const AttendanceChartContainer = async () => {
     }),
     prisma.attendance.count()
   ])
+  
   return (
     <>
       <div className="w-full h-full flex flex-col gap-4 ">
         <div className="flex flex-col justify-center gap-1">
           <div className='flex justify-between items-center'>
             <h1 className="font-medium text-sm flex flex-col">Total Students</h1>
-            <button>
-              <Image
-                src="/more.png"
-                width={12}
-                height={12}
-                alt="More"
-              />
-            </button>
+            
           </div>
           {/* <span className="text-2xl font-bold">{330 + 400}</span> */}
           <span className="text-2xl font-bold">{data[1]}</span>

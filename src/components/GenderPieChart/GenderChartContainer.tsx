@@ -1,27 +1,23 @@
 import prisma from "@/utils/db"
 import GenderChart from "./GenderChart"
 import Image from 'next/image'
+
 const GenderChartContainer = async () => {
+
   const data = await prisma.student.groupBy({
     by: ["gender"],
     _count: true,
   })
   const boys = data.find((d) => d.gender === 'Male')?._count || 0
   const girls = data.find((d) => d.gender === 'Female')?._count || 0
+  
   return (
     <>
       <div className="w-full h-full flex flex-col gap-4 ">
         <div className="flex flex-col justify-center gap-1">
           <div className="flex items-center justify-between">
             <h1 className="font-medium text-sm flex flex-col">Total Students</h1>
-            <button>
-              <Image
-                src="/more.png"
-                width={12}
-                height={12}
-                alt="More"
-              />
-            </button>
+            
           </div>
           {/* <span className="text-2xl font-bold">{330 + 400}</span> */}
           <span className="text-2xl font-bold">{boys + girls}</span>

@@ -11,8 +11,8 @@ const NavBar = () => {
       </div>
       <div className='flex gap-6 w-auto items-center justify-center'>
         <div className='flex flex-col'>
-          <span>Username</span>
-          <span className='self-end'> Role</span>
+          <span className=" font-bold">Mohit</span>
+          <span className='self-end text-[8px]'>Admin</span>
         </div>
         <div className='w-max h-max'>
           <Image src={'/avatar.png'} alt="" width={14} height={14} className='rounded-full' />

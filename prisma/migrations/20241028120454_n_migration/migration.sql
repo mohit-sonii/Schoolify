@@ -82,8 +82,10 @@ CREATE TABLE "Exam" (
 CREATE TABLE "Event" (
     "id" SERIAL NOT NULL,
     "typeOfEvent" "EventType" NOT NULL,
+    "eventName" TEXT NOT NULL,
     "startDate" TIMESTAMP(3) NOT NULL,
     "endDate" TIMESTAMP(3) NOT NULL,
+    "description" TEXT NOT NULL,
     "classId" INTEGER,
 
     CONSTRAINT "Event_pkey" PRIMARY KEY ("id")

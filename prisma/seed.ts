@@ -100,15 +100,19 @@ const main = async () => {
   await prisma.event.createMany({
     data: [
       {
+        eventName: 'Independence Day Cle',
         typeOfEvent: EventType.General,
         startDate: new Date('2024-10-26T10:00:00Z'),
         endDate: new Date('2024-10-26T10:00:00Z'),
+        description: 'Independance Day Celebration'
       },
       {
+        eventName: 'One piece',
         typeOfEvent: EventType.Specific,
         startDate: new Date('2024-11-02T10:00:00Z'),
         endDate: new Date('2024-11-02T10:00:00Z'),
-        classId: 1
+        classId: 1,
+        description: 'Tour'
       }
     ]
   })
@@ -154,6 +158,19 @@ const main = async () => {
         classId: 2,
         subjectId: 2,
         resultId: 2
+      }
+    ]
+  })
+
+  //attendance creation
+  await prisma.attendance.createMany({
+    data: [
+      {
+        studentAttendanceId: 1,
+        present: true
+      }, {
+        studentAttendanceId: 2,
+        present: true
       }
     ]
   })

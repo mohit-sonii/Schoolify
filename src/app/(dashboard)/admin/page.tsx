@@ -1,7 +1,8 @@
 import Cards from "@/components/Cards";
 import GenderChartContainer from "@/components/GenderPieChart/GenderChartContainer";
 import AttendanceChartContainer from "../../../components/AttendenceChart/AttendanceChartContainer";
-import Create from "@/components/buttons/Create";
+import BasicDateCalendar from "@/components/Calendar/Calender";
+import EventContainer from "@/components/Events/EventContainer";
 
 const page = () => {
   return (
@@ -22,8 +23,9 @@ const page = () => {
           </div>
         </div>
       </div>
-      <div className="w-full lg:w-[25%] flex gap-4">
-        <Create innerText={'Teacher'}/>
+      <div className="w-full lg:w-[25%] flex gap-4 flex-col">
+        <BasicDateCalendar/>
+        <EventContainer/>
       </div>
     </div>
   )
