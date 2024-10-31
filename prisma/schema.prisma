@@ -17,6 +17,21 @@ enum Gender {
   Female
 }
 
+enum Month {
+  April
+  May
+  June
+  July
+  August
+  September
+  October
+  November
+  December
+  January
+  February
+  March
+}
+
 model Student {
   studentId     Int          @id @default(autoincrement())
   username      String       @unique
@@ -27,7 +42,9 @@ model Student {
   gender        Gender
   contactNo     String
   address       String
-  admissionDate DateTime     @default(now())
+  feesPaidUpto  Month
+  admissionYear Int
+  passedOutYear Int?
   classId       Int
   class         Class        @relation(fields: [classId], references: [id])
   attendance    Attendance[]
@@ -62,6 +79,7 @@ model Teacher {
   joining        DateTime  @default(now())
   servedTillDate DateTime?
   servedPresent  String?
+  salary         Int
   subject        Subject[]
   classId        Int?
   class          Class?    @relation(fields: [classId], references: [id])
@@ -106,9 +124,10 @@ model Event {
 }
 
 model Attendance {
-  id                  Int     @id @default(autoincrement())
+  id                  Int      @id @default(autoincrement())
+  date                DateTime
   studentAttendanceId Int
-  student             Student @relation(fields: [studentAttendanceId], references: [studentId])
+  student             Student  @relation(fields: [studentAttendanceId], references: [studentId])
   present             Boolean
 }
 

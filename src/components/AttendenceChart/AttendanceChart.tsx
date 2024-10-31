@@ -24,8 +24,15 @@ export default function AttendanceChart({ present, total }: { present: number, t
           faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
         },
       ]}
+      slotProps={{
+        legend: {
+          direction: 'column',
+          position: { vertical: 'middle', horizontal: 'right' },
+          padding: 0,
+        },
+      }}
       height={200}
-      colors={['#CFCEFF', '#FAE27C']}
+      colors={['#CFCEFF', '#CBC3E3']}
     />
   );
 }

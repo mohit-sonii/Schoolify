@@ -2,6 +2,9 @@
 CREATE TYPE "Gender" AS ENUM ('Male', 'Female');
 
 -- CreateEnum
+CREATE TYPE "Month" AS ENUM ('April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'January', 'February', 'March');
+
+-- CreateEnum
 CREATE TYPE "Group" AS ENUM ('Rose', 'Marigold', 'Lily', 'Sunflower');
 
 -- CreateEnum
@@ -26,7 +29,9 @@ CREATE TABLE "Student" (
     "gender" "Gender" NOT NULL,
     "contactNo" TEXT NOT NULL,
     "address" TEXT NOT NULL,
-    "admissionDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "feesPaidUpto" "Month" NOT NULL,
+    "admissionYear" INTEGER NOT NULL,
+    "passedOutYear" INTEGER,
     "classId" INTEGER NOT NULL,
 
     CONSTRAINT "Student_pkey" PRIMARY KEY ("studentId")
@@ -51,6 +56,7 @@ CREATE TABLE "Teacher" (
     "joining" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "servedTillDate" TIMESTAMP(3),
     "servedPresent" TEXT,
+    "salary" INTEGER NOT NULL,
     "classId" INTEGER,
 
     CONSTRAINT "Teacher_pkey" PRIMARY KEY ("id")
@@ -94,6 +100,7 @@ CREATE TABLE "Event" (
 -- CreateTable
 CREATE TABLE "Attendance" (
     "id" SERIAL NOT NULL,
+    "date" TIMESTAMP(3) NOT NULL,
     "studentAttendanceId" INTEGER NOT NULL,
     "present" BOOLEAN NOT NULL,
 

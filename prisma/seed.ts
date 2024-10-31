@@ -1,4 +1,4 @@
-import { EventType, Gender, Group, PrismaClient } from "@prisma/client"
+import { EventType, Gender, Group, PrismaClient, Month } from "@prisma/client"
 
 const prisma = new PrismaClient();
 
@@ -33,6 +33,34 @@ const main = async () => {
         motherName: "angel",
         fatherName: "rolex",
         gender: Gender.Male,
+        admissionYear:2022,
+        feesPaidUpto:Month.July,
+        contactNo: '123456789',
+        address: "abc",
+        classId: 1
+      },
+      {
+        username: "werwer",
+        firstname: "alex",
+        lastname: "rus",
+        motherName: "angel",
+        fatherName: "rolex",
+        gender: Gender.Female,
+        admissionYear:2022,
+        feesPaidUpto:Month.July,
+        contactNo: '123456789',
+        address: "abc",
+        classId: 1
+      },
+      {
+        username: "eqwrqewr",
+        firstname: "alex",
+        lastname: "rus",
+        motherName: "angel",
+        fatherName: "rolex",
+        gender: Gender.Female,
+        admissionYear:2021,
+        feesPaidUpto:Month.July,
         contactNo: '123456789',
         address: "abc",
         classId: 1
@@ -44,6 +72,60 @@ const main = async () => {
         motherName: "angel",
         fatherName: "rolex",
         gender: Gender.Male,
+        admissionYear:2023,
+        feesPaidUpto:Month.May,
+        contactNo: '123456789',
+        address: "abc",
+        classId: 2
+      },
+      {
+        username: "forth",
+        firstname: "alex",
+        lastname: "rus",
+        motherName: "angel",
+        fatherName: "rolex",
+        gender: Gender.Male,
+        admissionYear:2024,
+        feesPaidUpto:Month.May,
+        contactNo: '123456789',
+        address: "abc",
+        classId: 2
+      },
+      {
+        username: "asdfasd",
+        firstname: "alex",
+        lastname: "rus",
+        motherName: "angel",
+        fatherName: "rolex",
+        gender: Gender.Male,
+        admissionYear:2023,
+        feesPaidUpto:Month.May,
+        contactNo: '123456789',
+        address: "abc",
+        classId: 2
+      },
+      {
+        username: "asdf",
+        firstname: "alex",
+        lastname: "rus",
+        motherName: "angel",
+        fatherName: "rolex",
+        gender: Gender.Male,
+        admissionYear:2022,
+        feesPaidUpto:Month.May,
+        contactNo: '123456789',
+        address: "abc",
+        classId: 2
+      },
+      {
+        username: "third",
+        firstname: "alex",
+        lastname: "rus",
+        motherName: "angel",
+        fatherName: "rolex",
+        gender: Gender.Male,
+        admissionYear:2024,
+        feesPaidUpto:Month.June,
         contactNo: '123456789',
         address: "abc",
         classId: 2
@@ -59,14 +141,16 @@ const main = async () => {
         firstname: 'First',
         lastname: 'lastname',
         qualification: 'BCom',
-        classId: 1
+        classId: 1,
+        salary:25000
       },
       {
         username: 'secondTeacher',
         firstname: 'Second',
         lastname: 'lastname',
         qualification: 'BCom',
-        classId: 2
+        classId: 2,
+        salary:25000
       }
     ]
   })
@@ -166,10 +250,11 @@ const main = async () => {
   await prisma.attendance.createMany({
     data: [
       {
+        date: new Date(),
         studentAttendanceId: 1,
         present: true
       }, {
-        studentAttendanceId: 2,
+        date: new Date(), studentAttendanceId: 2,
         present: true
       }
     ]
