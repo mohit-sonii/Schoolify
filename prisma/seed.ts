@@ -1,4 +1,4 @@
-import { EventType, Gender, Group, PrismaClient, Month } from "@prisma/client"
+import { EventType, Gender, Group, PrismaClient, Month,ClassList } from "@prisma/client"
 
 const prisma = new PrismaClient();
 
@@ -13,13 +13,44 @@ const main = async () => {
   //class Creation
   await prisma.class.createMany({
     data: [{
-      className: '10B',
+      id: ClassList.class_4,
       group: Group.Lily
     },
     {
-      className: '11A',
+      id: ClassList.class_5,
       group: Group.Sunflower
-    }
+    },
+    {
+      id: ClassList.class_6,
+      group: Group.Sunflower
+    },
+    {
+      id: ClassList.class_7,
+      group: Group.Sunflower
+    },
+    {
+      id: ClassList.class_8,
+      group: Group.Sunflower
+    },
+    {
+      id: ClassList.class_9,
+      group: Group.Sunflower
+    },
+    {
+      id: ClassList.class_10,
+      group: Group.Sunflower
+    },
+    
+    {
+      id: ClassList.class_11,
+      group: Group.Sunflower
+    },
+    
+    {
+      id: ClassList.class_12,
+      group: Group.Sunflower
+    },
+    
     ]
   })
 
@@ -37,7 +68,7 @@ const main = async () => {
         feesPaidUpto:Month.July,
         contactNo: '123456789',
         address: "abc",
-        classId: 1
+        classId: ClassList.class_12
       },
       {
         username: "werwer",
@@ -50,7 +81,7 @@ const main = async () => {
         feesPaidUpto:Month.July,
         contactNo: '123456789',
         address: "abc",
-        classId: 1
+        classId: ClassList.class_4
       },
       {
         username: "eqwrqewr",
@@ -63,7 +94,7 @@ const main = async () => {
         feesPaidUpto:Month.July,
         contactNo: '123456789',
         address: "abc",
-        classId: 1
+        classId: ClassList.class_5
       },
       {
         username: "second",
@@ -76,7 +107,7 @@ const main = async () => {
         feesPaidUpto:Month.May,
         contactNo: '123456789',
         address: "abc",
-        classId: 2
+        classId: ClassList.class_4
       },
       {
         username: "forth",
@@ -89,7 +120,7 @@ const main = async () => {
         feesPaidUpto:Month.May,
         contactNo: '123456789',
         address: "abc",
-        classId: 2
+        classId: ClassList.class_12
       },
       {
         username: "asdfasd",
@@ -102,7 +133,7 @@ const main = async () => {
         feesPaidUpto:Month.May,
         contactNo: '123456789',
         address: "abc",
-        classId: 2
+        classId: ClassList.class_8
       },
       {
         username: "asdf",
@@ -115,7 +146,7 @@ const main = async () => {
         feesPaidUpto:Month.May,
         contactNo: '123456789',
         address: "abc",
-        classId: 2
+        classId: ClassList.class_9
       },
       {
         username: "third",
@@ -128,7 +159,7 @@ const main = async () => {
         feesPaidUpto:Month.June,
         contactNo: '123456789',
         address: "abc",
-        classId: 2
+        classId: ClassList.class_10
       }
     ]
   })
@@ -141,7 +172,7 @@ const main = async () => {
         firstname: 'First',
         lastname: 'lastname',
         qualification: 'BCom',
-        classId: 1,
+        classId: ClassList.class_10,
         salary:25000
       },
       {
@@ -149,7 +180,7 @@ const main = async () => {
         firstname: 'Second',
         lastname: 'lastname',
         qualification: 'BCom',
-        classId: 2,
+        classId: ClassList.class_12,
         salary:25000
       }
     ]
@@ -161,22 +192,22 @@ const main = async () => {
       {
         subjectName: 'Maths',
         teacherId: 1,
-        classId: 1
+        classId: ClassList.class_10
       },
       {
         subjectName: 'Science',
         teacherId: 1,
-        classId: 2
+        classId: ClassList.class_7
       },
       {
         subjectName: 'Social Science',
         teacherId: 2,
-        classId: 1
+        classId: ClassList.class_4
       },
       {
         subjectName: 'English',
         teacherId: 2,
-        classId: 2
+        classId: ClassList.class_8
       }
     ]
   })
@@ -195,7 +226,7 @@ const main = async () => {
         typeOfEvent: EventType.Specific,
         startDate: new Date('2024-11-02T10:00:00Z'),
         endDate: new Date('2024-11-02T10:00:00Z'),
-        classId: 1,
+        classId: ClassList.class_4,
         description: 'Tour'
       }
     ]
@@ -206,11 +237,40 @@ const main = async () => {
     data: [
       {
         amount: 500,
-        classId: 1
-      }, {
+        classId: ClassList.class_4
+      }, 
+      {
         amount: 600,
-        classId: 2
-      }
+        classId: ClassList.class_5
+      }, 
+      {
+        amount: 700,
+        classId: ClassList.class_6
+      }, 
+      {
+        amount: 800,
+        classId: ClassList.class_7
+      }, 
+      {
+        amount: 900,
+        classId: ClassList.class_8
+      }, 
+      {
+        amount: 1000,
+        classId: ClassList.class_9
+      }, 
+      {
+        amount: 1100,
+        classId: ClassList.class_10
+      }, 
+      {
+        amount: 1200,
+        classId: ClassList.class_11
+      }, 
+      {
+        amount: 1200,
+        classId: ClassList.class_12
+      }, 
     ]
   })
 
@@ -232,14 +292,14 @@ const main = async () => {
       {
         startTime: new Date('2024-11-02T10:00:00Z'),
         endTime: new Date('2024-11-02T10:00:00Z'),
-        classId: 1,
+        classId: ClassList.class_4,
         subjectId: 1,
         resultId: 1
       },
       {
         startTime: new Date('2024-11-02T10:00:00Z'),
         endTime: new Date('2024-11-02T10:00:00Z'),
-        classId: 2,
+        classId: ClassList.class_4,
         subjectId: 2,
         resultId: 2
       }

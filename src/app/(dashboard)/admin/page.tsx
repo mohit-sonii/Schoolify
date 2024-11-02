@@ -1,9 +1,10 @@
-import Cards from "@/components/Cards";
+// import Cards from "@/components/Cards";
 import GenderChartContainer from "@/components/GenderPieChart/GenderChartContainer";
 import AttendanceChartContainer from "../../../components/AttendenceChart/AttendanceChartContainer";
-import BasicDateCalendar from "@/components/Calendar/Calender";
-import EventContainer from "@/components/Events/EventContainer";
+// import BasicDateCalendar from "@/components/Calendar/Calender";
+// import EventContainer from "@/components/Events/EventContainer";
 import AdmissionChartContainer from "@/components/AdmissionChart/AdmissionChartContainer";
+import OutstandingDuesContainer from "@/components/OutstandingDues/OutstandingDuesContainer";
 
 const page = () => {
   return (
@@ -11,6 +12,9 @@ const page = () => {
       <div className="w-full lg:w-[70%] flex gap-8 flex-col">
         <div className="flex flex-wrap gap-2 justify-between items-center ">
           <AdmissionChartContainer />
+        </div>
+        <div className="flex flex-wrap gap-2 justify-between items-center ">
+          <OutstandingDuesContainer />
         </div>
       </div>
       <div className="w-full lg:w-[25%] flex gap-4 flex-col">

@@ -45,7 +45,7 @@ model Student {
   feesPaidUpto  Month
   admissionYear Int
   passedOutYear Int?
-  classId       Int
+  classId       ClassList
   class         Class        @relation(fields: [classId], references: [id])
   attendance    Attendance[]
   result        Result[]
@@ -58,9 +58,20 @@ enum Group {
   Sunflower
 }
 
+enum ClassList {
+  class_4
+  class_5
+  class_6
+  class_7
+  class_8
+  class_9
+  class_10
+  class_11
+  class_12
+}
+
 model Class {
-  id            Int       @id @default(autoincrement())
-  className     String
+  id            ClassList @id
   group         Group
   totalStudents Student[]
   subjects      Subject[]
@@ -81,30 +92,30 @@ model Teacher {
   servedPresent  String?
   salary         Int
   subject        Subject[]
-  classId        Int?
+  classId        ClassList
   class          Class?    @relation(fields: [classId], references: [id])
 }
 
 model Subject {
-  id          Int     @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   subjectName String
   teacherId   Int
-  teacher     Teacher @relation(fields: [teacherId], references: [id])
-  classId     Int
-  class       Class   @relation(fields: [classId], references: [id])
+  teacher     Teacher   @relation(fields: [teacherId], references: [id])
+  classId     ClassList
+  class       Class     @relation(fields: [classId], references: [id])
   exam        Exam[]
 }
 
 model Exam {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   startTime DateTime
   endTime   DateTime
-  classId   Int
-  class     Class    @relation(fields: [classId], references: [id])
+  classId   ClassList
+  class     Class     @relation(fields: [classId], references: [id])
   subjectId Int
-  subject   Subject  @relation(fields: [subjectId], references: [id])
+  subject   Subject   @relation(fields: [subjectId], references: [id])
   resultId  Int
-  result    Result   @relation(fields: [resultId], references: [id])
+  result    Result    @relation(fields: [resultId], references: [id])
 }
 
 enum EventType {
@@ -113,14 +124,14 @@ enum EventType {
 }
 
 model Event {
-  id          Int       @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   typeOfEvent EventType
   eventName   String
   startDate   DateTime
   endDate     DateTime
   description String
-  classId     Int?
-  class       Class?    @relation(fields: [classId], references: [id])
+  classId     ClassList?
+  class       Class?     @relation(fields: [classId], references: [id])
 }
 
 model Attendance {
@@ -139,8 +150,8 @@ model Result {
 }
 
 model Fee {
-  id      Int   @id @default(autoincrement())
+  id      Int       @id @default(autoincrement())
   amount  Int
-  classId Int
-  class   Class @relation(fields: [classId], references: [id])
+  classId ClassList
+  class   Class     @relation(fields: [classId], references: [id])
 }

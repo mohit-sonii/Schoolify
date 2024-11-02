@@ -8,6 +8,9 @@ CREATE TYPE "Month" AS ENUM ('April', 'May', 'June', 'July', 'August', 'Septembe
 CREATE TYPE "Group" AS ENUM ('Rose', 'Marigold', 'Lily', 'Sunflower');
 
 -- CreateEnum
+CREATE TYPE "ClassList" AS ENUM ('class_4', 'class_5', 'class_6', 'class_7', 'class_8', 'class_9', 'class_10', 'class_11', 'class_12');
+
+-- CreateEnum
 CREATE TYPE "EventType" AS ENUM ('Specific', 'General');
 
 -- CreateTable
@@ -32,15 +35,14 @@ CREATE TABLE "Student" (
     "feesPaidUpto" "Month" NOT NULL,
     "admissionYear" INTEGER NOT NULL,
     "passedOutYear" INTEGER,
-    "classId" INTEGER NOT NULL,
+    "classId" "ClassList" NOT NULL,
 
     CONSTRAINT "Student_pkey" PRIMARY KEY ("studentId")
 );
 
 -- CreateTable
 CREATE TABLE "Class" (
-    "id" SERIAL NOT NULL,
-    "className" TEXT NOT NULL,
+    "id" "ClassList" NOT NULL,
     "group" "Group" NOT NULL,
 
     CONSTRAINT "Class_pkey" PRIMARY KEY ("id")
@@ -57,7 +59,7 @@ CREATE TABLE "Teacher" (
     "servedTillDate" TIMESTAMP(3),
     "servedPresent" TEXT,
     "salary" INTEGER NOT NULL,
-    "classId" INTEGER,
+    "classId" "ClassList" NOT NULL,
 
     CONSTRAINT "Teacher_pkey" PRIMARY KEY ("id")
 );
@@ -67,7 +69,7 @@ CREATE TABLE "Subject" (
     "id" SERIAL NOT NULL,
     "subjectName" TEXT NOT NULL,
     "teacherId" INTEGER NOT NULL,
-    "classId" INTEGER NOT NULL,
+    "classId" "ClassList" NOT NULL,
 
     CONSTRAINT "Subject_pkey" PRIMARY KEY ("id")
 );
@@ -77,7 +79,7 @@ CREATE TABLE "Exam" (
     "id" SERIAL NOT NULL,
     "startTime" TIMESTAMP(3) NOT NULL,
     "endTime" TIMESTAMP(3) NOT NULL,
-    "classId" INTEGER NOT NULL,
+    "classId" "ClassList" NOT NULL,
     "subjectId" INTEGER NOT NULL,
     "resultId" INTEGER NOT NULL,
 
@@ -92,7 +94,7 @@ CREATE TABLE "Event" (
     "startDate" TIMESTAMP(3) NOT NULL,
     "endDate" TIMESTAMP(3) NOT NULL,
     "description" TEXT NOT NULL,
-    "classId" INTEGER,
+    "classId" "ClassList",
 
     CONSTRAINT "Event_pkey" PRIMARY KEY ("id")
 );
@@ -119,7 +121,7 @@ CREATE TABLE "Result" (
 CREATE TABLE "Fee" (
     "id" SERIAL NOT NULL,
     "amount" INTEGER NOT NULL,
-    "classId" INTEGER NOT NULL,
+    "classId" "ClassList" NOT NULL,
 
     CONSTRAINT "Fee_pkey" PRIMARY KEY ("id")
 );
@@ -137,7 +139,7 @@ CREATE UNIQUE INDEX "Teacher_username_key" ON "Teacher"("username");
 ALTER TABLE "Student" ADD CONSTRAINT "Student_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Teacher" ADD CONSTRAINT "Teacher_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Teacher" ADD CONSTRAINT "Teacher_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Subject" ADD CONSTRAINT "Subject_teacherId_fkey" FOREIGN KEY ("teacherId") REFERENCES "Teacher"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

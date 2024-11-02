@@ -1,58 +1,47 @@
 "use client"
 
-import * as React from 'react';
-import { LineChart } from '@mui/x-charts/LineChart';
+import { LineChart } from "@mui/x-charts"
 import { useRef, useState, useEffect } from 'react'
 
-export default function AdmissionChart({
-  range
-}: {
-  range:
-  {
-    admissionYear: number, count: number
-  }[]
-}
-) {
+export default function OutstandingDues({ classes, students }: { classes: number[], students: number[] }) {
 
   const widthRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState(500);
 
   useEffect(() => {
     function handleResize() {
-      if (widthRef.current) {
+      if (widthRef.current)
         setWidth(widthRef.current.offsetWidth)
-      }
     }
     handleResize()
     window.addEventListener("resize", handleResize)
+
     return () => window.removeEventListener("resize", handleResize)
+
   }, [])
 
-  const years = range.map((val) => (val.admissionYear))
-  const yearData = range.map((val) => (val.count))
-
   return (
-
     <div ref={widthRef} className="w-full">
       <LineChart
         xAxis={
           [
             {
-              data: years,
+              data: classes,
               scaleType: "point",
-              label: "Year Range"
-            }
+              label: 'Classes'
+            },
           ]
         }
         series={[
           {
-            data: yearData,
-            label: "Total Number of Admissions"
+            data: students,
+            area: true,
+            label:' Number of Students'
           },
         ]}
         width={width}
         height={400}
       />
     </div>
-  );
+  )
 }
