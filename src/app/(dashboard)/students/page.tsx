@@ -25,19 +25,19 @@ const page = async () => {
   }).then((res) => {
     const arr = res.map((val) => {
       return {
-        studentId: val.studentId,
-        username: val.username,
-        firstname: val.firstname,
-        lastname: val.lastname,
-        mothername: val.motherName,
-        fathername: val.fatherName,
-        gender: val.gender,
-        contactNo: val.contactNo,
-        address: val.address,
-        feesPaidUpto: val.feesPaidUpto,
-        admissionYear: val.admissionYear,
-        passedOutYEar: val.passedOutYear,
-        class: val.classId.replace("class_", "").concat(" std."),
+        StudentId: val.studentId,
+        Username: val.username,
+        "First Name": val.firstname,
+        "Last Name": val.lastname,
+        "Mother Name": val.motherName,
+        "Father Name": val.fatherName,
+        Gender: val.gender,
+        "Contact No": val.contactNo,
+        Address: val.address,
+        "Fees Paid Upto": val.feesPaidUpto,
+        "Admission Year": val.admissionYear,
+        "Passing out Year": val.passedOutYear,
+        Class: val.classId.replace("class_", "").concat(" std."),
       }
     })
     return {
