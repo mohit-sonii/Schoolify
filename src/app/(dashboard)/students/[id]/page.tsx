@@ -1,7 +1,7 @@
 
 const page = ()=>{
   return(
-    <>This is ID of stun oage</>
+    <>This is ID of stun oage[</>
   )
 }
 
