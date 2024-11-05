@@ -3,7 +3,6 @@ import TotalStudentsContainer from "@/components/Students/TotalStudentAccToClass
 import prisma from "@/utils/db"
 import Image from 'next/image'
 
-
 const page = async () => {
   const students = await prisma.student.findMany({
     select: {
@@ -20,10 +19,23 @@ const page = async () => {
       address: true,
       feesPaidUpto: true,
       passedOutYear: true,
+      class: {
+        select: {
+          id: true,
+          fees: {
+            select: {
+              amount: true
+            }
+          }
+        }
+      }
     },
-    take: 10
   }).then((res) => {
     const arr = res.map((val) => {
+      const currentMonth = new Date().getMonth() 
+      const paidUpto = new Date(`${val.feesPaidUpto} 1,2000`)
+      const monthNumber = paidUpto.getMonth() + 1;
+      const getMonthlyAmount = val.class.fees[0].amount
       return {
         StudentId: val.studentId,
         Username: val.username,
@@ -34,17 +46,17 @@ const page = async () => {
         Gender: val.gender,
         "Contact No": val.contactNo,
         Address: val.address,
-        "Fees Paid Upto": val.feesPaidUpto,
+        "Last Fees Paid": val.feesPaidUpto,
         "Admission Year": val.admissionYear,
         "Passing out Year": val.passedOutYear,
         Class: val.classId.replace("class_", "").concat(" std."),
+        "Outstanding Fees": Math.abs(currentMonth - monthNumber) * getMonthlyAmount
       }
     })
     return {
       arr
     }
   })
-
   return (
     <>
       <div className="flex md:gap-8 flex-col">

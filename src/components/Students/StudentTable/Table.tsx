@@ -2,10 +2,49 @@
 
 import { StudentTable } from "./TableType"
 
+
 export default function Table({ students }: { students: StudentTable[] }) {
 
-// this was for Filter to select specific column
+  return (
+   
+    < div className = "w-full  h-max flex mb-4 show-table rounded-lg shadow-lg flex-col gap-2">
+      <table className="min-w-full bg-white  border-gray-300 rounded-lg">
+        <thead className="font-semibold text-xs text-gray-700">
+          <tr>
+            <th>Student Id</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Contact No.</th>
+            <th>Admission Year</th>
+            <th>Class</th>
+            <th>Last Paid</th>
+            <th>Outstanding Fees</th>
+          </tr>
+        </thead>
+        <tbody className="text-xs font-medium text-gray-600">
+          {students.map((val: any) => (
+            <tr key={val.Username} className="text-center">
+              <td>{val.StudentId}</td>
+              <td>{val["First Name"]}</td>
+              <td>{val["Last Name"]}</td>
+              <td>{val["Contact No"]}</td>
+              <td>{val["Admission Year"]}</td>
+              <td>{val.Class}</td>
+              <td>{val["Last Fees Paid"]}</td>
+              <td>{val["Outstanding Fees"]}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      </div >
 
+  )
+}
+
+
+
+
+// this was for Filter to select specific column
   // const itemsToKeepStill = ['StudentId', 'First Name', 'Class']
   // const removingPermananetFieldsForOption = students.map(obj => {
   //     const dup: any = { ...obj }
@@ -50,37 +89,3 @@ export default function Table({ students }: { students: StudentTable[] }) {
     //     )} 
 
     //   </div> 
-
-  return (
-   
-    < div className = "w-full  h-max flex mb-4 show-table rounded-lg shadow-lg flex-col gap-2">
-      <table className="min-w-full bg-white  border-gray-300 rounded-lg">
-        <thead className="font-semibold text-xs text-gray-700">
-          <tr>
-            <th>Student Id</th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Contact No.</th>
-            <th>Admission Year</th>
-            <th>Class</th>
-            <th>Outstanding Fees</th>
-          </tr>
-        </thead>
-        <tbody className="text-xs font-medium text-gray-600">
-          {students.map((val: any) => (
-            <tr key={val.Username} className="text-center">
-              <td>{val.StudentId}</td>
-              <td>{val["First Name"]}</td>
-              <td>{val["Last Name"]}</td>
-              <td>{val["Contact No"]}</td>
-              <td>{val["Admission Year"]}</td>
-              <td>{val.Class}</td>
-              <td>{val["Fees Paid Upto"]}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      </div >
-
-  )
-}
