@@ -1,4 +1,4 @@
-import Table from "@/components/Students/StudentTable/Table"
+import {Table} from "@/components/Students/StudentTable/Table"
 import TotalStudentsContainer from "@/components/Students/TotalStudentAccToClass/TotalStudentsContainer"
 import prisma from "@/utils/db"
 import Image from 'next/image'
@@ -32,7 +32,6 @@ const page = async () => {
     },
   }).then((res) => {
     const arr = res.map((val) => {
-      const currentMonth = new Date().getMonth() 
       const paidUpto = new Date(`${val.feesPaidUpto} 1,2000`)
       const monthNumber = paidUpto.getMonth() + 1;
       const getMonthlyAmount = val.class.fees[0].amount
@@ -49,8 +48,8 @@ const page = async () => {
         "Last Fees Paid": val.feesPaidUpto,
         "Admission Year": val.admissionYear,
         "Passing out Year": val.passedOutYear,
-        Class: val.classId.replace("class_", "").concat(" std."),
-        "Outstanding Fees": Math.abs(currentMonth - monthNumber) * getMonthlyAmount
+        Class: val.classId.replace("class_", "").concat("th"),
+        "Outstanding Fees": Math.abs(new Date().getMonth() - monthNumber) * getMonthlyAmount
       }
     })
     return {
