@@ -11,7 +11,7 @@ export type StudentTable = {
   "Contact No"?: string,
   Address?: string,
   "Last Fees Paid"?: Month,
-  "Admission Year"?: number,
+  "Admission Year": number,
   "Passing out Year"?: number | null,
   Class: string,
   "Outstanding Fees": number

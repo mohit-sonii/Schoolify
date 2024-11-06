@@ -8,7 +8,7 @@ import {
   monthNames,
 } from "./TableType";
 import {
-  FilterWorking,
+  FilterSort,
 } from "./FilterFunctions";
 
 export const Table = ({ students }: { students: StudentTable[] }) => {
@@ -16,6 +16,8 @@ export const Table = ({ students }: { students: StudentTable[] }) => {
   const [optionAdmission, setOptionAdmission] = useState<number | undefined>(undefined);
   const [optionFees, setOptionFees] = useState<string>("");
   const [filterResult, setFilterResults] = useState<StudentTable[]>([])
+  const [sortingAdmissionValue, setSortingAdmission] = useState<string>("")
+  const [sortingFeesValue, setSortingFees] = useState<string>("")
 
   const ChangeForClass = (e: ChangeEvent<HTMLSelectElement>) => {
     setOptionClass(e.target.value);
@@ -27,16 +29,23 @@ export const Table = ({ students }: { students: StudentTable[] }) => {
   const ChangeForFees = (e: ChangeEvent<HTMLSelectElement>) => {
     setOptionFees(e.target.value);
   };
+  const changeForAdmissionSort = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSortingAdmission(e.target.value)
+  }
+  const changeForFeesSort = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSortingFees(e.target.value)
+  }
 
   useEffect(() => {
-    const result = FilterWorking(students, optionFees, optionAdmission, optionClass)
+    const result = FilterSort(students, optionFees, optionAdmission, optionClass, sortingAdmissionValue, sortingFeesValue)
     setFilterResults(result)
-  }, [students, optionFees, optionAdmission, optionClass]);
+  }, [students, optionFees, optionAdmission, optionClass, sortingAdmissionValue, sortingFeesValue]);
 
   return (
     <div className="w-full  h-max flex mb-4 show-table rounded-lg shadow-lg flex-col gap-2">
-      <div className="flters w-full p-4 flex  gap-4 items-center">
-        <h1 className="font-semibold text-gray-600 text-sm">Filters</h1>
+        {/*filtering*/}
+      <div className="w-full p-2 flex  gap-4 items-center">
+        <p className="font-semibold text-gray-700 text-xs ">Filters</p>
         {/*First Filter for Class*/}
         <div>
           <select
@@ -97,6 +106,22 @@ export const Table = ({ students }: { students: StudentTable[] }) => {
             ))}
           </select>
         </div>
+      </div>
+      {/* Sorting */}
+      <div className="w-full p-2 flex  gap-4 items-center">
+        <p className="font-semibold text-gray-700 text-xs ">Sort by :</p>
+        {/*Sorting by admission Year */}
+        <select className="font-light text-xs rounded-md shadow-xl px-4 py-2 border-none outline-none cursor-pointer" onChange={(e) => changeForAdmissionSort(e)}>
+          <option className="text-xs text-gray-500 font-light" value={sortingAdmissionValue}>Admission Year --</option>
+          <option className="text-xs text-gray-500 font-light" value="oldest">Oldest Admission First</option>
+          <option className="text-xs text-gray-500 font-light" value="newest">Newest Admission First</option>
+        </select>
+        {/*Sorting by Outstanding Fees Balance */}
+        <select className="font-light text-xs rounded-md shadow-xl px-4 py-2 border-none outline-none cursor-pointer" onChange={(e) => changeForFeesSort(e)}>
+          <option className="text-xs text-gray-500 font-light " value="">Outstanding Fees --</option>
+          <option className="text-xs text-gray-500 font-light" value="highest">Highest First</option>
+          <option className="text-xs text-gray-500 font-light" value="lowest">Lowest First</option>
+        </select>
       </div>
       <table className="min-w-full bg-white  border-gray-300 rounded-lg">
         <thead className="font-semibold text-xs text-gray-700">
