@@ -6,9 +6,10 @@ export const FilterSort = (
   optionAdmission?: number | undefined,
   optionClass?: string,
   sortingAdmissionValue?: string,
-  sortingFeesValue?: string
+  sortingFeesValue?: string,
+  inputText?:string
 ) => {
-  const res = students.filter((val) => {
+  let res = students.filter((val) => {
     const isClassMatch = optionClass ? val.Class === optionClass : true;
     const isAdmissionMatch = optionAdmission
       ? val["Admission Year"] === optionAdmission
@@ -29,6 +30,9 @@ export const FilterSort = (
   else if (sortingFeesValue === "lowest")
     res.sort((a, b) => a["Outstanding Fees"] - b["Outstanding Fees"])
 
+  if (inputText)
+    res = res.filter((val) => val["First Name"].includes(inputText))
+  
   return res
 };
 // If optionClass is not set (e.g., it’s an empty string or null), isClassMatch is assigned true, which means this criterion is considered a "match" for all students. So, effectively, it ignores the Class field in filtering if optionClass is empty or undefined.
