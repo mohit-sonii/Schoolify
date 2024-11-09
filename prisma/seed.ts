@@ -1,4 +1,4 @@
-import { EventType, Gender, Group, PrismaClient, Month,ClassList } from "@prisma/client"
+import { EventType, Gender, Group, PrismaClient, Month, ClassList } from "@prisma/client"
 
 const prisma = new PrismaClient();
 
@@ -12,45 +12,44 @@ const main = async () => {
 
   //class Creation
   await prisma.class.createMany({
-    data: [{
-      id: ClassList.class_4,
-      group: Group.Lily
-    },
-    {
-      id: ClassList.class_5,
-      group: Group.Sunflower
-    },
-    {
-      id: ClassList.class_6,
-      group: Group.Sunflower
-    },
-    {
-      id: ClassList.class_7,
-      group: Group.Sunflower
-    },
-    {
-      id: ClassList.class_8,
-      group: Group.Sunflower
-    },
-    {
-      id: ClassList.class_9,
-      group: Group.Sunflower
-    },
-    {
-      id: ClassList.class_10,
-      group: Group.Sunflower
-    },
-    
-    {
-      id: ClassList.class_11,
-      group: Group.Sunflower
-    },
-    
-    {
-      id: ClassList.class_12,
-      group: Group.Sunflower
-    },
-    
+    data: [
+      {
+        id: ClassList.class_12,
+        group: Group.Sunflower
+      },
+      {
+        id: ClassList.class_11,
+        group: Group.Sunflower
+      },
+      {
+        id: ClassList.class_10,
+        group: Group.Sunflower
+      },
+      {
+        id: ClassList.class_9,
+        group: Group.Sunflower
+      },
+      {
+        id: ClassList.class_8,
+        group: Group.Sunflower
+      },
+      {
+        id: ClassList.class_7,
+        group: Group.Sunflower
+      },
+
+      {
+        id: ClassList.class_6,
+        group: Group.Sunflower
+      },
+      {
+        id: ClassList.class_5,
+        group: Group.Sunflower
+      },
+      {
+        id: ClassList.class_4,
+        group: Group.Sunflower
+      },
     ]
   })
 
@@ -58,108 +57,32 @@ const main = async () => {
   await prisma.student.createMany({
     data: [
       {
-        username: "first",
-        firstname: "alex",
-        lastname: "rus",
+        username: "one",
+        firstname: "Alex",
+        lastname: "Rux",
         motherName: "angel",
         fatherName: "rolex",
         gender: Gender.Male,
-        admissionYear:2022,
-        feesPaidUpto:Month.July,
+        admissionYear: 2022,
+        dob: new Date(),
+        feesPaidUpto: Month.September,
         contactNo: '123456789',
-        address: "abc",
+        address: "Home Town colony, G-12",
         classId: ClassList.class_12
       },
       {
-        username: "werwer",
-        firstname: "alex",
-        lastname: "rus",
-        motherName: "angel",
-        fatherName: "rolex",
+        username: "two",
+        firstname: "Angel",
+        lastname: "Priya",
+        motherName: "Analisa",
+        fatherName: "Mike",
         gender: Gender.Female,
-        admissionYear:2022,
-        feesPaidUpto:Month.July,
+        dob: new Date(),
+        admissionYear: 2022,
+        feesPaidUpto: Month.July,
         contactNo: '123456789',
-        address: "abc",
-        classId: ClassList.class_4
-      },
-      {
-        username: "eqwrqewr",
-        firstname: "alex",
-        lastname: "rus",
-        motherName: "angel",
-        fatherName: "rolex",
-        gender: Gender.Female,
-        admissionYear:2021,
-        feesPaidUpto:Month.July,
-        contactNo: '123456789',
-        address: "abc",
-        classId: ClassList.class_5
-      },
-      {
-        username: "second",
-        firstname: "alex",
-        lastname: "rus",
-        motherName: "angel",
-        fatherName: "rolex",
-        gender: Gender.Male,
-        admissionYear:2023,
-        feesPaidUpto:Month.May,
-        contactNo: '123456789',
-        address: "abc",
-        classId: ClassList.class_4
-      },
-      {
-        username: "forth",
-        firstname: "alex",
-        lastname: "rus",
-        motherName: "angel",
-        fatherName: "rolex",
-        gender: Gender.Male,
-        admissionYear:2024,
-        feesPaidUpto:Month.May,
-        contactNo: '123456789',
-        address: "abc",
+        address: "GC Colony,Fine Art Street - 78, House no. 412",
         classId: ClassList.class_12
-      },
-      {
-        username: "asdfasd",
-        firstname: "alex",
-        lastname: "rus",
-        motherName: "angel",
-        fatherName: "rolex",
-        gender: Gender.Male,
-        admissionYear:2023,
-        feesPaidUpto:Month.May,
-        contactNo: '123456789',
-        address: "abc",
-        classId: ClassList.class_8
-      },
-      {
-        username: "asdf",
-        firstname: "alex",
-        lastname: "rus",
-        motherName: "angel",
-        fatherName: "rolex",
-        gender: Gender.Male,
-        admissionYear:2022,
-        feesPaidUpto:Month.May,
-        contactNo: '123456789',
-        address: "abc",
-        classId: ClassList.class_9
-      },
-      {
-        username: "third",
-        firstname: "alex",
-        lastname: "rus",
-        motherName: "angel",
-        fatherName: "rolex",
-        gender: Gender.Male,
-        admissionYear:2024,
-        feesPaidUpto:Month.June,
-        contactNo: '123456789',
-        address: "abc",
-        classId: ClassList.class_10
       }
     ]
   })
@@ -168,20 +91,22 @@ const main = async () => {
   await prisma.teacher.createMany({
     data: [
       {
-        username: 'firstTeacher',
-        firstname: 'First',
-        lastname: 'lastname',
-        qualification: 'BCom',
-        classId: ClassList.class_10,
-        salary:25000
-      },
-      {
-        username: 'secondTeacher',
-        firstname: 'Second',
-        lastname: 'lastname',
+        username: 'monika',
+        firstname: 'Monika',
+        lastname: 'Suma',
         qualification: 'BCom',
         classId: ClassList.class_12,
-        salary:25000
+        salary: 25000,
+        lastSalaryPaid: Month.October
+      },
+      {
+        username: 'suman',
+        firstname: 'Suman',
+        lastname: 'Shekawat',
+        qualification: 'BCom',
+        classId: ClassList.class_12,
+        salary: 25000,
+        lastSalaryPaid: Month.October
       }
     ]
   })
@@ -191,23 +116,23 @@ const main = async () => {
     data: [
       {
         subjectName: 'Maths',
-        teacherId: 1,
-        classId: ClassList.class_10
+        teacherUsername: 'monika',
+        classId: ClassList.class_12
+      },
+      {
+        subjectName: 'Maths',
+        teacherUsername: 'monika',
+        classId: ClassList.class_11
       },
       {
         subjectName: 'Science',
-        teacherId: 1,
-        classId: ClassList.class_7
+        teacherUsername: 'suman',
+        classId: ClassList.class_12
       },
       {
         subjectName: 'Social Science',
-        teacherId: 2,
-        classId: ClassList.class_4
-      },
-      {
-        subjectName: 'English',
-        teacherId: 2,
-        classId: ClassList.class_8
+        teacherUsername: 'monika',
+        classId: ClassList.class_12
       }
     ]
   })
@@ -226,7 +151,7 @@ const main = async () => {
         typeOfEvent: EventType.Specific,
         startDate: new Date('2024-11-02T10:00:00Z'),
         endDate: new Date('2024-11-02T10:00:00Z'),
-        classId: ClassList.class_4,
+        classId: ClassList.class_12,
         description: 'Tour'
       }
     ]
@@ -238,51 +163,39 @@ const main = async () => {
       {
         amount: 500,
         classId: ClassList.class_4
-      }, 
+      },
       {
         amount: 600,
         classId: ClassList.class_5
-      }, 
+      },
       {
         amount: 700,
         classId: ClassList.class_6
-      }, 
+      },
       {
         amount: 800,
         classId: ClassList.class_7
-      }, 
+      },
       {
         amount: 900,
         classId: ClassList.class_8
-      }, 
+      },
       {
         amount: 1000,
         classId: ClassList.class_9
-      }, 
+      },
       {
         amount: 1100,
         classId: ClassList.class_10
-      }, 
+      },
       {
         amount: 1200,
         classId: ClassList.class_11
-      }, 
+      },
       {
         amount: 1200,
         classId: ClassList.class_12
-      }, 
-    ]
-  })
-
-  // result creation
-  await prisma.result.createMany({
-    data: [
-      {
-        stuId: 1
       },
-      {
-        stuId: 2
-      }
     ]
   })
 
@@ -292,19 +205,27 @@ const main = async () => {
       {
         startTime: new Date('2024-11-02T10:00:00Z'),
         endTime: new Date('2024-11-02T10:00:00Z'),
-        classId: ClassList.class_4,
-        subjectId: 1,
-        resultId: 1
-      },
-      {
-        startTime: new Date('2024-11-02T10:00:00Z'),
-        endTime: new Date('2024-11-02T10:00:00Z'),
-        classId: ClassList.class_4,
-        subjectId: 2,
-        resultId: 2
+        classId: ClassList.class_12,
+        subjectId: 1
       }
     ]
   })
+  // result creation
+  await prisma.result.createMany({
+    data: [
+      {
+        stuId: 1,
+        score: 72,
+        examId: 1
+      },
+      {
+        stuId: 2,
+        score: 84,
+        examId: 1
+      }
+    ]
+  })
+
 
   //attendance creation
   await prisma.attendance.createMany({
@@ -314,8 +235,9 @@ const main = async () => {
         studentAttendanceId: 1,
         present: true
       }, {
-        date: new Date(), studentAttendanceId: 2,
-        present: true
+        date: new Date(),
+        studentAttendanceId: 2,
+        present: false
       }
     ]
   })

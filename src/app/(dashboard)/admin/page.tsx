@@ -1,10 +1,10 @@
 // import Cards from "@/components/Cards";
-import GenderChartContainer from "@/components/GenderPieChart/GenderChartContainer";
-import AttendanceChartContainer from "../../../components/AttendenceChart/AttendanceChartContainer";
+import GenderChartContainer from "@/components/Admin/GenderPieChart/GenderChartContainer";
+import AttendanceChartContainer from "../../../components/Admin/AttendenceChart/AttendanceChartContainer";
 // import BasicDateCalendar from "@/components/Calendar/Calender";
 // import EventContainer from "@/components/Events/EventContainer";
-import AdmissionChartContainer from "@/components/AdmissionChart/AdmissionChartContainer";
-import OutstandingDuesContainer from "@/components/OutstandingDues/OutstandingDuesContainer";
+import AdmissionChartContainer from "@/components/Admin/AdmissionChart/AdmissionChartContainer";
+import OutstandingDuesContainer from "@/components/Admin/OutstandingDues/OutstandingDuesContainer";
 
 const page = () => {
   return (

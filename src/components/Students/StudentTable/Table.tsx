@@ -157,7 +157,7 @@ export const Table = ({ students }: { students: StudentTable[] }) => {
           {filterResult.length > 0
             ? filterResult.map((val: any) => (
               <tr key={val.Username} className="text-center">
-                <td onClick={() => router.push(`/students/${val.StudentId.toString()}`)} className="cursor-pointer hover:font-bold hover:text-black">{val.StudentId}</td>
+                <td onClick={() => router.push(`/students/${val.Username}`)} className="cursor-pointer hover:font-bold hover:text-black">{val.StudentId}</td>
                 <td className="hover:font-bold hover:text-black">{val["First Name"]}</td>
                 <td className="hover:font-bold hover:text-black">{val["Last Name"]}</td>
                 <td className="hover:font-bold hover:text-black">{val["Contact No"]}</td>

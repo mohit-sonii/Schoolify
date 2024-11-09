@@ -23,6 +23,9 @@ export const admissionYears = new Array(new Date().getFullYear() - 2020 + 1).fil
 
 
 export const monthNames = [
+  "January",
+  "February",
+  "March",
   "April",
   "May",
   "June",
@@ -31,9 +34,7 @@ export const monthNames = [
   "September",
   "October",
   "November",
-  "December",
-  "January",
-  "February",
-  "March"
+  "December"
+
 ]
 

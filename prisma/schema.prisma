@@ -33,7 +33,7 @@ enum Month {
 }
 
 model Student {
-  studentId     Int          @id @default(autoincrement())
+  studentId     Int          @id @default(autoincrement()) // registration number
   username      String       @unique
   firstname     String
   lastname      String
@@ -41,6 +41,7 @@ model Student {
   fatherName    String
   gender        Gender
   contactNo     String
+  dob           DateTime
   address       String
   feesPaidUpto  Month
   admissionYear Int
@@ -90,6 +91,7 @@ model Teacher {
   joining        DateTime  @default(now())
   servedTillDate DateTime?
   servedPresent  String?
+  lastSalaryPaid Month
   salary         Int
   subject        Subject[]
   classId        ClassList
@@ -97,13 +99,13 @@ model Teacher {
 }
 
 model Subject {
-  id          Int       @id @default(autoincrement())
-  subjectName String
-  teacherId   Int
-  teacher     Teacher   @relation(fields: [teacherId], references: [id])
-  classId     ClassList
-  class       Class     @relation(fields: [classId], references: [id])
-  exam        Exam[]
+  id              Int       @id @default(autoincrement())
+  subjectName     String
+  teacherUsername String
+  teacher         Teacher   @relation(fields: [teacherUsername], references: [username])
+  classId         ClassList
+  class           Class     @relation(fields: [classId], references: [id])
+  exam            Exam[]
 }
 
 model Exam {
@@ -114,8 +116,16 @@ model Exam {
   class     Class     @relation(fields: [classId], references: [id])
   subjectId Int
   subject   Subject   @relation(fields: [subjectId], references: [id])
-  resultId  Int
-  result    Result    @relation(fields: [resultId], references: [id])
+  results   Result[]
+}
+
+model Result {
+  id      Int     @id @default(autoincrement())
+  score   Int
+  examId  Int
+  exam    Exam    @relation(fields: [examId], references: [id])
+  stuId   Int
+  student Student @relation(fields: [stuId], references: [studentId])
 }
 
 enum EventType {
@@ -136,17 +146,10 @@ model Event {
 
 model Attendance {
   id                  Int      @id @default(autoincrement())
+  present             Boolean
   date                DateTime
   studentAttendanceId Int
   student             Student  @relation(fields: [studentAttendanceId], references: [studentId])
-  present             Boolean
-}
-
-model Result {
-  id      Int     @id @default(autoincrement())
-  exams   Exam[]
-  stuId   Int
-  student Student @relation(fields: [stuId], references: [studentId])
 }
 
 model Fee {

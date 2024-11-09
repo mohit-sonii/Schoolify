@@ -31,6 +31,7 @@ CREATE TABLE "Student" (
     "fatherName" TEXT NOT NULL,
     "gender" "Gender" NOT NULL,
     "contactNo" TEXT NOT NULL,
+    "dob" TIMESTAMP(3) NOT NULL,
     "address" TEXT NOT NULL,
     "feesPaidUpto" "Month" NOT NULL,
     "admissionYear" INTEGER NOT NULL,
@@ -58,6 +59,7 @@ CREATE TABLE "Teacher" (
     "joining" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "servedTillDate" TIMESTAMP(3),
     "servedPresent" TEXT,
+    "lastSalaryPaid" "Month" NOT NULL,
     "salary" INTEGER NOT NULL,
     "classId" "ClassList" NOT NULL,
 
@@ -68,7 +70,7 @@ CREATE TABLE "Teacher" (
 CREATE TABLE "Subject" (
     "id" SERIAL NOT NULL,
     "subjectName" TEXT NOT NULL,
-    "teacherId" INTEGER NOT NULL,
+    "teacherUsername" TEXT NOT NULL,
     "classId" "ClassList" NOT NULL,
 
     CONSTRAINT "Subject_pkey" PRIMARY KEY ("id")
@@ -81,9 +83,18 @@ CREATE TABLE "Exam" (
     "endTime" TIMESTAMP(3) NOT NULL,
     "classId" "ClassList" NOT NULL,
     "subjectId" INTEGER NOT NULL,
-    "resultId" INTEGER NOT NULL,
 
     CONSTRAINT "Exam_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Result" (
+    "id" SERIAL NOT NULL,
+    "score" INTEGER NOT NULL,
+    "examId" INTEGER NOT NULL,
+    "stuId" INTEGER NOT NULL,
+
+    CONSTRAINT "Result_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -102,19 +113,11 @@ CREATE TABLE "Event" (
 -- CreateTable
 CREATE TABLE "Attendance" (
     "id" SERIAL NOT NULL,
+    "present" BOOLEAN NOT NULL,
     "date" TIMESTAMP(3) NOT NULL,
     "studentAttendanceId" INTEGER NOT NULL,
-    "present" BOOLEAN NOT NULL,
 
     CONSTRAINT "Attendance_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Result" (
-    "id" SERIAL NOT NULL,
-    "stuId" INTEGER NOT NULL,
-
-    CONSTRAINT "Result_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -142,7 +145,7 @@ ALTER TABLE "Student" ADD CONSTRAINT "Student_classId_fkey" FOREIGN KEY ("classI
 ALTER TABLE "Teacher" ADD CONSTRAINT "Teacher_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Subject" ADD CONSTRAINT "Subject_teacherId_fkey" FOREIGN KEY ("teacherId") REFERENCES "Teacher"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Subject" ADD CONSTRAINT "Subject_teacherUsername_fkey" FOREIGN KEY ("teacherUsername") REFERENCES "Teacher"("username") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Subject" ADD CONSTRAINT "Subject_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -154,16 +157,16 @@ ALTER TABLE "Exam" ADD CONSTRAINT "Exam_classId_fkey" FOREIGN KEY ("classId") RE
 ALTER TABLE "Exam" ADD CONSTRAINT "Exam_subjectId_fkey" FOREIGN KEY ("subjectId") REFERENCES "Subject"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Exam" ADD CONSTRAINT "Exam_resultId_fkey" FOREIGN KEY ("resultId") REFERENCES "Result"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Result" ADD CONSTRAINT "Result_examId_fkey" FOREIGN KEY ("examId") REFERENCES "Exam"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Result" ADD CONSTRAINT "Result_stuId_fkey" FOREIGN KEY ("stuId") REFERENCES "Student"("studentId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Event" ADD CONSTRAINT "Event_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Attendance" ADD CONSTRAINT "Attendance_studentAttendanceId_fkey" FOREIGN KEY ("studentAttendanceId") REFERENCES "Student"("studentId") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Result" ADD CONSTRAINT "Result_stuId_fkey" FOREIGN KEY ("stuId") REFERENCES "Student"("studentId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Fee" ADD CONSTRAINT "Fee_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
