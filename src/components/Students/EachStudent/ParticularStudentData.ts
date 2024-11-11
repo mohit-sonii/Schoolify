@@ -1,95 +1,121 @@
 import prisma from "@/utils/db"
-import { EachStudent } from "./EachStudentTypes"
+import { ClassData, Result, Student } from "./EachStudentTypes"
 
-export const StudentData = async (user: string): Promise<[EachStudent | any, number,string]> => {
-  const res = await prisma.$transaction([
-    prisma.student.findFirst({
-      where: {
-        username: user
-      },
-      select: {
-        studentId: true,
-        username: true,
-        firstname: true,
-        lastname: true,
-        contactNo: true,
-        admissionYear: true,
-        classId: true,
-        motherName: true,
-        fatherName: true,
-        gender: true,
-        address: true,
-        feesPaidUpto: true,
-        passedOutYear: true,
-        class: {
-          select: {
-            id: true,
-            group: true,
-            teacher: {
-              select: {
-                firstname: true,
-                lastname: true
-              }
-            },
-            exam: {
-              select: {
-                classId: true,
-                subjectId: true
-              }
-            },
-            subjects: {
-              select: {
-                subjectName: true,
-                teacherUsername: true,
-              }
-            },
-            fees: {
-              select: {
-                amount: true
-              }
-            }
-          },
-        },
-        attendance: {
-          select: {
-            present: true,
-            date: true
-          }
-        },
-        result: {
-          select: {
-            score: true,
-            examId: true,
-            stuId: true
-          }
-        }
-      }
-    }),
-    prisma.student.count({
-      where: {
-        classId: (await prisma.student.findUnique({
-          where: {
-            username: user
-          },
-          select: {
-            classId: true
-          }
-        }))?.classId
-      }
-    }),
-    prisma.student.findUnique({
-      where: {
-        username: user
-      },
-      select: {
-        class: {
-          select: {
-            group:true
-          }
-        }
-      }
-    })
-  ]
-  )
-  return res
+export const StudentData = async (user: string): Promise<Student> => {
+  return await prisma.student.findFirstOrThrow({
+    where: {
+      username: user
+    },
+    select: {
+      studentId: true,
+      username: true,
+      firstname: true,
+      lastname: true,
+      contactNo: true,
+      classId: true,
+      motherName: true,
+      fatherName: true,
+      gender: true,
+      address: true,
+      feesPaidUpto: true,
+    }
+  })
 }
+
+export const countClass = async (user: string): Promise<number> => {
+  const result = await prisma.student.count({
+    where: {
+      classId: (await prisma.student.findUnique({
+        where: {
+          username: user
+        },
+        select: {
+          classId: true
+        }
+      }))?.classId
+    }
+  })
+  return result
+}
+
+
+export const classData = async (user: string): Promise<ClassData | null> => {
+  const studentId = await prisma.student.findUnique({
+    where: {
+      username:user
+    },
+    select: {
+      studentId:true
+    }
+  })
+  const result = await prisma.class.findUnique({
+    where: {
+      id: (await prisma.student.findUnique({
+        where: {
+          username: user
+        },
+        select: {
+          classId: true
+        }
+      }))?.classId
+    },
+    select: {
+      id: true,
+      group: true,
+      teacher: {
+        select: {
+          firstname: true,
+          lastname: true
+        }
+      },
+      subjects: {
+        select: {
+          subjectName: true,
+          teacherUsername: true,
+        }
+      },
+      fees: {
+        select: {
+          amount: true
+        }
+      },
+      exams: {
+        select: {
+          monthname: true,
+          subjectId:true,
+          
+          results: {
+            where: {
+              stuId: studentId?.studentId
+            },
+            select: {
+              score: true,
+            }
+          }
+        }
+      }
+    },
+  })
+
+  return result ? result : null
+}
+
+
+// export const studentResult = async (user: string): Promise<Result> => {
+//   const res = await prisma.student.findFirst({
+//     where: {
+//       username: user
+//     },
+//     select: {
+//       result: {
+//         select: {
+//           score: true,
+//           examId: true,
+//           examMonthId: true
+//         }
+//       }
+//     }
+//   })
+//   return res?.result
+// }
+

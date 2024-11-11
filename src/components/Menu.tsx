@@ -11,6 +11,11 @@ const menuItem = [
         label: 'Home',
       },
       {
+        icon: '/finance.svg',
+        href: '/finance',
+        label:'Finance'
+      },
+      {
         icon: '/student.svg',
         href: '/students',
         label: 'Student',

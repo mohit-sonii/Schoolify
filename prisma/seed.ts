@@ -1,4 +1,4 @@
-import { EventType, Gender, Group, PrismaClient, Month, ClassList } from "@prisma/client"
+import { EventType, Gender, Group, MonthsOfExam, PrismaClient, Month, ClassList } from "@prisma/client"
 
 const prisma = new PrismaClient();
 
@@ -83,6 +83,20 @@ const main = async () => {
         contactNo: '123456789',
         address: "GC Colony,Fine Art Street - 78, House no. 412",
         classId: ClassList.class_12
+      },
+      {
+        username: "thress",
+        firstname: "Shivam",
+        lastname: "Mlik",
+        motherName: "Analisa",
+        fatherName: "Mike",
+        gender: Gender.Female,
+        dob: new Date(),
+        admissionYear: 2022,
+        feesPaidUpto: Month.July,
+        contactNo: '123456789',
+        address: "GC Colony,Fine Art Street - 78, House no. 412",
+        classId: ClassList.class_11
       }
     ]
   })
@@ -133,6 +147,11 @@ const main = async () => {
         subjectName: 'Social Science',
         teacherUsername: 'monika',
         classId: ClassList.class_12
+      },
+      {
+        subjectName: 'Social Science',
+        teacherUsername: 'monika',
+        classId: ClassList.class_11
       }
     ]
   })
@@ -199,29 +218,89 @@ const main = async () => {
     ]
   })
 
-  //exam creation
-  await prisma.exam.createMany({
-    data: [
-      {
-        startTime: new Date('2024-11-02T10:00:00Z'),
-        endTime: new Date('2024-11-02T10:00:00Z'),
-        classId: ClassList.class_12,
-        subjectId: 1
-      }
-    ]
+  // exam month
+  await prisma.examMonth.create({
+    data: {
+      name: MonthsOfExam.May
+    }
   })
+  await prisma.examMonth.create({
+    data: {
+      name: MonthsOfExam.September
+    }
+  })
+
+  //exam creation
+  await prisma.exam.create({
+    data: {
+      classId: ClassList.class_12,
+      subjectId: 1,
+      monthname: 'May',
+    },
+  });
+
+  await prisma.exam.create({
+    data: {
+      classId: ClassList.class_12,
+      subjectId: 2,
+      monthname: 'May',
+    },
+  });
+
+  await prisma.exam.create({
+    data: {
+      classId: ClassList.class_11,
+      subjectId: 1,
+      monthname: 'September',
+    },
+  });
+  await prisma.exam.create({
+    data: {
+      classId: ClassList.class_12,
+      subjectId: 1,
+      monthname: 'September',
+    },
+  });
+
   // result creation
   await prisma.result.createMany({
     data: [
       {
+        score: 80,
         stuId: 1,
-        score: 72,
+        examMonthId: MonthsOfExam.May,
         examId: 1
+      }, {
+        score: 99,
+        stuId: 2,
+        examMonthId: MonthsOfExam.May,
+        examId: 1
+      }, {
+        score: 88,
+        stuId: 1,
+        examMonthId: MonthsOfExam.May,
+        examId: 2
+      }, {
+        score: 75,
+        stuId: 2,
+        examMonthId: MonthsOfExam.May,
+        examId: 2
       },
       {
+        score: 74,
+        stuId: 1,
+        examMonthId: MonthsOfExam.September,
+        examId: 4
+      }, {
+        score: 89,
         stuId: 2,
-        score: 84,
-        examId: 1
+        examMonthId: MonthsOfExam.September,
+        examId: 4
+      }, {
+        score: 89,
+        stuId: 3,
+        examMonthId: MonthsOfExam.September,
+        examId: 3
       }
     ]
   })

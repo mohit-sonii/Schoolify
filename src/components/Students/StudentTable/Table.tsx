@@ -114,6 +114,7 @@ export const Table = ({ students }: { students: StudentTable[] }) => {
               >
                 {val}
               </option>
+            
             ))}
           </select>
         </div>

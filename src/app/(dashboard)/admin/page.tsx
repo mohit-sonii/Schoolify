@@ -5,6 +5,7 @@ import AttendanceChartContainer from "../../../components/Admin/AttendenceChart/
 // import EventContainer from "@/components/Events/EventContainer";
 import AdmissionChartContainer from "@/components/Admin/AdmissionChart/AdmissionChartContainer";
 import OutstandingDuesContainer from "@/components/Admin/OutstandingDues/OutstandingDuesContainer";
+import { Divider } from "@mui/material";
 
 const page = () => {
   return (
@@ -13,14 +14,17 @@ const page = () => {
         <div className="flex flex-wrap gap-2 justify-between items-center ">
           <AdmissionChartContainer />
         </div>
+        <Divider />
         <div className="flex flex-wrap gap-2 justify-between items-center ">
           <OutstandingDuesContainer />
         </div>
       </div>
+      <Divider />
       <div className="w-full lg:w-[25%] flex gap-4 flex-col">
         {/* <BasicDateCalendar/>
         <EventContainer/> */}
         <GenderChartContainer />
+        <Divider />
         <AttendanceChartContainer />
       </div>
     </div>

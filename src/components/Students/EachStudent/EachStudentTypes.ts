@@ -1,65 +1,44 @@
-export type EachStudent = {
+import { $Enums } from "@prisma/client";
+
+export type Student = {
   studentId: number;
   username: string;
   firstname: string;
   lastname: string;
   contactNo: string;
-  admissionYear: number;
   classId: string;
   motherName: string;
   fatherName: string;
-  gender: "Male" | "Female";
+  gender: 'Male' | 'Female';
   address: string;
   feesPaidUpto: string;
-  passedOutYear: number | null;
-  class: Class;
-  attendance: Attendance;
-  result: Result[];
-};
-type Class = {
-  id:
-    | "class_4"
-    | "class_5"
-    | "class_6"
-    | "class_7"
-    | "class_8"
-    | "class_9"
-    | "class_10"
-    | "class_11"
-    | "class_12";
-  group: "Rose" | "Marigold" | "Lily" | "Sunflower";
-  teacher: Teacher[];
-  exam: Exam;
-  subjects: Subject;
-  fees: Fees;
 };
 
-type Teacher = {
-  firstname: string;
-  lastname: string;
-};
+export type Result = {
+  score: number | null;
+  examId: number | null;
+}[] | undefined
 
-type Subject = {
-  subjectName: string;
-  teacherUsername: string;
-};
 
-type Exam = {
-  classId: string;
-  subjectId: number;
-};
-
-type Result = {
-  score: number;
-  examId: number;
-  stuId: number;
-};
-
-type Fees = {
-  amount: number;
-};
-
-type Attendance = {
-  present: boolean;
-  date: Date;
-};
+export type ClassData = {
+  id: $Enums.ClassList;
+  group: $Enums.Group;
+  subjects: {
+    subjectName: string;
+    teacherUsername: string;
+  }[];
+  teacher: {
+    firstname: string;
+    lastname: string;
+  }[];
+  exams: {
+    monthname: $Enums.MonthsOfExam;
+    subjectId: number | null;
+    results: {
+      score: number | null;
+    }[];
+  }[];
+  fees: {
+    amount: number
+  }[];
+} 

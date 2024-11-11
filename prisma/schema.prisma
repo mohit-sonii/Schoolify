@@ -78,7 +78,7 @@ model Class {
   subjects      Subject[]
   events        Event[]
   teacher       Teacher[]
-  exam          Exam[]
+  exams         Exam[]
   fees          Fee[]
 }
 
@@ -105,27 +105,43 @@ model Subject {
   teacher         Teacher   @relation(fields: [teacherUsername], references: [username])
   classId         ClassList
   class           Class     @relation(fields: [classId], references: [id])
-  exam            Exam[]
+  exams           Exam[]
+}
+
+enum MonthsOfExam {
+  May
+  September
+  December
+  March
 }
 
 model Exam {
-  id        Int       @id @default(autoincrement())
-  startTime DateTime
-  endTime   DateTime
+  id        Int          @id @default(autoincrement())
   classId   ClassList
-  class     Class     @relation(fields: [classId], references: [id])
+  class     Class        @relation(fields: [classId], references: [id])
   subjectId Int
-  subject   Subject   @relation(fields: [subjectId], references: [id])
+  subject   Subject      @relation(fields: [subjectId], references: [id])
+  monthname MonthsOfExam
+  examMonth ExamMonth    @relation(fields: [monthname], references: [name])
   results   Result[]
 }
 
+model ExamMonth {
+  id      Int          @id @default(autoincrement())
+  name    MonthsOfExam @unique
+  exams   Exam[]
+  results Result[]
+}
+
 model Result {
-  id      Int     @id @default(autoincrement())
-  score   Int
-  examId  Int
-  exam    Exam    @relation(fields: [examId], references: [id])
-  stuId   Int
-  student Student @relation(fields: [stuId], references: [studentId])
+  id          Int           @id @default(autoincrement())
+  score       Int?
+  stuId       Int?
+  student     Student?      @relation(fields: [stuId], references: [studentId])
+  examMonthId MonthsOfExam?
+  ExamMonth   ExamMonth?    @relation(fields: [examMonthId], references: [name])
+  examId      Int
+  exam        Exam          @relation(fields: [examId], references: [id])
 }
 
 enum EventType {
