@@ -151,7 +151,8 @@ export const Table = ({ students }: { students: StudentTable[] }) => {
             <th className="hover:font-bold hover:text-black">Admission Year</th>
             <th className="hover:font-bold hover:text-black">Class</th>
             <th className="hover:font-bold hover:text-black">Last Paid</th>
-            <th className="hover:font-bold hover:text-black">Outstanding Fees</th>
+            <th
+              className="hover:font-bold hover:text-black">Outstanding Fees</th>
           </tr>
         </thead>
         <tbody className="text-xs font-medium text-gray-600">

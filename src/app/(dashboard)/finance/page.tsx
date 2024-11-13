@@ -1,22 +1,26 @@
+import FeeBreakdown from "@/components/Finance/FeeBreakdown";
 import OutstandingFeesTotal from "@/components/Finance/OutstandingFeesTotal";
 import OutstandingPerClass from "@/components/Finance/OutstandingPerClass";
 import TotalCollectionFromFees from "@/components/Finance/TotalCollectionFromFees";
-import Divider from '@mui/material/Divider';
+import Divider from "@mui/material/Divider";
 
-const page = () => {
+const page = async () => {
 
   return (
-    <>
+    <div className="w-full flex justify-between  ">
       {/*70 % column */}
-      <div className="w-full xl:w-[60%] flex-col flex gap-5">
+      <div className="w-full xl:w-[65%] flex-col flex gap-5 ">
         <OutstandingFeesTotal />
-        <Divider/>
-        <TotalCollectionFromFees/>
+        <Divider />
+        <TotalCollectionFromFees />
         <Divider />
         <OutstandingPerClass />
         <Divider />
       </div>
-    </>
+      <div className="w-full xl:w-[30%]  flex justify-end">
+        <FeeBreakdown />
+      </div>
+    </div>
   );
 };
 export default page;
