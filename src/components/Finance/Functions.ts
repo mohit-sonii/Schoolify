@@ -86,7 +86,10 @@ export const monthAnalysis = async (selectedMonth: string): Promise<number> => {
   return total;
 };
 
-export const monthlyFeeCollection = async (monthName: string): Promise<number> => {
+// monthly fees collection
+export const monthlyFeeCollection = async (
+  monthName: string
+): Promise<number> => {
   let total = 0;
   await prisma.student
     .findMany({
@@ -108,7 +111,7 @@ export const monthlyFeeCollection = async (monthName: string): Promise<number> =
         const indexOfPaidMonth = months.indexOf(val.feesPaidUpto);
         const charge = val.class.fees[0].amount;
         if (monthName === "") {
-          total += (indexOfPaidMonth * charge);
+          total += indexOfPaidMonth * charge;
         } else {
           const indexOfSelectedMonth = months.indexOf(monthName);
           if (indexOfPaidMonth >= indexOfSelectedMonth) {
@@ -117,5 +120,66 @@ export const monthlyFeeCollection = async (monthName: string): Promise<number> =
         }
       });
     });
+  return total;
+};
+
+//monthly salary analysis
+export const monthlySalaryAnalysis = async (
+  monthName: string
+): Promise<number> => {
+  let total = 0;
+  const monthNameIndex = months.indexOf(monthName);
+  await prisma.teacher
+    .findMany({
+      select: {
+        lastSalaryPaid: true,
+        salary: true,
+      },
+    })
+    .then((res) => {
+      res.map((val) => {
+        const indexOfLastPaid = months.indexOf(val.lastSalaryPaid);
+        const salary = val.salary;
+        if (monthName === "") {
+          total += (indexOfLastPaid + 1) * salary;
+        } else {
+          if (monthNameIndex <= indexOfLastPaid) {
+            total += salary;
+          }
+        }
+      });
+    });
+  return total;
+};
+
+// monthly salary outstanding
+export const monthlySalaryOutstanding = async (
+  monthName: string
+): Promise<number> => {
+  let total = 0;
+  const monthNameIndex = months.indexOf(monthName)
+  await prisma.teacher.findMany({
+    select: {
+      lastSalaryPaid:true,
+      salary:true
+    }
+  }).then((res) => {
+    res.map((val) => {
+      const currentMonth = new Date().getMonth()
+      const salary = val.salary
+      const paidUptoIndex = months.indexOf(val.lastSalaryPaid)+1
+      if (monthName === "") {
+        if (currentMonth > (paidUptoIndex)) {
+          total += ((currentMonth - paidUptoIndex) * salary)
+        }
+      }
+      else {
+        if (monthNameIndex >= paidUptoIndex) {
+          total += salary;
+        }
+      }
+    })
+  })
+
   return total;
 };

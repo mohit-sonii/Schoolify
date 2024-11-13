@@ -31,7 +31,7 @@ const FeeBreakdown = async () => {
   return (
     <div className="w-full  flex flex-col gap-5">
       <div className="flex justify-between items-center w-full">
-        <h3 className="text-sm font-semibold text-gray-900">Fee Breakdwn</h3>
+        <h3 className="text-sm font-semibold text-gray-800">Fee Breakdwn</h3>
       </div>
       <div className="w-full flex flex-col gap-3">
         <div>

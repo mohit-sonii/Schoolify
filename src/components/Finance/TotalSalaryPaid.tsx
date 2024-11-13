@@ -3,23 +3,23 @@
 import React, { ChangeEvent } from "react";
 import { monthNames } from "../Students/StudentTable/TableType";
 import { useState, useEffect } from "react";
-import { monthlyFeeCollection } from "./Functions";
+import { monthlySalaryAnalysis } from "./Functions";
 
-const TotalCollectionFromFees = () => {
+const TotalSalaryPaid = () => {
   const [optionValue, setOptionValue] = useState<string>("");
-  const [totalFees, setTotalFees] = useState<number>(0);
+  const [totalSalary, setTotalSalary] = useState<number>(0);
 
   const handleChange = async (e: ChangeEvent<HTMLSelectElement>) => {
     const month = e.target.value;
     setOptionValue(month);
-    const res = await monthlyFeeCollection(month);
-    setTotalFees(res);
+    const res = await monthlySalaryAnalysis(month);
+    setTotalSalary(res)
   };
-  
+
   useEffect(() => {
     const result = async () => {
-      const total = await monthlyFeeCollection("");
-      setTotalFees(total);
+      const total = await monthlySalaryAnalysis("");
+      setTotalSalary(total)
     };
     result();
   }, []);
@@ -28,9 +28,9 @@ const TotalCollectionFromFees = () => {
     <div className="w-full  flex flex-col gap-5">
       <div className="flex justify-between items-center w-full">
         <h3 className="text-sm font-semibold text-gray-900 flex flex-col">
-          Total Fees Collection
+          Total Salary Paid
           <span className="text-[10px] font-light text-gray-500">
-            All Classes
+            All Teachers
           </span>
         </h3>
         <select
@@ -51,9 +51,9 @@ const TotalCollectionFromFees = () => {
           ))}
         </select>
       </div>
-      <h1 className="w-max text-2xl font-bold text-gray-800">{`$${totalFees}`}</h1>
+      <h1 className="w-max text-2xl font-bold text-gray-800">{`$${totalSalary}`}</h1>
     </div>
   );
 };
 
-export default TotalCollectionFromFees;
+export default TotalSalaryPaid;
