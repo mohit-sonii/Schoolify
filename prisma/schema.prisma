@@ -168,9 +168,29 @@ model Attendance {
   student             Student  @relation(fields: [studentAttendanceId], references: [studentId])
 }
 
+
+
 model Fee {
   id      Int       @id @default(autoincrement())
   amount  Int
   classId ClassList
   class   Class     @relation(fields: [classId], references: [id])
+}
+
+model Expense {
+  id Int @id @default(autoincrement())
+  monthName Month
+  date Int
+  amount Int
+  description String
+  title String
+}
+
+model Gain {
+  id Int @id @default(autoincrement())
+  monthName Month
+  date Int
+  amount Int
+  description String
+  title String
 }

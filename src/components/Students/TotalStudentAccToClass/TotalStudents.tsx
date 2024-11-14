@@ -46,7 +46,9 @@ export default function TotalStudents({
         series={[
           {
             data: counting,
-            label: "Total Number of Students"
+            label: "Total Number of Students",
+            color: '#8A89CC',
+
           },
         ]}
         width={width}

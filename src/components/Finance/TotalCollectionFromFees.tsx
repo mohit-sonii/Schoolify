@@ -51,7 +51,7 @@ const TotalCollectionFromFees = () => {
           ))}
         </select>
       </div>
-      <h1 className="w-max text-2xl font-bold text-gray-800">{`$${totalFees}`}</h1>
+      <h1 className="w-max text-2xl font-bold text-green-600">{`$${totalFees}`}</h1>
     </div>
   );
 };

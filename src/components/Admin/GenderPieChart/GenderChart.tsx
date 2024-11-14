@@ -25,7 +25,8 @@ export default function GenderChart({ boys, girls }: { boys: number, girls: numb
         },
       ]}
       height={200}
-      colors={['#CFCEFF', '#CBC3E3']}
+      colors={['#8A89CC', '#7D6CA8']}
+
     />
   );
 }

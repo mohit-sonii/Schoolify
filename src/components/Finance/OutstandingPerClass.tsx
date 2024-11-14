@@ -25,6 +25,7 @@ const OutstandingPerClass = async () => {
           y={values}
           labelForY="Total outstanding amount"
           Area={false}
+          
         />
         : <p>No more outstanding fees</p>}
     </>

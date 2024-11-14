@@ -41,6 +41,7 @@ export default function OutstandingDues({
           {
             data: y,
             area: Area,
+            color:'#8A89CC',
             label: labelForY,
           },
         ]}

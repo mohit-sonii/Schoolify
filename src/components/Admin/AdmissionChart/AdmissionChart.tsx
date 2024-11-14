@@ -47,7 +47,9 @@ export default function AdmissionChart({
         series={[
           {
             data: yearData,
-            label: "Total Number of Admissions"
+            label: "Total Number of Admissions",
+            color: '#8A89CC',
+
           },
         ]}
         width={width}

@@ -140,6 +140,30 @@ CREATE TABLE "Fee" (
     CONSTRAINT "Fee_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Expense" (
+    "id" SERIAL NOT NULL,
+    "monthName" "Month" NOT NULL,
+    "date" INTEGER NOT NULL,
+    "amount" INTEGER NOT NULL,
+    "description" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+
+    CONSTRAINT "Expense_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Gain" (
+    "id" SERIAL NOT NULL,
+    "monthName" "Month" NOT NULL,
+    "date" INTEGER NOT NULL,
+    "amount" INTEGER NOT NULL,
+    "description" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+
+    CONSTRAINT "Gain_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Admin_username_key" ON "Admin"("username");
 

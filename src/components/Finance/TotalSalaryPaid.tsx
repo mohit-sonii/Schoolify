@@ -51,7 +51,7 @@ const TotalSalaryPaid = () => {
           ))}
         </select>
       </div>
-      <h1 className="w-max text-2xl font-bold text-gray-800">{`$${totalSalary}`}</h1>
+      <h1 className="w-max text-2xl font-bold text-red-600">{`$${totalSalary}`}</h1>
     </div>
   );
 };
