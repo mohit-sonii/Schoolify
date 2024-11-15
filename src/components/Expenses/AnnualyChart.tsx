@@ -3,11 +3,12 @@ import { useState, useEffect, ChangeEvent, useRef } from "react";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { annuallyTrack } from "@/components/Expenses/Functions";
 import React from "react";
+import { years } from "./objectExport";
 
 const AnnualyChart = () => {
   const widthRef = useRef<HTMLDivElement>(null);
   const year = new Date().getFullYear();
-  const years = [2024, 2023, 2022, 2021, 2020];
+ 
   const [width, setWidth] = useState<number>(500);
   const [optionValue, setOptionValue] = useState<number>(year);
   const [keys, setKeys] = useState<string[]>([]);
@@ -46,7 +47,7 @@ const AnnualyChart = () => {
           onChange={(e) => handleChange(e)}
         >
           {years.map((val) => (
-            <option value={val} className="font-light text-xs text-gray-500">
+            <option key={val} value={val} className="font-light text-xs text-gray-500">
               {val}
             </option>
           ))}

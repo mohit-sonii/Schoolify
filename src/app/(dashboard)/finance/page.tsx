@@ -15,6 +15,7 @@ const page = async () => {
       {/*70 % column */}
       <div className="w-full xl:w-[65%] flex-col flex gap-5 ">
       <h1 className="font-bold text-xl">Finance</h1>
+        <Divider />
         <OutstandingFeesTotal />
         <Divider />
         <TotalCollectionFromFees />

@@ -10,7 +10,7 @@ const page = async () => {
     <>
       <div className="flex md:gap-8 flex-col">
         <h1 className="font-bold text-xl">Students</h1>
-
+        <Divider />
         <div className="flex w-full justify-end ">
           <Button innerText="Create Student" />
         </div>

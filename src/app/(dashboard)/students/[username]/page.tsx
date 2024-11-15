@@ -61,6 +61,7 @@ const page = async ({ params }: { params: { username: string } }) => {
 
       <div className="w-full xl:w-[65%]  gap-5 h-max flex flex-wrap flex-col justify-between">
         <h1 className="font-bold text-xl">{`${result.firstname} ${result.lastname}`}</h1>
+        <Divider />
         <FirstRow
           firstname={result.firstname}
           lastname={result.lastname}
