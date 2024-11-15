@@ -11,8 +11,8 @@ export default function OutstandingDues({
 }: {
   x: string[];
   y: number[];
-    labelForY: string;
-  Area:boolean
+  labelForY: string;
+  Area: boolean
 }) {
   const widthRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(500);
@@ -41,7 +41,7 @@ export default function OutstandingDues({
           {
             data: y,
             area: Area,
-            color:'#8A89CC',
+            color: '#8A89CC',
             label: labelForY,
           },
         ]}

@@ -11,6 +11,7 @@ const page = () => {
   return (
     <div className="flex flex-wrap gap-4 w-full ">
       <div className="w-full lg:w-[70%] flex gap-8 flex-col">
+        <h1 className="font-bold text-xl">Summary</h1>
         <div className="flex flex-wrap gap-2 justify-between items-center ">
           <AdmissionChartContainer />
         </div>

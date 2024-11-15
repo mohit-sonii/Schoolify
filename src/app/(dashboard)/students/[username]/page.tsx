@@ -54,11 +54,13 @@ const page = async ({ params }: { params: { username: string } }) => {
     });
 
   mayResults.push(...temp);
-  
+
 
   return (
     <div className="flex justify-between flex-wrap gap-5">
+
       <div className="w-full xl:w-[65%]  gap-5 h-max flex flex-wrap flex-col justify-between">
+        <h1 className="font-bold text-xl">{`${result.firstname} ${result.lastname}`}</h1>
         <FirstRow
           firstname={result.firstname}
           lastname={result.lastname}
@@ -68,9 +70,9 @@ const page = async ({ params }: { params: { username: string } }) => {
           contact={result.contactNo}
           address={result.address}
         />
-        <Divider/>
+        <Divider />
         <SecondRow subjects={subjects} teachers={teachers} />
-        <Divider/>
+        <Divider />
         {/* <PerformanceCard subjects={subjects} results={mayResults} /> */}
       </div>
       <div className="w-full xl:w-[30%] flex flex-wrap flex-col gap-5">

@@ -146,6 +146,7 @@ CREATE TABLE "Expense" (
     "monthName" "Month" NOT NULL,
     "date" INTEGER NOT NULL,
     "amount" INTEGER NOT NULL,
+    "year" INTEGER NOT NULL,
     "description" TEXT NOT NULL,
     "title" TEXT NOT NULL,
 
@@ -157,6 +158,7 @@ CREATE TABLE "Gain" (
     "id" SERIAL NOT NULL,
     "monthName" "Month" NOT NULL,
     "date" INTEGER NOT NULL,
+    "year" INTEGER NOT NULL,
     "amount" INTEGER NOT NULL,
     "description" TEXT NOT NULL,
     "title" TEXT NOT NULL,

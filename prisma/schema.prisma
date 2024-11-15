@@ -168,8 +168,6 @@ model Attendance {
   student             Student  @relation(fields: [studentAttendanceId], references: [studentId])
 }
 
-
-
 model Fee {
   id      Int       @id @default(autoincrement())
   amount  Int
@@ -178,19 +176,22 @@ model Fee {
 }
 
 model Expense {
-  id Int @id @default(autoincrement())
-  monthName Month
-  date Int
-  amount Int
+  id          Int    @id @default(autoincrement())
+  monthName   Month
+  date        Int
+  amount      Int
+  year        Int
   description String
-  title String
+  title       String
 }
 
 model Gain {
-  id Int @id @default(autoincrement())
+  id        Int   @id @default(autoincrement())
   monthName Month
-  date Int
-  amount Int
+  date      Int
+  year      Int
+
+  amount      Int
   description String
-  title String
+  title       String
 }
