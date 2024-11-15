@@ -1,3 +1,5 @@
+"use server"
+
 import OutstandingDues from "./OutstandingDues";
 import { outstandingData } from "./OutStandingAmount";
 

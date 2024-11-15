@@ -1,3 +1,5 @@
+"use server"
+
 const SecondRow = ({ subjects, teachers }: { subjects: string[], teachers: string[] }) => {
   return (
     <div className="flex flex-col lg:flex-row gap-3">

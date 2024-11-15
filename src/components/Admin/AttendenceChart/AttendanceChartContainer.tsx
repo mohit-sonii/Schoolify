@@ -1,8 +1,9 @@
+"use server"
+
 import React from 'react'
 import AttendanceChart from './AttendanceChart'
 import prisma from '@/utils/db'
 import Image from 'next/image'
-
 const AttendanceChartContainer = async () => {
 
   const data = await prisma.$transaction([

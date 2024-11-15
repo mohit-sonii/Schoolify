@@ -1,3 +1,6 @@
+"use server"
+
+
 import { Result } from "../EachStudent/EachStudentTypes";
 
 const PerformanceCard = ({

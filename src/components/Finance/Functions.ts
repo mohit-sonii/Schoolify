@@ -257,6 +257,7 @@ type objectType = {
   label: string;
   value: number;
 };
+
 //monthly profit
 export const monthlyProfit = async (
   monthName: string
@@ -265,7 +266,6 @@ export const monthlyProfit = async (
   let profit: number = 0;
   await Promise.all([monthlyExpense(monthName), monthlyGain(monthName)]).then(
     (res) => {
-      console.log(res)
       const exp: objectType = {
         label: "Total Expenses",
         value: res[0][1],
@@ -279,6 +279,5 @@ export const monthlyProfit = async (
       profit = gain.value - exp.value;
     }
   );
-  console.log(arr)
   return [arr, profit];
 };

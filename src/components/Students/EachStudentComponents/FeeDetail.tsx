@@ -1,3 +1,6 @@
+"use server"
+
+
 const FeeDetail = ({
   amount,
   last_paid_for,

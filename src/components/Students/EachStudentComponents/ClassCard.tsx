@@ -1,3 +1,4 @@
+"use server"
 
 const ClassCard = ({ classname, group, total }: { classname: string, group: string, total: number }) => {
   return (

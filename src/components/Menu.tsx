@@ -16,6 +16,16 @@ const menuItem = [
         label:'Finance'
       },
       {
+        icon: '/expense.svg',
+        href: '/expense',
+        label: 'Expense'
+      },
+      {
+        icon: '/profit.svg',
+        href: '/profit',
+        label: 'Profit'
+      },
+      {
         icon: '/student.svg',
         href: '/students',
         label: 'Student',
