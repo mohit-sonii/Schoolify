@@ -4,8 +4,8 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
-import { years } from "./objectExport";
 import Table from "@mui/material/Table";
+import { years } from "../Expenses/objectExport";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -16,14 +16,14 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { expenseType } from "./Functions";
-import { refineResult } from "./objectExport";
+import {  incomeType } from "./Functions";
+import { refineResult } from "../Expenses/objectExport";
 import Button from "../Button";
 import { monthNames } from "../Students/StudentTable/TableType";
 import Image from "next/image";
 
 //each row
-function Row(props: { row: expenseType }) {
+function Row(props: { row: incomeType }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
@@ -66,7 +66,7 @@ function Row(props: { row: expenseType }) {
 export default function IncomeTable({
   gain,
 }: {
-  gain: expenseType[];
+  gain: incomeType[];
 }) {
   const currentYear = new Date().getFullYear();
   const [yearMonth, setYearMonth] = useState<{ year: number; month: string }>({
@@ -74,7 +74,7 @@ export default function IncomeTable({
     month: "",
   });
   const [inputValue, setInputValue] = useState<string>("");
-  const [mapping, setMapping] = useState<expenseType[] | null>(null);
+  const [mapping, setMapping] = useState<incomeType[] | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [sortOrder, setSortOrder] = useState<string>("");
   const optionChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -82,7 +82,7 @@ export default function IncomeTable({
     setYearMonth((prev) => {
       const updatedState = { ...prev, [name]: value };
       const response = refineResult(
-        expenditure,
+        gain,
         yearMonth.year,
         yearMonth.month
       );
@@ -94,7 +94,7 @@ export default function IncomeTable({
   };
   const handleClick = () => {
     const response = refineResult(
-      expenditure,
+      gain,
       yearMonth.year,
       yearMonth.month,
       inputValue
@@ -106,7 +106,7 @@ export default function IncomeTable({
 
   useEffect(() => {
     const response = refineResult(
-      expenditure,
+      gain,
       yearMonth.year,
       yearMonth.month,
       "",
@@ -115,12 +115,11 @@ export default function IncomeTable({
     setMapping(response);
     if (response.length === 0) setVisible(true);
     else setVisible(false);
-  }, [yearMonth, expenditure, sortOrder]);
+  }, [yearMonth, gain, sortOrder]);
 
   return (
     <div className="flex flex-col w-full gap-5 mb-5">
-      <h1 className="text-sm font-bold ">Expenses Details</h1>
-      <Button innerText="Add new Expense" />
+      <h1 className="text-sm font-bold ">Income Details</h1>
       <div className="flex gap-3 items-center flex-wrap">
         <div className="flex flex-col gap-1">
           <label htmlFor="year" className="font-light text-xs">

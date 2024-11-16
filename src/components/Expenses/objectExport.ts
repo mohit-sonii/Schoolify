@@ -1,9 +1,10 @@
+import { incomeType } from "../Profit/Functions";
 import { expenseType } from "./Functions";
 
 export const years = [2024, 2023, 2022, 2021, 2020];
 
 export const refineResult = (
-  data: expenseType[],
+  data: expenseType[] | incomeType[],
   year: number,
   month: string,
   inputText?: string,

@@ -1,17 +1,18 @@
-// import IncomeTable from '@/components/Profit/IncomeTable'
+import IncomeTable from '@/components/Profit/IncomeTable'
 import Income from "@/components/Profit/Income";
 import Expense from "@/components/Profit/Expense";
 import Profit from "@/components/Profit/Profit";
 import ProfitAnuallyChart from "@/components/Profit/ProfitAnuallyChart";
 import { Divider } from "@mui/material";
 import React from "react";
-import { calculateTotalExpense, calculateTotalProfit } from "@/components/Profit/Functions";
+import { AllIncomeData, calculateTotalExpense, calculateTotalProfit } from "@/components/Profit/Functions";
 
 const page = async () => {
   const year = new Date().getFullYear();
   const income = await calculateTotalProfit(year);
-  const expense = await calculateTotalExpense(year);
+  const expense = await calculateTotalExpense(year)
   const profit = income - expense;
+  const incomeData = await AllIncomeData()
 
   return (
     <div className="flex flex-col gap-5">
@@ -25,7 +26,7 @@ const page = async () => {
       <Divider />
       <ProfitAnuallyChart />
       <Divider />
-      {/* <IncomeTable /> */}
+      <IncomeTable gain={incomeData} />
     </div>
   );
 };
