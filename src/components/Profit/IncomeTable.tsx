@@ -68,7 +68,6 @@ export default function IncomeTable({
 }: {
   gain: incomeType[];
 }) {
-  const currentYear = new Date().getFullYear();
   const [yearMonth, setYearMonth] = useState<{ year: number; month: string }>({
     year: 0,
     month: "",

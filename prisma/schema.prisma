@@ -88,8 +88,10 @@ model Teacher {
   firstname      String
   lastname       String
   qualification  String
-  joining        DateTime  @default(now())
-  servedTillDate DateTime?
+  joiningDate    Int
+  joiningMonth   Month
+  joiningYear Int
+  servedTill     Month?
   servedPresent  String?
   lastSalaryPaid Month
   salary         Int

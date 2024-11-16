@@ -32,7 +32,7 @@ const menuItem = [
       },
       {
         icon: '/teacher.svg',
-        href: '/teacher',
+        href: '/teachers',
         label: 'Teacher',
       },
       {
