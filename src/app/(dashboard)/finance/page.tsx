@@ -24,6 +24,7 @@ const page = async () => {
         <Divider />
         <div className="w-full flex justify-between items-center flex-col xl:flex-row">
           <ExpenseChart />
+          <Divider orientation="vertical"/>
           <GainChart />
         </div>
       </div>
