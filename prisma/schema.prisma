@@ -91,9 +91,12 @@ model Teacher {
   joiningDate    Int
   joiningMonth   Month
   joiningYear Int
+  gender Gender
   servedTill     Month?
-  servedPresent  String?
+  servedPresent  Boolean? @default(true)
   lastSalaryPaid Month
+  contactNo String
+  address String
   salary         Int
   subject        Subject[]
   classId        ClassList

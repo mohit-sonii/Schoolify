@@ -62,9 +62,12 @@ CREATE TABLE "Teacher" (
     "joiningDate" INTEGER NOT NULL,
     "joiningMonth" "Month" NOT NULL,
     "joiningYear" INTEGER NOT NULL,
+    "gender" "Gender" NOT NULL,
     "servedTill" "Month",
-    "servedPresent" TEXT,
+    "servedPresent" BOOLEAN DEFAULT true,
     "lastSalaryPaid" "Month" NOT NULL,
+    "contactNo" TEXT NOT NULL,
+    "address" TEXT NOT NULL,
     "salary" INTEGER NOT NULL,
     "classId" "ClassList" NOT NULL,
 

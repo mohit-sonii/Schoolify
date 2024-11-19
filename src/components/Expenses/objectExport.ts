@@ -15,10 +15,11 @@ export const refineResult = (
     const monthMatch = month.length > 0 ? val.month === month : true;
     return yearMatch && monthMatch;
   });
-  if (inputText) res = res.filter((val) => val.title.toLowerCase().includes(inputText.toLowerCase()));
-  if (sortOrder === "least")
-    res.sort((a, b) => a.amount - b.amount)
-  if (sortOrder === "high")
-    res.sort((a, b) => b.amount - a.amount)
+  if (inputText)
+    res = res.filter((val) =>
+      val.title.toLowerCase().includes(inputText.toLowerCase())
+    );
+  if (sortOrder === "least") res.sort((a, b) => a.amount - b.amount);
+  if (sortOrder === "high") res.sort((a, b) => b.amount - a.amount);
   return res;
 };
