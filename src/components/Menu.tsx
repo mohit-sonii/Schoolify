@@ -36,18 +36,13 @@ const menuItem = [
         label: 'Teacher',
       },
       {
-        icon: '/attendance.svg',
-        href: '/attendance',
-        label: 'Attendance',
-      },
-      {
         icon: '/results.svg',
         href: '/result',
         label: 'Result',
       },
       {
         icon: '/class.svg',
-        href: '/class',
+        href: '/classes',
         label: 'Class',
       },
       {

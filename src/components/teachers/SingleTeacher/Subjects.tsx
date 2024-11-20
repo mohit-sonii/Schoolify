@@ -14,8 +14,8 @@ const Subjects = ({
           Subjects
         </h1>
         <div className="flex flex-col gap-2 text-xs font-light  w-full ">
-          {subject.map((val) => (
-            <span className="text-gray-700 text-xs font-semibold flex-wrap">
+          {subject.map((val,index) => (
+            <span key={index} className="text-gray-700 text-xs font-semibold flex-wrap">
               {val}
             </span>
           ))}
@@ -26,8 +26,8 @@ const Subjects = ({
           Classes
         </h1>
         <div className="flex flex-col gap-2 text-xs font-light  w-full ">
-          {classes.map((val) => (
-            <span className="text-gray-700 text-xs font-semibold">{val}</span>
+          {classes.map((val,index) => (
+            <span key={index} className="text-gray-700 text-xs font-semibold">{val}</span>
           ))}
         </div>
       </div>

@@ -1,4 +1,3 @@
-import AddRemoveButton from "@/components/teachers/SingleTeacher/AddRemoveButton";
 import FirstRow from "@/components/teachers/SingleTeacher/FirstRow";
 import {
   findPending,
@@ -9,6 +8,7 @@ import Salary from "@/components/teachers/SingleTeacher/Salary";
 import Subjects from "@/components/teachers/SingleTeacher/Subjects";
 import { Divider } from "@mui/material";
 import React from "react";
+import AddRemoveButton from "../../../../components/AddRemoveButton";
 
 const page = async ({ params }: { params: { username: string } }) => {
   const res = await params;
@@ -24,7 +24,7 @@ const page = async ({ params }: { params: { username: string } }) => {
       <div className="flex items-center w-full justify-between flex-wrap">
         <h1 className="w-max font-bold text-xl">{data["Full Name"]}</h1>
         <div className="flex w-max">
-          <AddRemoveButton/>
+          <AddRemoveButton text={'Teacher'} />
         </div>
       </div>
 

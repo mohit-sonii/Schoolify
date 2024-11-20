@@ -10,8 +10,8 @@ import FirstRow from "@/components/Students/EachStudentComponents/FirtRow";
 import PerformanceCard from "@/components/Students/EachStudentComponents/PerformanceCard";
 import SecondRow from "@/components/Students/EachStudentComponents/SecondRow";
 import { monthNames } from "@/components/Students/StudentTable/TableType";
-import AddRemoveButton from "@/components/teachers/SingleTeacher/AddRemoveButton";
 import { Divider } from "@mui/material";
+import AddRemoveButton from "../../../../components/AddRemoveButton";
 
 const page = async ({ params }: { params: { username: string } }) => {
   const res = await params;
@@ -62,7 +62,7 @@ const page = async ({ params }: { params: { username: string } }) => {
       <div className="flex items-center w-full justify-between flex-wrap">
         <h1 className="w-max font-bold text-xl">{result.firstname + " " + result.lastname}</h1>
         <div className="flex w-max">
-          <AddRemoveButton />
+          <AddRemoveButton text={"Student" } />
         </div>
       </div>
       <div className="w-full xl:w-[65%]  gap-5 h-max flex flex-wrap flex-col justify-between">
