@@ -10,8 +10,8 @@ import { useState, useEffect, ChangeEvent } from "react";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { teacherType } from "./Functions";
-import { monthNames } from "../Students/StudentTable/TableType";
 import Image from "next/image";
+import { months } from "../Extra";
 import { refining, years } from "./refining";
 import { useRouter } from "next/navigation";
 
@@ -135,7 +135,7 @@ export default function TeacherTable({
             <option className="font-light text-xs text-gray-500" value="">
               Select Month
             </option>
-            {monthNames.map((val) => (
+            {months.map((val) => (
               <option
                 className="font-light text-xs text-gray-500"
                 key={val}

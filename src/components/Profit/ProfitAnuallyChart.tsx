@@ -2,8 +2,8 @@
 import { LineChart } from "@mui/x-charts";
 import React, { ChangeEvent } from "react";
 import { useState, useRef, useEffect } from "react";
-import { years } from "../Expenses/objectExport";
 import { calculateProfit } from "./Functions";
+import { years } from "../Extra";
 
 const ProfitAnuallyChart = () => {
   const currentYear = new Date().getFullYear();

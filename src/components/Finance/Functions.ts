@@ -1,8 +1,7 @@
 "use server";
 
 import prisma from "@/utils/db";
-
-import { months } from "../Admin/OutstandingDues/OutStandingAmount";
+import { months } from "../Extra";
 
 const details: { [key: string]: number } = {};
 

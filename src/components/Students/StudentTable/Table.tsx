@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import {
   StudentTable,
   classNames,
-  admissionYears,
-  monthNames,
+  admissionYears
 } from "./TableType";
+import { months } from "@/components/Extra";
 import { FilterSort } from "./FilterFunctions";
 import Image from "next/image";
 
@@ -120,7 +120,7 @@ export const Table = ({ students }: { students: StudentTable[] }) => {
             <option value={""} className="font-light text-xs text-gray-500">
               Last Paid fees
             </option>
-            {monthNames.map((val) => (
+            {months.map((val) => (
               <option
                 key={val}
                 value={`${val}`}

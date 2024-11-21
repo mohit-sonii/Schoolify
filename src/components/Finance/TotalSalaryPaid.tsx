@@ -1,8 +1,8 @@
 "use client";
 
 import React, { ChangeEvent } from "react";
-import { monthNames } from "../Students/StudentTable/TableType";
 import { useState, useEffect } from "react";
+import { months } from "../Extra";
 import { monthlySalaryAnalysis } from "./Functions";
 
 const TotalSalaryPaid = () => {
@@ -40,7 +40,7 @@ const TotalSalaryPaid = () => {
           <option value={""} className="font-light text-xs text-gray-500">
             Select Month
           </option>
-          {monthNames.map((val) => (
+          {months.map((val) => (
             <option
               key={val}
               value={`${val}`}

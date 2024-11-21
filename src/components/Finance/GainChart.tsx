@@ -1,13 +1,13 @@
 "use client";
 
-import { monthNames } from "@/components/Students/StudentTable/TableType";
 import { ChangeEvent, useState, useEffect } from "react";
+import { months } from "../Extra";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { monthlyGain } from "./Functions";
 
 const ExpenseChart = () => {
   const currentMonthIdx = new Date().getMonth() - 1;
-  const currentMonth = monthNames[currentMonthIdx];
+  const currentMonth = months[currentMonthIdx];
   const [optionValue, setOptionValue] = useState<string>(currentMonth);
   const [total, setTotal] = useState<number>(0);
   const [apiResult, setApiResult] = useState<
@@ -56,7 +56,7 @@ const ExpenseChart = () => {
               >
                 {currentMonth}
               </option>
-              {monthNames.map((val) => (
+              {months.map((val) => (
                 <option
                   key={val}
                   value={`${val}`}

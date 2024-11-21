@@ -3,8 +3,7 @@ import { useState, useEffect, ChangeEvent, useRef } from "react";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { annuallyTrack } from "@/components/Expenses/Functions";
 import React from "react";
-import { years } from "./objectExport";
-
+import { years } from "../Extra";
 const AnnualyChart = () => {
   const widthRef = useRef<HTMLDivElement>(null);
   const year = new Date().getFullYear();

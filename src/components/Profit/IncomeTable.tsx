@@ -5,8 +5,8 @@ import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
-import { years } from "../Expenses/objectExport";
 import TableBody from "@mui/material/TableBody";
+import { years } from "../Extra";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
@@ -19,8 +19,8 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import {  incomeType } from "./Functions";
 import { refineResult } from "../Expenses/objectExport";
 import Button from "../Button";
-import { monthNames } from "../Students/StudentTable/TableType";
 import Image from "next/image";
+import { months } from "../Extra";
 
 //each row
 function Row(props: { row: incomeType }) {
@@ -152,7 +152,7 @@ export default function IncomeTable({
             <option className="font-light text-xs text-gray-500" value="">
               Select Month
             </option>
-            {monthNames.map((val) => (
+            {months.map((val) => (
               <option
                 className="font-light text-xs text-gray-500"
                 key={val}

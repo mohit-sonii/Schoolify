@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, ChangeEvent } from "react";
-import { years } from "../Expenses/objectExport";
 import { averageSalary } from "./Functions";
+import { years } from "../Extra";
 
 const AverageSalary = ({ value }: { value: number }) => {
   const [optionValue, setOptionValue] = useState<number>(

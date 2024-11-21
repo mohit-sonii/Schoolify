@@ -1,5 +1,5 @@
 import prisma from "@/utils/db"
-import { ClassData, Result, Student } from "./EachStudentTypes"
+import { ClassData, Student } from "./EachStudentTypes"
 
 export const StudentData = async (user: string): Promise<Student> => {
   return await prisma.student.findFirstOrThrow({

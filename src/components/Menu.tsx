@@ -49,22 +49,12 @@ const menuItem = [
         icon: '/exam.svg',
         href: '/exams',
         label: 'Exam',
-      },
-      {
-        icon: '/subject.svg',
-        href: '/subjects',
-        label: 'Subjects',
-      },
+      }
     ]
   },
   {
     title: 'Others',
     items: [
-      {
-        icon: '/settings.svg',
-        href: '/account/setting',
-        label: 'Setting',
-      },
       {
         icon: '/logout.svg',
         href: '/logout',

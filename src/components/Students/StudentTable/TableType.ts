@@ -22,19 +22,4 @@ export const classNames = ["4th", "5th", "6th", "7th", "8th", "9th", "10th", "11
 export const admissionYears = new Array(new Date().getFullYear() - 2020 + 1).fill(2020).map((_, index) => 2020 + index)
 
 
-export const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
-
-]
 

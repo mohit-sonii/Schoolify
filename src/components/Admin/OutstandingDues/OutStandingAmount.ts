@@ -1,19 +1,6 @@
 import prisma from "@/utils/db";
 
-export const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+import { months  } from "@/components/Extra";
 const getMonth = new Date().getMonth();
 
 const classId: string[] = [];
