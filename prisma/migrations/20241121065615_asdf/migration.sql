@@ -88,8 +88,9 @@ CREATE TABLE "Subject" (
 CREATE TABLE "Exam" (
     "id" SERIAL NOT NULL,
     "classId" "ClassList" NOT NULL,
-    "subjectId" INTEGER NOT NULL,
+    "subjectname" TEXT NOT NULL,
     "monthname" "MonthsOfExam" NOT NULL,
+    "date" INTEGER NOT NULL,
 
     CONSTRAINT "Exam_pkey" PRIMARY KEY ("id")
 );
@@ -181,6 +182,9 @@ CREATE UNIQUE INDEX "Student_username_key" ON "Student"("username");
 CREATE UNIQUE INDEX "Teacher_username_key" ON "Teacher"("username");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Subject_subjectName_classId_key" ON "Subject"("subjectName", "classId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "ExamMonth_name_key" ON "ExamMonth"("name");
 
 -- AddForeignKey
@@ -199,7 +203,7 @@ ALTER TABLE "Subject" ADD CONSTRAINT "Subject_classId_fkey" FOREIGN KEY ("classI
 ALTER TABLE "Exam" ADD CONSTRAINT "Exam_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Exam" ADD CONSTRAINT "Exam_subjectId_fkey" FOREIGN KEY ("subjectId") REFERENCES "Subject"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Exam" ADD CONSTRAINT "Exam_subjectname_classId_fkey" FOREIGN KEY ("subjectname", "classId") REFERENCES "Subject"("subjectName", "classId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Exam" ADD CONSTRAINT "Exam_monthname_fkey" FOREIGN KEY ("monthname") REFERENCES "ExamMonth"("name") ON DELETE RESTRICT ON UPDATE CASCADE;

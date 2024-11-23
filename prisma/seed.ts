@@ -146,8 +146,8 @@ const main = async () => {
     ],
   });
 
-  //subject creation
-  await prisma.subject.createMany({
+  // Subject creation
+  const subjects = await prisma.subject.createMany({
     data: [
       {
         subjectName: "Maths",
@@ -173,6 +173,93 @@ const main = async () => {
         subjectName: "Social Science",
         teacherUsername: "monika",
         classId: ClassList.class_11,
+      },
+    ],
+  });
+
+  // Exam month creation
+  await prisma.examMonth.createMany({
+    data: [
+      { name: MonthsOfExam.May },
+      { name: MonthsOfExam.September },
+    ],
+  });
+
+  // Exam creation
+  await prisma.exam.createMany({
+    data: [
+      {
+        classId: ClassList.class_12,
+        subjectname: "Maths", // Match subjectName with an existing subject
+        monthname: "May",    // Use the enum value correctly
+        date: 20,            // Add the date field if defined in your schema
+      },
+      {
+        classId: ClassList.class_12,
+        subjectname: "Science",
+        monthname: "May",
+        date: 25,
+      },
+      {
+        classId: ClassList.class_11,
+        subjectname: "Maths",
+        monthname: "September",
+        date: 10,
+      },
+      {
+        classId: ClassList.class_12,
+        subjectname: "Maths",
+        monthname: "September",
+        date: 15,
+      },
+    ],
+  });
+
+
+  // result creation
+  await prisma.result.createMany({
+    data: [
+      {
+        score: 80,
+        stuId: 1,
+        examMonthId: MonthsOfExam.May,
+        examId: 1,
+      },
+      {
+        score: 99,
+        stuId: 2,
+        examMonthId: MonthsOfExam.May,
+        examId: 1,
+      },
+      {
+        score: 88,
+        stuId: 1,
+        examMonthId: MonthsOfExam.May,
+        examId: 2,
+      },
+      {
+        score: 75,
+        stuId: 2,
+        examMonthId: MonthsOfExam.May,
+        examId: 2,
+      },
+      {
+        score: 74,
+        stuId: 1,
+        examMonthId: MonthsOfExam.September,
+        examId: 4,
+      },
+      {
+        score: 89,
+        stuId: 2,
+        examMonthId: MonthsOfExam.September,
+        examId: 4,
+      },
+      {
+        score: 89,
+        stuId: 3,
+        examMonthId: MonthsOfExam.September,
+        examId: 3,
       },
     ],
   });
@@ -235,98 +322,6 @@ const main = async () => {
       {
         amount: 1200,
         classId: ClassList.class_12,
-      },
-    ],
-  });
-
-  // exam month
-  await prisma.examMonth.create({
-    data: {
-      name: MonthsOfExam.May,
-    },
-  });
-  await prisma.examMonth.create({
-    data: {
-      name: MonthsOfExam.September,
-    },
-  });
-
-  //exam creation
-  await prisma.exam.create({
-    data: {
-      classId: ClassList.class_12,
-      subjectId: 1,
-      monthname: "May",
-    },
-  });
-
-  await prisma.exam.create({
-    data: {
-      classId: ClassList.class_12,
-      subjectId: 2,
-      monthname: "May",
-    },
-  });
-
-  await prisma.exam.create({
-    data: {
-      classId: ClassList.class_11,
-      subjectId: 1,
-      monthname: "September",
-    },
-  });
-  await prisma.exam.create({
-    data: {
-      classId: ClassList.class_12,
-      subjectId: 1,
-      monthname: "September",
-    },
-  });
-
-  // result creation
-  await prisma.result.createMany({
-    data: [
-      {
-        score: 80,
-        stuId: 1,
-        examMonthId: MonthsOfExam.May,
-        examId: 1,
-      },
-      {
-        score: 99,
-        stuId: 2,
-        examMonthId: MonthsOfExam.May,
-        examId: 1,
-      },
-      {
-        score: 88,
-        stuId: 1,
-        examMonthId: MonthsOfExam.May,
-        examId: 2,
-      },
-      {
-        score: 75,
-        stuId: 2,
-        examMonthId: MonthsOfExam.May,
-        examId: 2,
-      },
-      {
-        score: 74,
-        stuId: 1,
-        examMonthId: MonthsOfExam.September,
-        examId: 4,
-      },
-      {
-        score: 89,
-        stuId: 2,
-        examMonthId: MonthsOfExam.September,
-        examId: 4,
-      },
-      {
-        score: 89,
-        stuId: 3,
-        examMonthId: MonthsOfExam.September,
-        examId: 3,
       },
     ],
   });

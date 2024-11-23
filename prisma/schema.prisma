@@ -90,13 +90,13 @@ model Teacher {
   qualification  String
   joiningDate    Int
   joiningMonth   Month
-  joiningYear Int
-  gender Gender
+  joiningYear    Int
+  gender         Gender
   servedTill     Month?
-  servedPresent  Boolean? @default(true)
+  servedPresent  Boolean?  @default(true)
   lastSalaryPaid Month
-  contactNo String
-  address String
+  contactNo      String
+  address        String
   salary         Int
   subject        Subject[]
   classId        ClassList
@@ -111,6 +111,8 @@ model Subject {
   classId         ClassList
   class           Class     @relation(fields: [classId], references: [id])
   exams           Exam[]
+
+  @@unique([subjectName, classId])
 }
 
 enum MonthsOfExam {
@@ -121,14 +123,19 @@ enum MonthsOfExam {
 }
 
 model Exam {
-  id        Int          @id @default(autoincrement())
-  classId   ClassList
-  class     Class        @relation(fields: [classId], references: [id])
-  subjectId Int
-  subject   Subject      @relation(fields: [subjectId], references: [id])
-  monthname MonthsOfExam
-  examMonth ExamMonth    @relation(fields: [monthname], references: [name])
-  results   Result[]
+  id          Int          @id @default(autoincrement())
+  
+  classId     ClassList
+  class       Class        @relation(fields: [classId], references: [id])
+  
+  subjectname String
+  subject     Subject      @relation(fields: [subjectname, classId], references: [subjectName, classId])
+  
+  monthname   MonthsOfExam
+  examMonth   ExamMonth    @relation(fields: [monthname], references: [name])
+  
+  results     Result[]
+  date        Int
 }
 
 model ExamMonth {
