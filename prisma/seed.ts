@@ -147,35 +147,276 @@ const main = async () => {
   });
 
   // Subject creation
-  const subjects = await prisma.subject.createMany({
+  const forForth = await prisma.subject.createMany({
     data: [
       {
-        subjectName: "Maths",
-        teacherUsername: "monika",
-        classId: ClassList.class_12,
+        subjectName: "English",
+        teacherUsername: "tanya",
+        classId:ClassList.class_4
       },
       {
-        subjectName: "Maths",
-        teacherUsername: "monika",
-        classId: ClassList.class_11,
+        subjectName: "General Science",
+        teacherUsername: "tanya",
+        classId:ClassList.class_4
+      },
+      {
+        subjectName: "Mathematics",
+        teacherUsername: "monal",
+        classId:ClassList.class_4
+      },
+      {
+        subjectName: "Environmental Science",
+        teacherUsername: "tanya",
+        classId:ClassList.class_4
+      },
+      {
+        subjectName: "Physical Education",
+        teacherUsername: "kirti",
+        classId:ClassList.class_4
+      },
+    ]
+  })
+  const forFifth = await prisma.subject.createMany({
+    data: [
+      {
+        subjectName: "English",
+        teacherUsername: "tanya",
+        classId:ClassList.class_5
       },
       {
         subjectName: "Science",
+        teacherUsername: "tanya",
+        classId:ClassList.class_5
+      },
+      {
+        subjectName: "Mathematics",
+        teacherUsername: "monal",
+        classId:ClassList.class_5
+      },
+      {
+        subjectName: "Environmental Science",
+        teacherUsername: "tanya",
+        classId:ClassList.class_5
+      },
+      {
+        subjectName: "General Knowledge",
         teacherUsername: "suman",
-        classId: ClassList.class_12,
+        classId:ClassList.class_5
       },
       {
-        subjectName: "Social Science",
-        teacherUsername: "monika",
-        classId: ClassList.class_12,
+        subjectName: "Moral Science",
+        teacherUsername: "anjali",
+        classId:ClassList.class_5
       },
       {
-        subjectName: "Social Science",
-        teacherUsername: "monika",
-        classId: ClassList.class_11,
+        subjectName: "Physical Education",
+        teacherUsername: "kirti",
+        classId:ClassList.class_5
       },
-    ],
-  });
+    ]
+  })
+  const forSeven = await prisma.subject.createMany({
+    data: [
+      {
+        subjectName: "English",
+        teacherUsername: "deepika",
+        classId: ClassList.class_7
+      },
+      {
+        subjectName: "Science",
+        teacherUsername: "deepika",
+        classId: ClassList.class_7
+      },
+      {
+        subjectName: "Social Studies",
+        teacherUsername: "diya",
+        classId: ClassList.class_7
+      },
+      {
+        subjectName: "Mathematics",
+        teacherUsername: "sujpriya",
+        classId: ClassList.class_7
+      },
+      {
+        subjectName: "Arts and Craft",
+        teacherUsername: "sujpriya",
+        classId: ClassList.class_7
+      },
+      {
+        subjectName: "Environmental Science",
+        teacherUsername: "deepika",
+        classId: ClassList.class_7
+      },
+      {
+        subjectName: "General Knowledge",
+        teacherUsername: "suman",
+        classId: ClassList.class_7
+      },
+      {
+        subjectName: "Moral Science",
+        teacherUsername: "anjali",
+        classId: ClassList.class_7
+      },
+      {
+        subjectName: "Physical Education",
+        teacherUsername: "neha",
+        classId: ClassList.class_7
+      },
+    ]
+  })
+  const forSix = await prisma.subject.createMany({
+    data: [
+      {
+        subjectName: "English",
+        teacherUsername: "tanya",
+        classId: ClassList.class_6
+      },
+      {
+        subjectName: "Science",
+        teacherUsername: "tanya",
+        classId: ClassList.class_6
+      },
+      {
+        subjectName: "Social Studies",
+        teacherUsername: "diya",
+        classId: ClassList.class_6
+      },
+      {
+        subjectName: "Mathematics",
+        teacherUsername: "monal",
+        classId: ClassList.class_6
+      },
+      {
+        subjectName: "Arts and Craft",
+        teacherUsername: "monal",
+        classId: ClassList.class_6
+      },
+      {
+        subjectName: "Environmental Science",
+        teacherUsername: "tanya",
+        classId: ClassList.class_6
+      },
+      {
+        subjectName: "General Knowledge",
+        teacherUsername: "suman",
+        classId: ClassList.class_6
+      },
+      {
+        subjectName: "Moral Science",
+        teacherUsername: "anjali",
+        classId: ClassList.class_6
+      },
+      {
+        subjectName: "Physical Education",
+        teacherUsername: "kirti",
+        classId: ClassList.class_6
+      },
+    ]
+  })
+  const forEight= await prisma.subject.createMany({
+    data: [
+      {
+        subjectName: "English",
+        teacherUsername: "deepika",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "Science",
+        teacherUsername: "deepika",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "Computer Science",
+        teacherUsername: "sujrpiya",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "Social Studies",
+        teacherUsername: "diya",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "Mathematics",
+        teacherUsername: "sujpriya",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "Arts and Craft",
+        teacherUsername: "sujpriya",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "Environmental Science",
+        teacherUsername: "deepika",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "General Knowledge",
+        teacherUsername: "riya",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "Moral Science",
+        teacherUsername: "prabhi",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "Physical Education",
+        teacherUsername: "neha",
+        classId: ClassList.class_8
+      },
+    ]
+  })
+  const forNine= await prisma.subject.createMany({
+    data: [
+      {
+        subjectName: "English",
+        teacherUsername: "deepika",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "Science",
+        teacherUsername: "deepika",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "Computer Science",
+        teacherUsername: "sujrpiya",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "Social Studies",
+        teacherUsername: "diya",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "Mathematics",
+        teacherUsername: "sujpriya",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "Environmental Science",
+        teacherUsername: "deepika",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "General Knowledge",
+        teacherUsername: "riya",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "Moral Science",
+        teacherUsername: "prabhi",
+        classId: ClassList.class_8
+      },
+      {
+        subjectName: "Physical Education",
+        teacherUsername: "neha",
+        classId: ClassList.class_8
+      },
+    ]
+  })
+ 
 
   // Exam month creation
   await prisma.examMonth.createMany({

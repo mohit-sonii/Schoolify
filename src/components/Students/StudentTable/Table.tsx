@@ -10,6 +10,9 @@ import {
 import { months } from "@/components/Extra";
 import { FilterSort } from "./FilterFunctions";
 import Image from "next/image";
+import Button from "@/components/Button";
+import useModalStore from "@/utils/store";
+import StudentForm from "@/components/AddPopUps/Students/StudentForm";
 
 export const Table = ({ students }: { students: StudentTable[] }) => {
   const [optionClass, setOptionClass] = useState<string>("");
@@ -66,9 +69,19 @@ export const Table = ({ students }: { students: StudentTable[] }) => {
     sortingFeesValue,
   ]);
 
+  const openModal = useModalStore((state) => state.openModal)
+  const studentPage = () => {
+    openModal(
+      <StudentForm/>
+    )
+  }
+
   return (
     <div className="w-full  h-max flex mb-4 show-table rounded-lg shadow-lg flex-col gap-2">
       {/*filtering*/}
+      <div className="flex w-full justify-end ">
+        <Button innerText="Create Student" click={studentPage} />
+      </div>
       <div className="w-full p-2 flex  gap-4 items-center">
         <p className="font-semibold text-gray-700 text-xs ">Filters</p>
         {/*First Filter for Class*/}

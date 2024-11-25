@@ -56,7 +56,7 @@ const IncomeForm = () => {
   return (
     <div className="absolute  items-center justify-center z-50  bg-gray-200 h-max flex flex-col flex-wrap w-full gap-8 p-4 rounded-md shadow-md">
       <div className="w-full justify-between items-center flex">
-        <h1 className=" text-lg font-bold ">Add a new Expense</h1>
+        <h1 className=" text-lg font-bold ">Add a new Income</h1>
         <button
           className="px-8 py-2 border-none shadow-lg outline-none text-xs font-medium text-gray-700 rounded-lg bg-white  transition-all ease-in-out hover:text-black hover:font-bold flex gap-2 flex-row w-max"
           onClick={closeModal}

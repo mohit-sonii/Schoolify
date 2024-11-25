@@ -41,7 +41,7 @@ model Student {
   fatherName    String
   gender        Gender
   contactNo     String
-  dob           DateTime
+  dob           String
   address       String
   feesPaidUpto  Month
   admissionYear Int
