@@ -22,7 +22,7 @@ import { refineResult } from "./objectExport";
 import Button from "../Button";
 import Image from "next/image";
 import { months } from "../Extra";
-import Expense from "../AddPopUps/Expenses/Expense";
+import ExpenseForm from "../AddPopUps/Expenses/ExpenseForm";
 //each row
 function Row(props: { row: expenseType }) {
   const { row } = props;
@@ -123,7 +123,7 @@ export default function ExpenseTable({
 
   const expensePage = () => {
     openModal(
-      <Expense />
+      <ExpenseForm />
     )
   }
 

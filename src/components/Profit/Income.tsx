@@ -1,9 +1,17 @@
 "use client";
+import useModalStore from "@/utils/store";
 import Button from "../Button";
 import { calculateTotalProfit } from "./Functions";
 import { Divider } from "@mui/material";
+import IncomeForm from "../AddPopUps/Incomes/IncomeForm";
 
-const Income = ({value}:{value:number}) => {
+const Income = ({ value }: { value: number }) => {
+  const openModal = useModalStore((state) => state.openModal)
+  const incomePage = () => {
+    openModal(
+      <IncomeForm/>
+    )
+  }
   return (
     <div className="flex w-full gap-4">
       <div className="flex flex-col gap-5 w-full">
@@ -14,7 +22,7 @@ const Income = ({value}:{value:number}) => {
               Current Year
             </span>
           </h3>
-          <Button innerText="Add Income" />
+          <Button innerText="Add Income" click = {incomePage} />
         </div>
         <h1 className={`w-max text-2xl font-bold ${value > 0 ? 'text-green-600' : 'text-gray-600'}`}>{`$${value}`}</h1>
       </div>

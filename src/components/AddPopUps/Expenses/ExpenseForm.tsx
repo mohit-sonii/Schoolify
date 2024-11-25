@@ -1,37 +1,39 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import InputField, { SelectField } from "../../InputField";
 import { months, years } from "../../Extra";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useModalStore from "@/utils/store";
-import { AddExpense } from "./Actions";
+import { AddExpenseAction } from "./Actions";
 import toast from "react-hot-toast";
-import { addExpense } from "./zodValidation";
+import { addExpenseSchema } from "./zodValidation";
 import { z } from "zod";
+import { ActionReturnType } from "../ReturnType";
 
-const Expense = () => {
+const ExpenseForm = () => {
   const { closeModal } = useModalStore();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<z.infer<typeof addExpense>>({
-    resolver: zodResolver(addExpense),
+  } = useForm<z.infer<typeof addExpenseSchema>>({
+    resolver:zodResolver(addExpenseSchema),
   });
 
   const handleExpenseAddition = handleSubmit(async (data: any) => {
-    const toastLoading = toast.loading("Please Wait");
+    const toastLoading = toast.loading("Please Wait...");
     try {
-      const result: { success: boolean; message: string } = await AddExpense({
-        month: data.month,
-        date: parseInt(data.date, 10),
-        amount: parseInt(data.amount, 10),
-        year: parseInt(data.year, 10),
-        description: data.description,
-        title:data.title
-      });
+      const result:ActionReturnType =
+        await AddExpenseAction({
+          month: data.month,
+          date: parseInt(data.date, 10),
+          amount: parseInt(data.amount, 10),
+          year: parseInt(data.year, 10),
+          description: data.description,
+          title: data.title,
+        });
       if (result.success) {
         toast.dismiss(toastLoading);
         toast.success(result.message);
@@ -46,13 +48,13 @@ const Expense = () => {
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       for (const field in errors) {
-        const err = errors[field as keyof typeof errors]
+        const err = errors[field as keyof typeof errors];
         if (err?.message) {
-          toast.error(`${field.toUpperCase()} : ${err.message}`)
+          toast.error(`${field.toUpperCase()} : ${err.message}`);
         }
       }
     }
-  },[errors])
+  }, [errors]);
 
   return (
     <div className="absolute  items-center justify-center z-50  bg-gray-200 h-max flex flex-col flex-wrap w-full gap-8 p-4 rounded-md shadow-md">
@@ -124,4 +126,4 @@ const Expense = () => {
   );
 };
 
-export default Expense;
+export default ExpenseForm;

@@ -2,10 +2,11 @@
 import { expenseType } from "@/components/Expenses/Functions";
 import prisma from "@/utils/db";
 import { $Enums } from "@prisma/client";
+import { ActionReturnType } from "../ReturnType";
 
-export const AddExpense = async (
+export const AddExpenseAction = async (
   data: expenseType 
-): Promise<{ success: boolean; message: string }> => {
+): Promise<ActionReturnType> => {
   try {
     const result = await prisma.expense.create({
       data: {
@@ -18,7 +19,7 @@ export const AddExpense = async (
       },
     });
     if (result) {
-      return { success: true, message: "A new Expense is added successfully" };
+      return { success: true, message: "Expense Added successfully !!" };
     }
   } catch (error: any) {
     console.log(error);
