@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Montserrat } from 'next/font/google'
+import { Toaster } from 'react-hot-toast';
+
 
 const inter = Montserrat({ subsets: ['latin'] })
 
@@ -19,6 +21,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-slate-200`}
       >
+        <Toaster />
         {children}
       </body>
     </html>

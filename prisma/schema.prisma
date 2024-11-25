@@ -202,7 +202,6 @@ model Gain {
   monthName Month
   date      Int
   year      Int
-
   amount      Int
   description String
   title       String

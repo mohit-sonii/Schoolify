@@ -1,6 +1,7 @@
 import React from 'react'
 import { Menu } from '@/components/Menu'
 import NavBar from '@/components/NavBar'
+import Modal from '@/components/Modal'
 
 export default function DashBoardLayout({
   children
@@ -17,6 +18,7 @@ export default function DashBoardLayout({
           </div>
           <div className=" w-[86%] md:w-[92%] lg:w-[84%] xl:w-[86%] p-2">
             {children}
+            <Modal/>
           </div>
         </div>
       </div>

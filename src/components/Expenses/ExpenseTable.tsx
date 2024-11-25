@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import { years } from "../Extra";
 import TableBody from "@mui/material/TableBody";
+import useModalStore from "@/utils/store";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
@@ -21,7 +22,7 @@ import { refineResult } from "./objectExport";
 import Button from "../Button";
 import Image from "next/image";
 import { months } from "../Extra";
-
+import Expense from "../AddPopUps/Expenses/Expense";
 //each row
 function Row(props: { row: expenseType }) {
   const { row } = props;
@@ -64,13 +65,13 @@ function Row(props: { row: expenseType }) {
 }
 
 export default function ExpenseTable({
-  expenditure,
+  expenditure
 }: {
   expenditure: expenseType[];
 }) {
   const currentYear = new Date().getFullYear();
   const [yearMonth, setYearMonth] = useState<{ year: number; month: string }>({
-    year: 0,
+    year: 2024,
     month: "",
   });
   const [inputValue, setInputValue] = useState<string>("");
@@ -92,6 +93,7 @@ export default function ExpenseTable({
       return updatedState;
     });
   };
+
   const handleClick = () => {
     const response = refineResult(
       expenditure,
@@ -117,10 +119,18 @@ export default function ExpenseTable({
     else setVisible(false);
   }, [yearMonth, expenditure, sortOrder]);
 
+  const openModal = useModalStore((state) => state.openModal)
+
+  const expensePage = () => {
+    openModal(
+      <Expense />
+    )
+  }
+
   return (
-    <div className="flex flex-col w-full gap-5 mb-5">
+    <div className="flex flex-col w-full gap-5 mb-5 ">
       <h1 className="text-sm font-bold ">Expenses Details</h1>
-      <Button innerText="Add new Expense" />
+      <Button innerText="Add new Expense" click={expensePage} />
       <div className="flex gap-3 items-center flex-wrap">
         <div className="flex flex-col gap-1">
           <label htmlFor="year" className="font-light text-xs">

@@ -62,7 +62,6 @@ export default function ExamTable() {
         setVisible(true);
       }
     };
-
     fetchExams();
   }, [classWithMonth]);
 
