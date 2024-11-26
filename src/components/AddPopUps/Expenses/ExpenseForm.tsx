@@ -17,24 +17,25 @@ const ExpenseForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<z.infer<typeof addExpenseSchema>>({
-    resolver:zodResolver(addExpenseSchema),
+    resolver: zodResolver(addExpenseSchema),
   });
 
   const handleExpenseAddition = handleSubmit(async (data: any) => {
     const toastLoading = toast.loading("Please Wait...");
     try {
-      const result:ActionReturnType =
-        await AddExpenseAction({
-          month: data.month,
-          date: parseInt(data.date, 10),
-          amount: parseInt(data.amount, 10),
-          year: parseInt(data.year, 10),
-          description: data.description,
-          title: data.title,
-        });
+      const result: ActionReturnType = await AddExpenseAction({
+        month: data.month,
+        date: parseInt(data.date, 10),
+        amount: parseInt(data.amount, 10),
+        year: parseInt(data.year, 10),
+        description: data.description,
+        title: data.title,
+      });
       if (result.success) {
+        reset();
         toast.dismiss(toastLoading);
         toast.success(result.message);
       }
@@ -115,12 +116,14 @@ const ExpenseForm = () => {
           register={register}
           classnames="w-[80%] h-auto"
         />
-        <button
-          type="submit"
-          className="px-8 py-2 border-none shadow-lg outline-none text-xs font-medium text-gray-200 rounded-lg bg-green-600  transition-all ease-in-out hover:text-white hover:font-bold flex gap-2 flex-row w-max"
-        >
-          Add
-        </button>
+        <div className="flex w-full items-center justify-end">
+          <button
+            type="submit"
+            className="px-8 py-2 border-none h-max shadow-lg outline-none text-xs font-medium text-gray-200 rounded-lg bg-green-600  transition-all ease-in-out hover:text-white hover:font-bold flex gap-2 flex-row w-max"
+          >
+            Add
+          </button>
+        </div>
       </form>
     </div>
   );

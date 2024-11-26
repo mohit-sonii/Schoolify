@@ -13,7 +13,7 @@ const page = async () => {
         <TotalStudentsContainer />
         <Divider />
         <div className="flex flex-col gap-4 w-full">
-          <h1 className="font-semibold text-gray-600">All Students</h1>
+          <h1 className="font-semibold text-gray-800">All Students</h1>
           <Table students={data.arr} />
         </div>
       </div>

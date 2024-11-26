@@ -18,7 +18,7 @@ export const addStudentSchema = z.object({
     .string()
     .max(100, { message: "Address must be more than 100 Characters" }),
   feesPaidUpto: z.string(),
-  passedOutYear:z.string().optional(),
+  passedOutYear: z.string().optional(),
   admission: z
     .string()
     .transform((str) => parseInt(str, 10))

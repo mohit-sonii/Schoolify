@@ -15,8 +15,6 @@ import { months } from "../Extra";
 import { refining, years } from "./refining";
 import { useRouter } from "next/navigation";
 
-//each row
-
 function Row(props: { row: teacherType }) {
   const { row } = props;
   const router = useRouter();
@@ -50,7 +48,7 @@ export default function TeacherTable({
   teachers: teacherType[];
 }) {
   const [yearMonth, setYearMonth] = useState<{ year: number; month: string }>({
-    year: 0,
+    year: 2024,
     month: "",
   });
   const [inputValue, setInputValue] = useState<string>("");

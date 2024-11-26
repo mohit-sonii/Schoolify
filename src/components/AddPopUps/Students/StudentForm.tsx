@@ -17,6 +17,7 @@ const StudentForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<z.infer<typeof addStudentSchema>>({
     resolver: zodResolver(addStudentSchema),
@@ -25,12 +26,17 @@ const StudentForm = () => {
   const handleStudentAddition = handleSubmit(async (data: any) => {
     const toastLoading = toast.loading("Please Wait...");
     try {
+      console.log(data)
       const result: ActionReturnType =
         await AddStudentAction(data);
+      console.log(result)
       if (result.success) {
-        toast.dismiss(toastLoading);
         toast.success(result.message);
+      } else {
+        toast.error(result.message)
       }
+      reset()
+      toast.dismiss(toastLoading);
     } catch (error: any) {
       console.log(error);
       if (error.message) {
@@ -146,12 +152,14 @@ const StudentForm = () => {
           register={register}
           classnames="w-[80%] h-auto"
         />
-        <button
-          type="submit"
-          className="px-8 py-2 border-none shadow-lg outline-none text-xs font-medium text-gray-200 rounded-lg bg-green-600  transition-all ease-in-out hover:text-white hover:font-bold flex gap-2 flex-row w-max"
-        >
-          Add
-        </button>
+        <div className="flex w-full items-center justify-end">
+          <button
+            type="submit"
+            className="px-8 py-2 border-none shadow-lg outline-none text-xs font-medium text-gray-200 rounded-lg bg-green-600  transition-all ease-in-out hover:text-white hover:font-bold flex gap-2 flex-row w-max"
+          >
+            Add
+          </button>
+        </div>
       </form>
     </div>
   );

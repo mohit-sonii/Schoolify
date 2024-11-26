@@ -24,7 +24,7 @@ const TotalStudentsContainer = async () => {
 
   return (
     <div className="w-full flex flex-col flex-wrap gap-2">
-      <h1 className="font-semibold text-gray-600">Number of Students Per Class</h1>
+      <h1 className="font-semibold text-gray-800">Number of Students Per Class</h1>
       <TotalStudents range={result.arr} />
     </div>
   )

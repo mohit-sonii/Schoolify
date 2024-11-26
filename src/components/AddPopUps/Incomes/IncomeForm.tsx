@@ -1,36 +1,41 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
-import toast from 'react-hot-toast'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { years,months } from '@/components/Extra'
-import { useEffect } from 'react'
-import { addIncomeSchema } from './zodValidation'
-import useModalStore from '@/utils/store'
-import InputField, { SelectField } from '@/components/InputField'
-import { ActionReturnType } from '../ReturnType'
-import { AddIncomeAction } from './Actions'
+"use client";
+import { zodResolver } from "@hookform/resolvers/zod";
+import React from "react";
+import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { years, months } from "@/components/Extra";
+import { useEffect } from "react";
+import { addIncomeSchema } from "./zodValidation";
+import useModalStore from "@/utils/store";
+import InputField, { SelectField } from "@/components/InputField";
+import { ActionReturnType } from "../ReturnType";
+import { AddIncomeAction } from "./Actions";
 
 const IncomeForm = () => {
-
-  const {closeModal}  = useModalStore()
-  const { register, handleSubmit, formState: { errors } } = useForm<z.infer<typeof addIncomeSchema>>({
-    resolver:zodResolver(addIncomeSchema)
-  })
+  const { closeModal } = useModalStore();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<z.infer<typeof addIncomeSchema>>({
+    resolver: zodResolver(addIncomeSchema),
+  });
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       for (const field in errors) {
-        const err = errors[field as keyof typeof errors]
+        const err = errors[field as keyof typeof errors];
         if (err?.message) {
-            toast.error(`${field.toUpperCase()} : ${err.message}`)
+          toast.error(`${field.toUpperCase()} : ${err.message}`);
         }
       }
     }
-  },[errors])
+  }, [errors]);
 
   const handleIncomeAddition = handleSubmit(async (data: any) => {
-    const toastLoading = toast.loading("Please Wait...")
+    const toastLoading = toast.loading("Please Wait...");
     try {
       const result: ActionReturnType = await AddIncomeAction({
         month: data.month,
@@ -38,20 +43,20 @@ const IncomeForm = () => {
         amount: parseInt(data.amount, 10),
         year: parseInt(data.year, 10),
         description: data.description,
-        title:data.title
-      })
+        title: data.title,
+      });
       if (result.success) {
-        toast.dismiss(toastLoading)
-        toast.success(result.message)
+        reset();
+        toast.dismiss(toastLoading);
+        toast.success(result.message);
       }
     } catch (err: any) {
-      console.log(err)
+      console.log(err);
       if (err.message) {
-        toast.error(err.message)
+        toast.error(err.message);
       }
     }
-  })
-
+  });
 
   return (
     <div className="absolute  items-center justify-center z-50  bg-gray-200 h-max flex flex-col flex-wrap w-full gap-8 p-4 rounded-md shadow-md">
@@ -66,7 +71,7 @@ const IncomeForm = () => {
       </div>
       <form
         onSubmit={handleIncomeAddition}
-        className="flex gap-4 flex-wrap w-full "
+        className="flex gap-4 flex-wrap w-full  "
       >
         <InputField
           label="Title"
@@ -112,15 +117,23 @@ const IncomeForm = () => {
           register={register}
           classnames="w-[80%] h-auto"
         />
-        <button
-          type="submit"
-          className="px-8 py-2 border-none shadow-lg outline-none text-xs font-medium text-gray-200 rounded-lg bg-green-600  transition-all ease-in-out hover:text-white hover:font-bold flex gap-2 flex-row w-max"
-        >
-          Add
-        </button>
+        <div className="flex w-full items-center justify-end">
+          <button
+            type="submit"
+            className="px-8 py-2 border-none h-max shadow-lg outline-none text-xs font-medium text-gray-200 rounded-lg bg-green-600  transition-all ease-in-out hover:text-white hover:font-bold flex gap-2 flex-row w-max"
+          >
+            Add
+          </button>
+        </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default IncomeForm
+export default IncomeForm;
+
+
+
+// "prisma": {
+//   "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"}  prisma/seed.ts"
+// },

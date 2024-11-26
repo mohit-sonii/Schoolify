@@ -32,6 +32,7 @@ enum Month {
   March
 }
 
+
 model Student {
   studentId     Int          @id @default(autoincrement()) // registration number
   username      String       @unique

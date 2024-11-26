@@ -1,6 +1,4 @@
 
-
-
 export type StudentType = {
   username: string,
   firstname: string,

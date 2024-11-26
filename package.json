@@ -11,6 +11,7 @@
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"}  prisma/seed.ts"
   },
+  
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",

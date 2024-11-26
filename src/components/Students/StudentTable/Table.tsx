@@ -78,10 +78,10 @@ export const Table = ({ students }: { students: StudentTable[] }) => {
 
   return (
     <div className="w-full  h-max flex mb-4 show-table rounded-lg shadow-lg flex-col gap-2">
-      {/*filtering*/}
       <div className="flex w-full justify-end ">
         <Button innerText="Create Student" click={studentPage} />
       </div>
+      {/*filtering*/}
       <div className="w-full p-2 flex  gap-4 items-center">
         <p className="font-semibold text-gray-700 text-xs ">Filters</p>
         {/*First Filter for Class*/}

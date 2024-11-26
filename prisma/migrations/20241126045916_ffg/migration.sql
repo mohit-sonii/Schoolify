@@ -34,7 +34,7 @@ CREATE TABLE "Student" (
     "fatherName" TEXT NOT NULL,
     "gender" "Gender" NOT NULL,
     "contactNo" TEXT NOT NULL,
-    "dob" TIMESTAMP(3) NOT NULL,
+    "dob" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "feesPaidUpto" "Month" NOT NULL,
     "admissionYear" INTEGER NOT NULL,
