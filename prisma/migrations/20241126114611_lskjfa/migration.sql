@@ -69,7 +69,6 @@ CREATE TABLE "Teacher" (
     "contactNo" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "salary" INTEGER NOT NULL,
-    "classId" "ClassList" NOT NULL,
 
     CONSTRAINT "Teacher_pkey" PRIMARY KEY ("id")
 );
@@ -172,6 +171,12 @@ CREATE TABLE "Gain" (
     CONSTRAINT "Gain_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "_TeacherClasses" (
+    "A" "ClassList" NOT NULL,
+    "B" INTEGER NOT NULL
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Admin_username_key" ON "Admin"("username");
 
@@ -187,11 +192,14 @@ CREATE UNIQUE INDEX "Subject_subjectName_classId_key" ON "Subject"("subjectName"
 -- CreateIndex
 CREATE UNIQUE INDEX "ExamMonth_name_key" ON "ExamMonth"("name");
 
--- AddForeignKey
-ALTER TABLE "Student" ADD CONSTRAINT "Student_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+-- CreateIndex
+CREATE UNIQUE INDEX "_TeacherClasses_AB_unique" ON "_TeacherClasses"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_TeacherClasses_B_index" ON "_TeacherClasses"("B");
 
 -- AddForeignKey
-ALTER TABLE "Teacher" ADD CONSTRAINT "Teacher_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Student" ADD CONSTRAINT "Student_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Subject" ADD CONSTRAINT "Subject_teacherUsername_fkey" FOREIGN KEY ("teacherUsername") REFERENCES "Teacher"("username") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -225,3 +233,9 @@ ALTER TABLE "Attendance" ADD CONSTRAINT "Attendance_studentAttendanceId_fkey" FO
 
 -- AddForeignKey
 ALTER TABLE "Fee" ADD CONSTRAINT "Fee_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_TeacherClasses" ADD CONSTRAINT "_TeacherClasses_A_fkey" FOREIGN KEY ("A") REFERENCES "Class"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_TeacherClasses" ADD CONSTRAINT "_TeacherClasses_B_fkey" FOREIGN KEY ("B") REFERENCES "Teacher"("id") ON DELETE CASCADE ON UPDATE CASCADE;

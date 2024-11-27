@@ -26,7 +26,6 @@ const StudentForm = () => {
   const handleStudentAddition = handleSubmit(async (data: any) => {
     const toastLoading = toast.loading("Please Wait...");
     try {
-      console.log(data)
       const result: ActionReturnType =
         await AddStudentAction(data);
       console.log(result)
@@ -142,6 +141,7 @@ const StudentForm = () => {
           classnames="w-[150px]"
           defaultValue={0}
           name="dob"
+          placeholder="DD/MM/YYYY"
           register={register}
         />
         <InputField

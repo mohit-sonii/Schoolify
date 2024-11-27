@@ -32,7 +32,6 @@ enum Month {
   March
 }
 
-
 model Student {
   studentId     Int          @id @default(autoincrement()) // registration number
   username      String       @unique
@@ -78,7 +77,7 @@ model Class {
   totalStudents Student[]
   subjects      Subject[]
   events        Event[]
-  teacher       Teacher[]
+  teachers      Teacher[] @relation("TeacherClasses")
   exams         Exam[]
   fees          Fee[]
 }
@@ -100,8 +99,7 @@ model Teacher {
   address        String
   salary         Int
   subject        Subject[]
-  classId        ClassList
-  class          Class?    @relation(fields: [classId], references: [id])
+  classes        Class[]   @relation("TeacherClasses")
 }
 
 model Subject {
@@ -124,19 +122,19 @@ enum MonthsOfExam {
 }
 
 model Exam {
-  id          Int          @id @default(autoincrement())
-  
-  classId     ClassList
-  class       Class        @relation(fields: [classId], references: [id])
-  
+  id Int @id @default(autoincrement())
+
+  classId ClassList
+  class   Class     @relation(fields: [classId], references: [id])
+
   subjectname String
-  subject     Subject      @relation(fields: [subjectname, classId], references: [subjectName, classId])
-  
-  monthname   MonthsOfExam
-  examMonth   ExamMonth    @relation(fields: [monthname], references: [name])
-  
-  results     Result[]
-  date        Int
+  subject     Subject @relation(fields: [subjectname, classId], references: [subjectName, classId])
+
+  monthname MonthsOfExam
+  examMonth ExamMonth    @relation(fields: [monthname], references: [name])
+
+  results Result[]
+  date    Int
 }
 
 model ExamMonth {
@@ -199,10 +197,10 @@ model Expense {
 }
 
 model Gain {
-  id        Int   @id @default(autoincrement())
-  monthName Month
-  date      Int
-  year      Int
+  id          Int    @id @default(autoincrement())
+  monthName   Month
+  date        Int
+  year        Int
   amount      Int
   description String
   title       String

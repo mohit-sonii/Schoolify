@@ -1,7 +1,20 @@
 
+"use client"
 import { Divider } from '@mui/material'
+import Button from '../Button';
+import useModalStore from '@/utils/store';
+import TeacherForm from '../AddPopUps/Teachers/TeacherForm';
 
 const TeacherCount = ({ value }: { value: number }) => {
+
+  const openModal = useModalStore((state) => state.openModal)
+  
+  const teacherPage = () => {
+    openModal(
+      <TeacherForm/>
+    )
+  }
+
   return (
     <div className="flex  w-full xl:w-[70%] gap-4 justify-between ">
       <div className="flex flex-col gap-5 w-full">
@@ -14,6 +27,9 @@ const TeacherCount = ({ value }: { value: number }) => {
           </h3>
         </div>
         <h1 className='w-max text-2xl font-bold text-gray-800'>{`${value}`}</h1>
+      </div>
+      <div className="flex w-full justify-end ">
+        <Button innerText="Add Teacher" click={teacherPage} />
       </div>
       <Divider orientation="vertical" />
     </div >
