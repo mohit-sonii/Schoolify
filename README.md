@@ -1,5 +1,5 @@
-Ultimate School Management System ~ By Mohit Soni
-<br>
+<b>Ultimate School Management System ~ By <i>Mohit Soni</i></b>
+<br><br>
 This project include all the basic as well as advance functionality that a school management system should have, like  
 <br><br>
 • pending fees calculation.<br>
