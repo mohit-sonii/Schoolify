@@ -44,5 +44,9 @@ export const addTeacherSchema = z.object({
     .refine((num) => Number.isInteger(num), {
       message: "Please Enter correct salary",
     }),
-  classes: z.array(z.string()).min(1, "Atleast assign one class to a teacher"),
+  classes: z
+    .array(z.string())
+    .min(1, "Atleast assign one class to a teacher")
+    .max(3, "A Teacher cannot have more than 3 Classes"),
+  subjects: z.record(z.array(z.string()))
 });

@@ -2,11 +2,11 @@
 
 import prisma from "@/utils/db";
 import { ActionReturnType } from "../ReturnType";
-import { teacher } from "./TeacherForm";
 import { $Enums } from "@prisma/client";
+import { teacher } from "./Type";
 
 export const AddTeacherAction = async (
-  data: teacher
+  data: teacher,
 ): Promise<ActionReturnType> => {
   try {
     const alreadyPresent = await prisma.teacher.findFirst({
@@ -37,9 +37,9 @@ export const AddTeacherAction = async (
         classes: {
           connect: data.classes.map((val) => ({ id: val as $Enums.ClassList })),
         },
+        subjects: data.subjects
       },
     });
-    console.log(result);
     if (result) {
       return {
         success: true,

@@ -98,18 +98,17 @@ model Teacher {
   contactNo      String
   address        String
   salary         Int
-  subject        Subject[]
+  subjects       Json
   classes        Class[]   @relation("TeacherClasses")
 }
 
 model Subject {
-  id              Int       @id @default(autoincrement())
-  subjectName     String
-  teacherUsername String
-  teacher         Teacher   @relation(fields: [teacherUsername], references: [username])
-  classId         ClassList
-  class           Class     @relation(fields: [classId], references: [id])
-  exams           Exam[]
+  id          Int       @id @default(autoincrement())
+  subjectName String
+  // teachers    Teacher[] @relation("TeacherSubjects")
+  classId     ClassList
+  class       Class     @relation(fields: [classId], references: [id])
+  exams       Exam[]
 
   @@unique([subjectName, classId])
 }

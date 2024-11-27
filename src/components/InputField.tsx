@@ -116,7 +116,7 @@ export const SelectWithCheckBox = ({
   options: { value: string; label: string }[];
 }) => {
   return (
-    <div className="w-full flex flex-col gap-3">
+    <div className="w-max flex flex-col gap-3">
       <label htmlFor={name} className="text-xs font-medium text-gray-600">
         {label}
       </label>
@@ -126,7 +126,7 @@ export const SelectWithCheckBox = ({
         control={control}
         defaultValue={[]}
         render={({ field: { value, onChange } }) => (
-          <div className="relative font-light text-xs rounded-md shadow-md px-4 py-2 border-none outline-none cursor-pointer flex flex-wrap gap-3 bg-white">
+          <div className="relative  font-light text-xs rounded-md shadow-md px-4 py-2 border-none outline-none cursor-pointer flex flex-wrap gap-3 bg-white">
             {options.map((option) => (
               <label
                 key={option.value}
@@ -154,3 +154,48 @@ export const SelectWithCheckBox = ({
     </div>
   );
 };
+
+export const ClassSubjects = ({
+  control,
+  name,
+  options,
+}: {
+  control: any;
+  name: string;
+  options: string[];
+}) => {
+  return (
+    <div className="flex gap-4 flex-col ">
+      <Controller
+        name={name}
+        control={control}
+        defaultValue={[]}
+        render={({ field: { value, onChange } }) => (
+          <div className="relative  font-light text-xs rounded-md shadow-md px-4 py-2 border-none outline-none cursor-pointer flex flex-wrap gap-3 bg-white">
+            {options.map((object) => (
+              <label
+                key={object}
+                className="text-xs font-light text-gray-600 flex items-center gap-2"
+              >
+                <input
+                  type="checkbox"
+                  value={object}
+                  checked={value.includes(object)}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    if (e.target.checked) {
+                      onChange([...value, newValue]);
+                    } else {
+                      onChange(value.filter((v: string) => v !== newValue));
+                    }
+                  }}
+                />
+                {object}
+              </label>
+            ))}
+          </div>
+        )}
+      />
+    </div>
+  )
+}
