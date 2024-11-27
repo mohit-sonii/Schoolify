@@ -9,7 +9,17 @@ export const AddTeacherAction = async (
   data: teacher
 ): Promise<ActionReturnType> => {
   try {
-    console.log(data)
+    const alreadyPresent = await prisma.teacher.findFirst({
+      where: {
+        username: data.username,
+      },
+    });
+    if (alreadyPresent != null)
+      return {
+        success: false,
+        message: "User with this username already exists !!",
+      };
+
     const result = await prisma.teacher.create({
       data: {
         username: data.username,
@@ -22,19 +32,19 @@ export const AddTeacherAction = async (
         gender: data.gender as $Enums.Gender,
         lastSalaryPaid: data.lastSalaryPaid as $Enums.Month,
         address: data.address,
-        salary: parseInt(data.salary,10),
-        contactNo:data.contact,
+        salary: parseInt(data.salary, 10),
+        contactNo: data.contact,
         classes: {
-          connect:data.classes.map((val)=>({id:val as $Enums.ClassList}))
+          connect: data.classes.map((val) => ({ id: val as $Enums.ClassList })),
         },
       },
     });
-    console.log(result)
-    if(result){
+    console.log(result);
+    if (result) {
       return {
-        success:true,
-        message:"Teacher Added Successfully !!!"
-      }
+        success: true,
+        message: "Teacher Added Successfully !!!",
+      };
     }
   } catch (err: any) {
     console.log(err);

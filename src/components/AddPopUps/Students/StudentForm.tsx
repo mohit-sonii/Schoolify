@@ -26,15 +26,13 @@ const StudentForm = () => {
   const handleStudentAddition = handleSubmit(async (data: any) => {
     const toastLoading = toast.loading("Please Wait...");
     try {
-      const result: ActionReturnType =
-        await AddStudentAction(data);
-      console.log(result)
+      const result: ActionReturnType = await AddStudentAction(data);
       if (result.success) {
         toast.success(result.message);
       } else {
-        toast.error(result.message)
+        toast.error(result.message);
       }
-      reset()
+      reset();
       toast.dismiss(toastLoading);
     } catch (error: any) {
       console.log(error);
@@ -104,11 +102,7 @@ const StudentForm = () => {
           defaultValue=""
           name="fathername"
         />
-        <SelectField
-          label="Gender"
-          name="gender"
-          register={register}
-        />
+        <SelectField label="Gender" name="gender" register={register} />
         <InputField
           label="Contact Number"
           type="text"

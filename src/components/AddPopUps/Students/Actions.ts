@@ -8,6 +8,17 @@ export const AddStudentAction = async (
   data: StudentType
 ): Promise<ActionReturnType> => {
   try {
+    const alreadyPresent = await prisma.student.findFirst({
+      where: {
+        username:data.username
+      }
+    })
+    if (alreadyPresent != null) {
+      return {
+        success: false,
+        message:"User with this username already exists !!"
+      }
+    }
     const result = await prisma.student.create({
       data: {
         username: data.username,

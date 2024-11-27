@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { months, years } from "@/components/Extra";
 import { AddTeacherAction } from "./Actions";
+import { ActionReturnType } from "../ReturnType";
 
 const obj = [
   { value: "class_12", label: "12th" },
@@ -57,14 +58,14 @@ const TeacherForm = () => {
   const handleTeacherAddition = handleSubmit(async (data: any) => {
     const toastLoading = toast.loading("Please Wait...");
     try {
-      const result = await AddTeacherAction(data);
+      const result:ActionReturnType = await AddTeacherAction(data);
       if (result.success) {
         reset();
-        toast.dismiss(toastLoading);
         toast.success(result.message);
       } else {
-        console.log(JSON.stringify(result, null, 2));
+        toast.error(result.message);
       }
+      toast.dismiss(toastLoading);
     } catch (err: any) {
       console.log(err);
       if (err.message) toast.error(err.message);
