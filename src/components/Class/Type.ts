@@ -3,6 +3,5 @@ export type dataType = {
   teacher: {
     fullName: string;
     username: string;
-    subjects: string[];
   }[];
 };

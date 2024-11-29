@@ -28,6 +28,13 @@ const TeacherForm = () => {
     resolver: zodResolver(addTeacherSchema),
   });
 
+  const [selectedSubjects, setSelectedSubjects] = useState<
+    {
+      classname: string;
+      subjects: string[];
+    }[]
+    >([]);
+  
   const [subjects, setSubjects] = useState<
     { classname: string; subjects: string[] }[] | null
   >(null);
@@ -44,6 +51,7 @@ const TeacherForm = () => {
       if (result.success) {
         reset();
         setSubjects(null);
+        setSelectedSubjects([])
         toast.success(result.message);
       } else {
         toast.error(result.message);
@@ -79,12 +87,7 @@ const TeacherForm = () => {
     toast.dismiss(setLoading);
     setSubjects(classSubjects);
   };
-  const [selectedSubjects, setSelectedSubjects] = useState<
-    {
-      classname: string;
-      subjects: string[];
-    }[]
-  >([]);
+
 
   const handleCheckboxChange = (classname: string, subject: string) => {
     setSelectedSubjects((prev) => {

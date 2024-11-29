@@ -5,7 +5,7 @@ import { dataType } from "./Type";
 import { $Enums } from "@prisma/client";
 import { months } from "../Extra";
 
-export const fetchTeacherSubject = async (): Promise<dataType[]> => {
+export const fetchTeacherForEachClass = async (): Promise<dataType[]> => {
   const ans: dataType[] = await prisma.class
     .findMany({
       select: {
@@ -15,28 +15,19 @@ export const fetchTeacherSubject = async (): Promise<dataType[]> => {
             firstname: true,
             lastname: true,
             username: true,
-            subjects: true,
           },
         },
       },
     })
     .then((res) => {
       const result = res.map((val) => {
-        console.log(val)
         return {
           classname: val.id.replace("class_", "").concat("th"),
           teacher: val.teachers.map((inner) => {
-            const subjects = inner.subjects
-              ? Object.entries(inner.subjects as Record<string, string[]>)
-                .filter(([key]) => key === val.id)
-                .flatMap(([, value]) => value)
-              : [];
-
             return {
-              fullName: `${inner.firstname} ${inner.lastname}`,
+              fullName: inner.firstname + ' ' + inner.lastname,
               username: inner.username,
-              subjects,
-            };
+            }
           }),
         };
       });
