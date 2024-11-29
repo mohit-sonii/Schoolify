@@ -1,7 +1,6 @@
 import prisma from "@/utils/db";
 import { Teacher } from "./Types";
-import { months } from "@/components/Admin/OutstandingDues/OutStandingAmount";
-
+import { months } from "@/components/Extra";
 
 export const teacherData = async (user: string): Promise<Teacher> => {
   const result: Teacher = await prisma.teacher
@@ -24,21 +23,26 @@ export const teacherData = async (user: string): Promise<Teacher> => {
         gender: true,
         servedPresent: true,
         servedTill: true,
-        subject: {
-          select: {
-            subjectName: true,
-            classId: true,
-          },
-        },
+        // subjects: true
       },
     })
     .then((res) => {
-      const subjectsName: string[] = [];
+      // const subjectsName: string[] = [];
       const classNames: string[] = [];
-      res.subject.map((val) => {
-        subjectsName.push(val.subjectName);
-        classNames.push(val.classId.replace("class_", "").concat("th"));
-      });
+      // Array.isArray(res.subjects) ? res.subjects.forEach((val) => {
+      //   if (typeof val === 'object' && val !== null) {
+      //     const subjectsArray = val.subjects as { subject: string }[];
+      //     const className = val.classname as string;
+
+      //     if (Array.isArray(subjectsArray)) {
+      //       subjectsArray.forEach((sub) => {
+      //         if (sub.subject) {
+      //           subjectsName.push(sub.subject);
+      //         }
+      //       });
+      //     }
+      // }) : []
+      // console.log(subjectsName)
       return {
         "Joinne Id": res.id,
         Address: res.address,
@@ -52,7 +56,7 @@ export const teacherData = async (user: string): Promise<Teacher> => {
         "Last Serve":
           res.servedTill?.toString() == "" ? "---" : res.servedTill?.toString(),
         "Last Paid": res.lastSalaryPaid.toString(),
-        Subject: subjectsName,
+        // Subject: subjectsName,
         Classes: classNames,
         Gender: res.gender.toString()
       };
@@ -62,7 +66,7 @@ export const teacherData = async (user: string): Promise<Teacher> => {
 
 export const findPending = async (lastPaid: string, salary: number): Promise<{ pendingMonths: string[], pendingTotalAmount: number }> => {
   const pending: string[] = []
-  let amount:number = 0;
+  let amount: number = 0;
   const currentMonthIdx = new Date().getMonth() - 1
   let lastPaidIdx = months.indexOf(lastPaid) + 1
   while (lastPaidIdx <= currentMonthIdx) {

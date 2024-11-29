@@ -35,11 +35,11 @@ const menuItem = [
         href: '/teachers',
         label: 'Teacher',
       },
-      {
-        icon: '/results.svg',
-        href: '/result',
-        label: 'Result',
-      },
+      // {
+      //   icon: '/results.svg',
+      //   href: '/result',
+      //   label: 'Result',
+      // },
       {
         icon: '/class.svg',
         href: '/classes',
@@ -50,11 +50,11 @@ const menuItem = [
         href: '/subjects',
         label: 'Subjects',
       },
-      {
-        icon: '/exam.svg',
-        href: '/exams',
-        label: 'Exam',
-      }
+      // {
+      //   icon: '/exam.svg',
+      //   href: '/exams',
+      //   label: 'Exam',
+      // }
     ]
   },
   {

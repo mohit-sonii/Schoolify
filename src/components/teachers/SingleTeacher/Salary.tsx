@@ -24,7 +24,7 @@ const Salary = ({
           Last Paid :{" "}
           <span className="font-normal text-gray-500">{`${lastPaid}`}</span>
         </h3>
-        <h3 className="font-semibold text-gray-700">
+        <h3 className="font-semibold text-gray-700 flex flex-wrap gap-3 items-center">
           Pending For :{" "}
           {monthsPending.length > 0 ? (
             monthsPending.map((val) => (
@@ -41,7 +41,7 @@ const Salary = ({
         </h3>
         <h3 className="font-semibold text-gray-700">
           Total Pending Amount :{" "}
-          <span className="font-normal text-gray-500">{`${pendingAmount}`}</span>
+          <span className="font-bold text-gray-500">{`${pendingAmount}`}</span>
         </h3>
       </div>
     </div>

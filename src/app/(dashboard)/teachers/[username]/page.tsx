@@ -8,7 +8,7 @@ import Salary from "@/components/teachers/SingleTeacher/Salary";
 import Subjects from "@/components/teachers/SingleTeacher/Subjects";
 import { Divider } from "@mui/material";
 import React from "react";
-import AddRemoveButton from "../../../../components/AddRemoveButton";
+import Header from "@/components/teachers/SingleTeacher/Header";
 
 const page = async ({ params }: { params: { username: string } }) => {
   const res = await params;
@@ -23,11 +23,8 @@ const page = async ({ params }: { params: { username: string } }) => {
     <div className="flex justify-between flex-wrap gap-5">
       <div className="flex items-center w-full justify-between flex-wrap">
         <h1 className="w-max font-bold text-xl">{data["Full Name"]}</h1>
-        <div className="flex w-max">
-          <AddRemoveButton text={'Teacher'} />
-        </div>
+        <Header username={res.username} />
       </div>
-
       <div className="w-full xl:w-[65%]  gap-5 h-max flex flex-wrap flex-col justify-between">
         <Divider />
         <FirstRow
@@ -42,7 +39,7 @@ const page = async ({ params }: { params: { username: string } }) => {
           lastServe={data["Last Serve"]}
         />
         <Divider />
-        <PerformanceChart/>
+        <PerformanceChart />
       </div>
       <div className="w-full xl:w-[30%] flex flex-wrap flex-col gap-5">
         <Salary
@@ -52,7 +49,8 @@ const page = async ({ params }: { params: { username: string } }) => {
           monthsPending={pendingMonths}
         />
         <Divider />
-        <Subjects subject={data.Subject } classes={data.Classes} />
+        {/* <Subjects subject={data.Subject } classes={data.Classes} /> */}
+        <Subjects classes={data.Classes} />
       </div>
     </div>
   );

@@ -1,15 +1,15 @@
 "use server"
 import React from "react";
 const Subjects = ({
-  subject,
+  // subject,
   classes,
 }: {
-  subject: string[];
+  // subject: string[];
   classes: string[];
 }) => {
   return (
     <div className="w-full h-max bg-orange-200 flex text-xs flex-row items-center justify-between rounded-lg p-4 gap-3 ">
-      <div className="w-[45%]  h-max flex flex-col gap-5">
+      {/* <div className="w-[45%]  h-max flex flex-col gap-5">
         <h1 className="text-sm font-semibold text-gray-900 ">
           Subjects
         </h1>
@@ -20,7 +20,7 @@ const Subjects = ({
             </span>
           ))}
         </div>
-      </div>
+      </div> */}
       <div className="w-[45%] flex flex-col gap-5">
         <h1 className="text-sm font-semibold text-gray-900 ">
           Classes
