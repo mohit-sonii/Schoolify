@@ -48,5 +48,4 @@ export const addTeacherSchema = z.object({
     .array(z.string())
     .min(1, "Atleast assign one class to a teacher")
     .max(3, "A Teacher cannot have more than 3 Classes"),
-  subjects: z.record(z.array(z.string()))
 });

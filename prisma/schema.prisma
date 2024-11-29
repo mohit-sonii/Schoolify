@@ -105,13 +105,10 @@ model Teacher {
 model Subject {
   id          Int       @id @default(autoincrement())
   subjectName String
-  // teachers    Teacher[] @relation("TeacherSubjects")
-  classId     ClassList
-  class       Class     @relation(fields: [classId], references: [id])
-  exams       Exam[]
-
-  @@unique([subjectName, classId])
+  classname   ClassList
+  class       Class     @relation(fields: [classname], references: [id])
 }
+
 
 enum MonthsOfExam {
   May
@@ -126,8 +123,8 @@ model Exam {
   classId ClassList
   class   Class     @relation(fields: [classId], references: [id])
 
-  subjectname String
-  subject     Subject @relation(fields: [subjectname, classId], references: [subjectName, classId])
+  // subjectname String
+  // subject     Subject @relation(fields: [subjectname, classId], references: [subjectName, classId])
 
   monthname MonthsOfExam
   examMonth ExamMonth    @relation(fields: [monthname], references: [name])

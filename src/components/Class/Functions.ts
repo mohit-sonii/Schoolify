@@ -4,38 +4,40 @@ import prisma from "@/utils/db";
 import { dataType } from "./Type";
 import { $Enums } from "@prisma/client";
 import { months } from "../Extra";
-import { validateDate } from "@mui/x-date-pickers/validation";
 
 export const fetchTeacherSubject = async (): Promise<dataType[]> => {
-  const ans = await prisma.class
+  const ans: dataType[] = await prisma.class
     .findMany({
       select: {
         id: true,
-        teacher: {
+        teachers: {
           select: {
             firstname: true,
             lastname: true,
             username: true,
-          },
-        },
-        subjects: {
-          select: {
-            subjectName: true,
+            subjects: true,
           },
         },
       },
     })
     .then((res) => {
       const result = res.map((val) => {
+        console.log(val)
         return {
           classname: val.id.replace("class_", "").concat("th"),
-          teacher: val.teacher.map((val) => {
+          teacher: val.teachers.map((inner) => {
+            const subjects = inner.subjects
+              ? Object.entries(inner.subjects as Record<string, string[]>)
+                .filter(([key]) => key === val.id)
+                .flatMap(([, value]) => value)
+              : [];
+
             return {
-              fullName: val.firstname + " " + val.lastname,
-              username: val.username,
+              fullName: `${inner.firstname} ${inner.lastname}`,
+              username: inner.username,
+              subjects,
             };
           }),
-          subjects: val.subjects.map((val) => val.subjectName),
         };
       });
       return result;

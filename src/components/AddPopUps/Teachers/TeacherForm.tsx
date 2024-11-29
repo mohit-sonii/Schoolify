@@ -1,7 +1,6 @@
 "use client";
 
 import InputField, {
-  ClassSubjects,
   SelectField,
   SelectWithCheckBox,
 } from "@/components/InputField";
@@ -13,9 +12,9 @@ import { addTeacherSchema } from "./zodValidation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { months, years } from "@/components/Extra";
-import { AddTeacherAction } from "./Actions";
+import { AddTeacherAction, getSubjectsAccToClass } from "./Actions";
 import { ActionReturnType } from "../ReturnType";
-import { classesForSelect, classSubjects } from "./Type";
+import { classesForSelect } from "./Type";
 
 const TeacherForm = () => {
   const {
@@ -25,35 +24,26 @@ const TeacherForm = () => {
     watch,
     handleSubmit,
     control,
-  } = useForm();
+  } = useForm<z.infer<typeof addTeacherSchema>>({
+    resolver: zodResolver(addTeacherSchema),
+  });
 
   const [subjects, setSubjects] = useState<
-    { classname: string; subjects: string[] }[][] | null
+    { classname: string; subjects: string[] }[] | null
   >(null);
 
   const { closeModal } = useModalStore();
+
   const handleTeacherAddition = handleSubmit(async (data: any) => {
     const toastLoading = toast.loading("Please Wait...");
     try {
-      const refinedWithSubjects = data?.classes.reduce((acc:any, val:any) => {
-        acc[val] = data[val];
-        delete data[val]
-        return acc;
-      }, {});
-
-      // data format after each
-      // {
-      //   class_6 : ['General Knowledge', 'Maths'],
-      //   class_5: ['English'],
-      //   class_4: ['General Knowledge', 'English']
-      // }
-
       const result: ActionReturnType = await AddTeacherAction({
         ...data,
-        subjects: refinedWithSubjects
+        subjects: selectedSubjects,
       });
       if (result.success) {
         reset();
+        setSubjects(null);
         toast.success(result.message);
       } else {
         toast.error(result.message);
@@ -77,16 +67,40 @@ const TeacherForm = () => {
   }, [errors]);
 
   const selectedClasses = watch("classes");
+
   const showSubjects = async () => {
+    const setLoading = toast.loading("Please Wait...");
     if (selectedClasses.length > 3) {
-      toast.error("A Teacher cannot have more than 3 Classes")
-      return
+      toast.error("A Teacher cannot have more than 3 Classes");
+      return;
     }
-    const res = selectedClasses.map((val:string) =>
-      classSubjects.filter((subj) => (val === subj.classname))
-    )
-    setSubjects(res);
-  }
+    const classSubjects: { classname: string; subjects: string[] }[] =
+      await getSubjectsAccToClass(selectedClasses);
+    toast.dismiss(setLoading);
+    setSubjects(classSubjects);
+  };
+  const [selectedSubjects, setSelectedSubjects] = useState<
+    {
+      classname: string;
+      subjects: string[];
+    }[]
+  >([]);
+
+  const handleCheckboxChange = (classname: string, subject: string) => {
+    setSelectedSubjects((prev) => {
+      const updatedSubjects = [...prev]
+      const index = selectedSubjects.findIndex((item) => item.classname === classname)
+      if (index !== -1) {
+        const obj = updatedSubjects[index];
+        const updatedArray = obj.subjects.includes(subject) ? obj.subjects.filter((val) => val !== subject) : [...obj.subjects, subject]
+        updatedSubjects[index] = { ...obj, subjects: updatedArray };
+      } else {
+        updatedSubjects.push({ classname, subjects: [subject] })
+      }
+      return updatedSubjects
+    })
+  };
+
   return (
     <div className="absolute  top-0 flex items-center justify-center bg-gray-200 flex-wrap gap-8 p-4 rounded-md shadow-md z-50 flex-col w-full h-auto">
       <div className="flex w-full justify-between items-center">
@@ -98,7 +112,8 @@ const TeacherForm = () => {
           Close
         </button>
       </div>
-      <form className="flex w-full gap-4 flex-wrap"
+      <form
+        className="flex w-full gap-4 flex-wrap"
         onSubmit={handleTeacherAddition}
       >
         <InputField
@@ -185,26 +200,40 @@ const TeacherForm = () => {
           />
           <button
             type="button"
-            className="px-8 py-2 border-none h-max shadow-lg outline-none text-xs font-medium text-gray-200 rounded-lg bg-blue-500  transition-all ease-in-out hover:text-white hover:font-semibold flex gap-2 flex-row w-max"
+            className="px-8 py-2 border-none h-max shadow-lg outline-none text-xs font-medium text-gray-200 rounded-lg bg-blue-500  transition-all ease-in-out hover:text-white hover:font-semibold flex gap-2 flex-rerow w-max"
             onClick={showSubjects}
           >
             Find Subjects
           </button>
         </div>
-        {subjects && subjects.map((obj) => (
-          obj.map((val) => (
-            <div className="w-full flex flex-col gap-3" key={val.classname}>
-              <label htmlFor={val.classname} className="text-xs font-medium text-gray-600">
-                {val.classname.replace("class_", "").concat("th")}
+        {subjects &&
+          subjects.map((obj) => (
+            <div className="w-full flex flex-col gap-3" key={obj.classname}>
+              <label
+                htmlFor={obj.classname}
+                className="text-xs font-medium text-gray-600"
+              >
+                {obj.classname.replace("class_", "").concat("th")}
               </label>
-              <ClassSubjects
-                control={control}
-                name={val.classname}
-                options={val.subjects}
-              />
+              <div className="w-full flex flex-wrap gap-3">
+                {obj.subjects.map((subject) => (
+                  <label
+                    key={subject}
+                    className="text-xs font-medium text-gray-600 flex gap-3 items-center flex-wrap"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedSubjects.some((val) => val.classname === obj.classname && val.subjects.includes(subject))}
+                      onChange={() =>
+                        handleCheckboxChange(obj.classname, subject)
+                      }
+                    />
+                    {subject}
+                  </label>
+                ))}
+              </div>
             </div>
-          ))
-        ))}
+          ))}
 
         <InputField
           defaultValue=""
@@ -222,7 +251,7 @@ const TeacherForm = () => {
             Add
           </button>
         </div>
-      </form >
+      </form>
     </div>
   );
 };

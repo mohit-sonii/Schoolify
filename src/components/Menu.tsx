@@ -46,6 +46,11 @@ const menuItem = [
         label: 'Class',
       },
       {
+        icon: '/subjects.svg',
+        href: '/subjects',
+        label: 'Subjects',
+      },
+      {
         icon: '/exam.svg',
         href: '/exams',
         label: 'Exam',

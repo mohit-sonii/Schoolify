@@ -48,6 +48,7 @@ CREATE TABLE "Student" (
 CREATE TABLE "Class" (
     "id" "ClassList" NOT NULL,
     "group" "Group" NOT NULL,
+    "subjects" TEXT[],
 
     CONSTRAINT "Class_pkey" PRIMARY KEY ("id")
 );
@@ -69,24 +70,15 @@ CREATE TABLE "Teacher" (
     "contactNo" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "salary" INTEGER NOT NULL,
+    "subjects" JSONB NOT NULL,
 
     CONSTRAINT "Teacher_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Subject" (
-    "id" SERIAL NOT NULL,
-    "subjectName" TEXT NOT NULL,
-    "classId" "ClassList" NOT NULL,
-
-    CONSTRAINT "Subject_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Exam" (
     "id" SERIAL NOT NULL,
     "classId" "ClassList" NOT NULL,
-    "subjectname" TEXT NOT NULL,
     "monthname" "MonthsOfExam" NOT NULL,
     "date" INTEGER NOT NULL,
 
@@ -176,12 +168,6 @@ CREATE TABLE "_TeacherClasses" (
     "B" INTEGER NOT NULL
 );
 
--- CreateTable
-CREATE TABLE "_TeacherSubjects" (
-    "A" INTEGER NOT NULL,
-    "B" INTEGER NOT NULL
-);
-
 -- CreateIndex
 CREATE UNIQUE INDEX "Admin_username_key" ON "Admin"("username");
 
@@ -192,9 +178,6 @@ CREATE UNIQUE INDEX "Student_username_key" ON "Student"("username");
 CREATE UNIQUE INDEX "Teacher_username_key" ON "Teacher"("username");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Subject_subjectName_classId_key" ON "Subject"("subjectName", "classId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "ExamMonth_name_key" ON "ExamMonth"("name");
 
 -- CreateIndex
@@ -203,23 +186,11 @@ CREATE UNIQUE INDEX "_TeacherClasses_AB_unique" ON "_TeacherClasses"("A", "B");
 -- CreateIndex
 CREATE INDEX "_TeacherClasses_B_index" ON "_TeacherClasses"("B");
 
--- CreateIndex
-CREATE UNIQUE INDEX "_TeacherSubjects_AB_unique" ON "_TeacherSubjects"("A", "B");
-
--- CreateIndex
-CREATE INDEX "_TeacherSubjects_B_index" ON "_TeacherSubjects"("B");
-
 -- AddForeignKey
 ALTER TABLE "Student" ADD CONSTRAINT "Student_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Subject" ADD CONSTRAINT "Subject_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "Exam" ADD CONSTRAINT "Exam_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Exam" ADD CONSTRAINT "Exam_subjectname_classId_fkey" FOREIGN KEY ("subjectname", "classId") REFERENCES "Subject"("subjectName", "classId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Exam" ADD CONSTRAINT "Exam_monthname_fkey" FOREIGN KEY ("monthname") REFERENCES "ExamMonth"("name") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -247,9 +218,3 @@ ALTER TABLE "_TeacherClasses" ADD CONSTRAINT "_TeacherClasses_A_fkey" FOREIGN KE
 
 -- AddForeignKey
 ALTER TABLE "_TeacherClasses" ADD CONSTRAINT "_TeacherClasses_B_fkey" FOREIGN KEY ("B") REFERENCES "Teacher"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_TeacherSubjects" ADD CONSTRAINT "_TeacherSubjects_A_fkey" FOREIGN KEY ("A") REFERENCES "Subject"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_TeacherSubjects" ADD CONSTRAINT "_TeacherSubjects_B_fkey" FOREIGN KEY ("B") REFERENCES "Teacher"("id") ON DELETE CASCADE ON UPDATE CASCADE;

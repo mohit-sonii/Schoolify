@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, ChangeEvent } from 'react'
+import { useState, ChangeEvent } from 'react'
 import { getOutstandingTotal } from './Functions'
 import { classes, months } from '../Extra'
 
