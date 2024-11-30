@@ -40,6 +40,7 @@ const NumberOfTeacherChart = () => {
     <div ref={widthRef} className="w-full flex flex-col gap-3">
       <h3 className="text-sm font-semibold text-gray-900 flex flex-col">
         Number of New Joinies
+        <span className="hidden">{optionValue}</span>
         <span className="text-[10px] font-light text-gray-500">
           Monthly Analysis
         </span>

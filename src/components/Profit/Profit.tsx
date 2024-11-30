@@ -1,6 +1,5 @@
 "use server";
-import React, { useState, useEffect } from "react";
-import { calculateTotalExpense, calculateTotalProfit } from "./Functions";
+import React from "react";
 import { Divider } from "@mui/material";
 
 const Profit = ({value}:{value:number}) => {

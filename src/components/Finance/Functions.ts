@@ -70,12 +70,12 @@ export const monthAnalysis = async (selectedMonth: string): Promise<number> => {
       },
     })
     .then((res) => {
-      let currentMonth = new Date().getMonth();
+      let newMonth = new Date().getMonth();
       res.map((val) => {
         const valIndex = months.indexOf(val.feesPaidUpto);
         if (selectedMonth === "") {
           total +=
-            val.class.fees[0].amount * Math.abs(currentMonth - 1 - valIndex);
+            val.class.fees[0].amount * Math.abs(newMonth - 1 - valIndex);
         } else {
           if (valIndex < indexOfSelectedMonth) {
             total += val.class.fees[0].amount;

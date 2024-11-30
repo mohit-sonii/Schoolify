@@ -3,7 +3,6 @@
 import React from 'react'
 import AttendanceChart from './AttendanceChart'
 import prisma from '@/utils/db'
-import Image from 'next/image'
 const AttendanceChartContainer = async () => {
 
   const data = await prisma.$transaction([
@@ -20,7 +19,7 @@ const AttendanceChartContainer = async () => {
       <div className="w-full h-full flex flex-col gap-4 ">
         <div className="flex flex-col justify-center gap-1">
           <div className='flex justify-between items-center'>
-            <h1 className="font-semibold  text-gray-700 flex flex-col">Today's Attendance</h1>
+            <h1 className="font-semibold  text-gray-700 flex flex-col">Today@apos;s Attendance</h1>
           </div>
           <span className="text-2xl font-bold">{data[1]}</span>
           <div className="text-xs w-full flex  items-center gap-2 ">

@@ -7,18 +7,17 @@ import {
 import ClassCard from "@/components/Students/EachStudentComponents/ClassCard";
 import FeeDetail from "@/components/Students/EachStudentComponents/FeeDetail";
 import FirstRow from "@/components/Students/EachStudentComponents/FirtRow";
-import PerformanceCard from "@/components/Students/EachStudentComponents/PerformanceCard";
+// import PerformanceCard from "@/components/Students/EachStudentComponents/PerformanceCard";
 import SecondRow from "@/components/Students/EachStudentComponents/SecondRow";
-import { monthNames } from "@/components/Students/StudentTable/TableType";
 import { Divider } from "@mui/material";
+import { months } from "@/components/Extra";
 import AddRemoveButton from "../../../../components/AddRemoveButton";
 
-const page = async ({ params }: { params: { username: string } }) => {
-  const res = await params;
+export default async function page({ username }: { username: string } ) {
 
-  const result = await StudentData(res.username);
-  const countClassStudents = await countClass(res.username);
-  const classdata = (await classData(res.username)) as ClassData;
+  const result = await StudentData(username);
+  const countClassStudents = await countClass(username);
+  const classdata = (await classData(username)) as ClassData;
 
   //for subjects and teachers
   const subjects: string[] = classdata["subjects"].map(
@@ -37,10 +36,10 @@ const page = async ({ params }: { params: { username: string } }) => {
   //for fees
   const feesAmount = classdata["fees"][0].amount;
   const lastpaidMonth = result.feesPaidUpto;
-  const monthIndex = monthNames.indexOf(lastpaidMonth) + 1;
+  const monthIndex = months.indexOf(lastpaidMonth) + 1;
   const currentMonth = new Date().getMonth();
   const countpendingMonths = currentMonth - monthIndex;
-  const slicer = monthNames.slice(monthIndex, currentMonth);
+  const slicer = months.slice(monthIndex, currentMonth);
 
   //for results
   // console.log(JSON.stringify(classdata.exams, null, 2));
@@ -56,13 +55,14 @@ const page = async ({ params }: { params: { username: string } }) => {
 
   mayResults.push(...temp);
 
-
   return (
     <div className="flex justify-between flex-wrap gap-5">
       <div className="flex items-center w-full justify-between flex-wrap">
-        <h1 className="w-max font-bold text-xl">{result.firstname + " " + result.lastname}</h1>
+        <h1 className="w-max font-bold text-xl">
+          {result.firstname + " " + result.lastname}
+        </h1>
         <div className="flex w-max">
-          <AddRemoveButton text={"Student" } />
+          <AddRemoveButton text={"Student"} />
         </div>
       </div>
       <div className="w-full xl:w-[65%]  gap-5 h-max flex flex-wrap flex-col justify-between">
@@ -95,9 +95,8 @@ const page = async ({ params }: { params: { username: string } }) => {
           total_pending_amount={countpendingMonths * feesAmount}
         />
       </div>
-      
     </div>
   );
 };
 
-export default page;
+

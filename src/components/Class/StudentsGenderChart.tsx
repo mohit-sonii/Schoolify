@@ -19,6 +19,7 @@ const StudentsGenderChart = ({ total, boys, girls }: { total: number, boys: numb
     setTotalStudents(ans.total)
     setTotalBoys(ans.boys)
     setTotalGirls(ans.girls)
+    
   }
 
 
@@ -26,7 +27,7 @@ const StudentsGenderChart = ({ total, boys, girls }: { total: number, boys: numb
     <div className="w-full h-max flex flex-col gap-4 ">
       <div className="flex flex-col justify-center gap-1">
         <div className="flex items-center justify-between">
-          <h1 className="font-semibold text-gray-700 flex flex-col">Total Students</h1>
+          <h1 className="font-semibold text-gray-700 flex flex-col">Total Students <span className="hidden">{optionValue}</span></h1>
           <select
             name="Class"
             className="font-light text-xs rounded-md shadow-xl px-4 py-2 border-none outline-none cursor-pointer"
