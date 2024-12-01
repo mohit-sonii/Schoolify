@@ -2,6 +2,11 @@ import { ClassList, Gender, Group, Month, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 const run = async () => {
+  await prisma.admin.create({
+    data: {
+      username:"mohit"
+    }
+  })
   await prisma.class.createMany({
     data: [
       {
