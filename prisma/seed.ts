@@ -1,4 +1,5 @@
-import { ClassList, Gender, Group, Month, PrismaClient } from "@prisma/client";
+const { ClassList, Gender, Group, Month, PrismaClient } = require('@prisma/client');
+
 
 const prisma = new PrismaClient();
 const run = async () => {
