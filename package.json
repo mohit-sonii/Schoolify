@@ -12,7 +12,6 @@
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"}  prisma/seed.ts"
   },
-  
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
@@ -21,6 +20,7 @@
     "@mui/material": "^6.1.5",
     "@mui/x-charts": "^7.21.0",
     "@mui/x-date-pickers": "^7.22.0",
+    "@neondatabase/serverless": "^0.10.4",
     "@nextui-org/dropdown": "^2.1.31",
     "@nextui-org/react": "^2.4.8",
     "@prisma/client": "^5.22.0",

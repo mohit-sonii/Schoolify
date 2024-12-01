@@ -1,8 +1,6 @@
 // import Cards from "@/components/Cards";
 import GenderChartContainer from "@/components/Admin/GenderPieChart/GenderChartContainer";
 import AttendanceChartContainer from "../../../components/Admin/AttendenceChart/AttendanceChartContainer";
-// import BasicDateCalendar from "@/components/Calendar/Calender";
-// import EventContainer from "@/components/Events/EventContainer";
 import AdmissionChartContainer from "@/components/Admin/AdmissionChart/AdmissionChartContainer";
 import OutstandingDuesContainer from "@/components/Admin/OutstandingDues/OutstandingDuesContainer";
 import { Divider } from "@mui/material";
