@@ -18,6 +18,6 @@ This project include all the basic as well as advance functionality that a schoo
 • Data Graph.<br>
 • Add, Remove, Create and update the data for each one.<br>
 • Annual and Monthly calculation for each data set.<br>
-• <i>Well it will be huge list so I will leave it to you to expore the project. Soon will host it as well</i><br>
+• <i>Well it will be huge list so I will leave it to you to expore the project</i><br>
 <br>
 Problem Solved ---> Instead of writing all those on paper, or prepare excel sheet for storing data and illustrating through chart. All these can be done at single place. In this way Time, Money and Effort will be saved for the school.
