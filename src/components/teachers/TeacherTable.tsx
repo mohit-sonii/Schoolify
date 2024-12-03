@@ -7,13 +7,13 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import { useState, useEffect, ChangeEvent } from "react";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { teacherType } from "./Functions";
+C
+import { getAllTeachers, teacherType } from "./Functions";
 import Image from "next/image";
 import { months } from "../Extra";
 import { refining, years } from "./refining";
 import { useRouter } from "next/navigation";
+import useModalStore from "@/utils/store";
 
 function Row(props: { row: teacherType }) {
   const { row } = props;
@@ -55,6 +55,14 @@ export default function TeacherTable({
   const [mapping, setMapping] = useState<teacherType[] | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [sortOrder, setSortOrder] = useState<string>("");
+  const currValue = useModalStore((state)=>state.teacherRenderState)
+
+  useEffect(() => {
+    const fetch = async() => {
+      return await getAllTeachers()
+    }
+    fetch().then((val) => setMapping(val))
+  },[currValue])
 
   const optionChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;

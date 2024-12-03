@@ -29,7 +29,6 @@ const Expense = ({ value }: { value: number }) => {
       </div>
       <Divider orientation="vertical" />
     </div>
-
   );
 };
 

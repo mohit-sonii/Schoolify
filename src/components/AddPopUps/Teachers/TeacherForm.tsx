@@ -17,6 +17,7 @@ import { ActionReturnType } from "../ReturnType";
 import { classesForSelect } from "./Type";
 
 const TeacherForm = () => {
+  const teacherRender = useModalStore((state)=>state.changeTeacherRender)
   const {
     formState: { errors },
     register,
@@ -50,6 +51,7 @@ const TeacherForm = () => {
       });
       if (result.success) {
         reset();
+        teacherRender();
         setSubjects(null);
         setSelectedSubjects([])
         toast.success(result.message);

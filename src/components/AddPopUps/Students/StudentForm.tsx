@@ -13,6 +13,7 @@ import { ActionReturnType } from "../ReturnType";
 
 const StudentForm = () => {
   const { closeModal } = useModalStore();
+  const studentRender = useModalStore((state) => state.changeStudentRender)
 
   const {
     register,
@@ -29,6 +30,7 @@ const StudentForm = () => {
       const result: ActionReturnType = await AddStudentAction(data);
       if (result.success) {
         toast.success(result.message);
+        studentRender()
       } else {
         toast.error(result.message);
       }

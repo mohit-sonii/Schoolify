@@ -14,6 +14,7 @@ import { addSubjectSchema } from "./zodValidation";
 
 const SubjectForm = () => {
   const { closeModal } = useModalStore();
+  const renderValue = useModalStore((state)=>state.changeStudentRender)
   const {
     register,
     handleSubmit,
@@ -41,6 +42,7 @@ const SubjectForm = () => {
       if (result.success) {
         reset();
         toast.success(result.message);
+        renderValue()
       } else {
         toast.error(result.message)
       }

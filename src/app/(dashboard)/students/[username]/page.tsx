@@ -15,6 +15,7 @@ import AddRemoveButton from "../../../../components/AddRemoveButton";
 
 export default async function page({ username }: { username: string } ) {
 
+  console.log(username)
   const result = await StudentData(username);
   const countClassStudents = await countClass(username);
   const classdata = (await classData(username)) as ClassData;

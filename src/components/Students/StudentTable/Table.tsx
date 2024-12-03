@@ -1,31 +1,46 @@
 "use client";
-
+import * as React from "react";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  StudentTable,
-  classNames,
-  admissionYears
-} from "./TableType";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { StudentTableSchema, classNames, admissionYears } from "./TableType";
 import { months } from "@/components/Extra";
 import { FilterSort } from "./FilterFunctions";
 import Image from "next/image";
 import Button from "@/components/Button";
 import useModalStore from "@/utils/store";
 import StudentForm from "@/components/AddPopUps/Students/StudentForm";
+import { StudentsFetch } from "../FetchStudents";
 
-export const Table = ({ students }: { students: StudentTable[] }) => {
+export const StudentTable = ({
+  students,
+}: {
+  students: StudentTableSchema[];
+}) => {
   const [optionClass, setOptionClass] = useState<string>("");
   const [optionAdmission, setOptionAdmission] = useState<number | undefined>(
     undefined
   );
+  const currValue = useModalStore((state) => state.studentRenderState);
   const [optionFees, setOptionFees] = useState<string>("");
-  const [filterResult, setFilterResults] = useState<StudentTable[]>([]);
+  const [filterResult, setFilterResults] = useState<StudentTableSchema[]>([]);
   const [sortingAdmissionValue, setSortingAdmission] = useState<string>("");
   const [sortingFeesValue, setSortingFees] = useState<string>("");
   const [inputText, setInputText] = useState<string>("");
 
-  const router = useRouter();
+  useEffect(() => {
+    const fetch = async () => {
+      const result = await StudentsFetch();
+      students = result.arr;
+    };
+    fetch();
+  }, [currValue]);
 
   const ChangeForClass = (e: ChangeEvent<HTMLSelectElement>) => {
     setOptionClass(e.target.value);
@@ -61,7 +76,6 @@ export const Table = ({ students }: { students: StudentTable[] }) => {
     );
     setFilterResults(result);
   }, [
-    students,
     optionFees,
     optionAdmission,
     optionClass,
@@ -69,11 +83,36 @@ export const Table = ({ students }: { students: StudentTable[] }) => {
     sortingFeesValue,
   ]);
 
-  const openModal = useModalStore((state) => state.openModal)
+  const openModal = useModalStore((state) => state.openModal);
   const studentPage = () => {
-    openModal(
-      <StudentForm/>
-    )
+    openModal(<StudentForm />);
+  };
+
+  function Row(props: { row: StudentTableSchema }) {
+    const { row } = props;
+    const router = useRouter();
+
+    return (
+      <React.Fragment>
+        <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+          <TableCell
+            component="th"
+            scope="row"
+            onClick={() => router.push(`/students/${row.Username}`)}
+            className="cursor-pointer hover:font-semibold text-black"
+          >
+            {row.StudentId}
+          </TableCell>
+          <TableCell align="left">{row["First Name"]}</TableCell>
+          <TableCell align="left">{row["Last Name"]}</TableCell>
+          <TableCell align="left">{row["Contact No"]}</TableCell>
+          <TableCell align="left">{row["Admission Year"]}</TableCell>
+          <TableCell align="left">{row.Class}</TableCell>
+          <TableCell align="left">{row["Last Fees Paid"]}</TableCell>
+          <TableCell align="left">{row["Outstanding Fees"]}</TableCell>
+        </TableRow>
+      </React.Fragment>
+    );
   }
 
   return (
@@ -200,63 +239,36 @@ export const Table = ({ students }: { students: StudentTable[] }) => {
           </button>
         </div>
       </div>
-      <table className="min-w-full bg-white  border-gray-300 rounded-lg">
-        <thead className="font-semibold text-xs text-gray-700">
-          <tr>
-            <th className="hover:font-bold hover:text-black">Student Id</th>
-            <th className="hover:font-bold hover:text-black">First name</th>
-            <th className="hover:font-bold hover:text-black">Last name</th>
-            <th className="hover:font-bold hover:text-black">Contact No.</th>
-            <th className="hover:font-bold hover:text-black">Admission Year</th>
-            <th className="hover:font-bold hover:text-black">Class</th>
-            <th className="hover:font-bold hover:text-black">Last Paid</th>
-            <th className="hover:font-bold hover:text-black">
-              Outstanding Fees
-            </th>
-          </tr>
-        </thead>
-        <tbody className="text-xs font-medium text-gray-600">
-          {filterResult.length > 0 ? (
-            filterResult.map((val: any) => (
-              <tr key={val.Username} className="text-center">
-                <td
-                  onClick={() => router.push(`/students/${val.Username}`)}
-                  className="cursor-pointer hover:font-bold hover:text-black"
-                >
-                  {val.StudentId}
-                </td>
-                <td className="hover:font-bold hover:text-black">
-                  {val["First Name"]}
-                </td>
-                <td className="hover:font-bold hover:text-black">
-                  {val["Last Name"]}
-                </td>
-                <td className="hover:font-bold hover:text-black">
-                  {val["Contact No"]}
-                </td>
-                <td className="hover:font-bold hover:text-black">
-                  {val["Admission Year"]}
-                </td>
-                <td className="hover:font-bold hover:text-black">
-                  {val.Class}
-                </td>
-                <td className="hover:font-bold hover:text-black">
-                  {val["Last Fees Paid"]}
-                </td>
-                <td className="hover:font-bold hover:text-black">
-                  {val["Outstanding Fees"]}
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr className="w-full">
-              <td className="text-center">
-                No students match the selected criteria.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+      <TableContainer
+        component={Paper}
+        className="bg-gray-100 border shadow-xl rounded-xl border-gray-400"
+      >
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Student Id</TableCell>
+              <TableCell align="left">First Name</TableCell>
+              <TableCell align="left">Last Name</TableCell>
+              <TableCell align="left">Contact No.</TableCell>
+              <TableCell align="left">Admission Year</TableCell>
+              <TableCell align="left">Class</TableCell>
+              <TableCell align="left">Last Paid</TableCell>
+              <TableCell align="left">Outstanding Fees</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {filterResult.length === 0 && (
+              <TableRow>
+                <TableCell align="left" colSpan={5}>
+                  No data for this criteria
+                </TableCell>
+              </TableRow>
+            )}
+            {filterResult &&
+              filterResult.map((row) => <Row key={row.Username} row={row} />)}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 };

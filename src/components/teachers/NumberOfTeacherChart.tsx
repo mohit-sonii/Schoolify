@@ -2,8 +2,9 @@
 import { LineChart } from "@mui/x-charts";
 import React, { ChangeEvent } from "react";
 import { useState, useRef, useEffect } from "react";
-import { teacherJoiningMonth } from "./Functions";
+import {teacherJoiningMonth } from "./Functions";
 import { years } from "../Extra";
+import useModalStore from "@/utils/store";
 
 const NumberOfTeacherChart = () => {
   const currentYear = new Date().getFullYear();
@@ -12,6 +13,7 @@ const NumberOfTeacherChart = () => {
   const [keys, setKeys] = useState<string[]>([]);
   const [values, setValues] = useState<number[]>([]);
   const [optionValue, setOptionValue] = useState<number>(currentYear);
+  const currValue = useModalStore((state) => state.teacherRenderState);
 
   const handleChange = async (e: ChangeEvent<HTMLSelectElement>) => {
     const val = parseInt(e.target.value, 10);
@@ -20,6 +22,16 @@ const NumberOfTeacherChart = () => {
     setKeys(result[0]);
     setValues(result[1]);
   };
+
+  useEffect(() => {
+    const fetch = async () => {
+      const result = await teacherJoiningMonth(currentYear)
+      setKeys(result[0])
+      setValues(result[1])
+    }
+    fetch()
+  }, [currValue])
+
   useEffect(() => {
     const result = async () => {
       const ans = await teacherJoiningMonth(currentYear);
@@ -36,6 +48,7 @@ const NumberOfTeacherChart = () => {
     window.addEventListener("resize", setResize);
     return () => window.removeEventListener("resize", setResize);
   }, []);
+
   return (
     <div ref={widthRef} className="w-full flex flex-col gap-3">
       <h3 className="text-sm font-semibold text-gray-900 flex flex-col">

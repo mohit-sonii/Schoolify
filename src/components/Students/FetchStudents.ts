@@ -1,3 +1,4 @@
+"use server"
 import prisma from "@/utils/db";
 
 export const StudentsFetch = async () => {
@@ -54,4 +55,25 @@ export const StudentsFetch = async () => {
     }
   })
   return students
+}
+
+
+export const fetchTotalStudents = async () => {
+  const result = await prisma.class.groupBy({
+    by: ["id"],
+    _count: true
+  }).then((res) => {
+    const arr = res.map((val) => {
+      const filterClass = parseInt(val.id.replace("class_", ""))
+      return {
+        count: val._count,
+        className: filterClass
+      }
+    })
+    arr.sort((a, b) => a.className - b.className)
+    return {
+      arr
+    }
+  })
+  return result.arr;
 }

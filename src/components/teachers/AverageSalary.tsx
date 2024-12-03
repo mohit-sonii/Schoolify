@@ -1,21 +1,30 @@
 "use client";
 
-import { useState, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { averageSalary } from "./Functions";
 import { years } from "../Extra";
+import useModalStore from "@/utils/store";
 
 const AverageSalary = ({ value }: { value: number }) => {
   const [optionValue, setOptionValue] = useState<number>(
     new Date().getFullYear()
   );
   const [total, setTotal] = useState<number>(value);
-
+  const currValue = useModalStore((state) => state.teacherRenderState)
   const handleChange = async (e: ChangeEvent<HTMLSelectElement>) => {
     const current = parseInt(e.target.value, 10);
     setOptionValue(current);
     const result = await averageSalary(current);
     setTotal(result);
   };
+
+  useEffect(() => {
+    const fetch = async () => {
+      return await averageSalary(new Date().getFullYear())
+    }
+    fetch().then((val) => setTotal(val))
+  }, [currValue])
+
   return (
     <div className="flex w-full xl:w-[70%] gap-4">
       <div className="flex flex-col gap-5 w-full">

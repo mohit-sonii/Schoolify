@@ -1,5 +1,5 @@
 import { StudentsFetch } from "@/components/Students/FetchStudents";
-import { Table } from "@/components/Students/StudentTable/Table";
+import { StudentTable } from "@/components/Students/StudentTable/Table";
 import TotalStudentsContainer from "@/components/Students/TotalStudentAccToClass/TotalStudentsContainer";
 import Divider from "@mui/material/Divider";
 
@@ -14,7 +14,7 @@ const page = async () => {
         <Divider />
         <div className="flex flex-col gap-4 w-full">
           <h1 className="font-semibold text-gray-800">All Students</h1>
-          <Table students={data.arr} />
+          <StudentTable students={data.arr} />
         </div>
       </div>
     </>

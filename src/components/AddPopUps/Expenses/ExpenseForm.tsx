@@ -13,6 +13,7 @@ import { ActionReturnType } from "../ReturnType";
 
 const ExpenseForm = () => {
   const { closeModal } = useModalStore();
+  const changeRender = useModalStore((state)=>state.changeRender)
 
   const {
     register,
@@ -36,6 +37,7 @@ const ExpenseForm = () => {
       });
       if (result.success) {
         reset();
+        changeRender();
         toast.dismiss(toastLoading);
         toast.success(result.message);
       }
@@ -46,6 +48,7 @@ const ExpenseForm = () => {
       }
     }
   });
+  const changeState = () => {};
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       for (const field in errors) {

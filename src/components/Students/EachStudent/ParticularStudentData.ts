@@ -62,7 +62,7 @@ export const classData = async (user: string): Promise<ClassData | null> => {
     select: {
       id: true,
       group: true,
-      teacher: {
+      teachers: {
         select: {
           firstname: true,
           lastname: true
@@ -71,7 +71,6 @@ export const classData = async (user: string): Promise<ClassData | null> => {
       subjects: {
         select: {
           subjectName: true,
-          teacherUsername: true,
         }
       },
       fees: {
@@ -79,21 +78,6 @@ export const classData = async (user: string): Promise<ClassData | null> => {
           amount: true
         }
       },
-      exams: {
-        select: {
-          monthname: true,
-          subjectId:true,
-          
-          results: {
-            where: {
-              stuId: studentId?.studentId
-            },
-            select: {
-              score: true,
-            }
-          }
-        }
-      }
     },
   })
 

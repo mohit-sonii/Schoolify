@@ -1,6 +1,6 @@
 import { Month, Gender } from "@prisma/client"
 
-export type StudentTable = {
+export type StudentTableSchema = {
   StudentId: number,
   Username: string,
   "First Name": string,

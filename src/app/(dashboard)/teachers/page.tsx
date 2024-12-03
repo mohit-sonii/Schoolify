@@ -8,7 +8,6 @@ import NumberOfTeacherChart from "@/components/teachers/NumberOfTeacherChart";
 import TeacherCount from "@/components/teachers/TeacherCount";
 import TeacherTable from "@/components/teachers/TeacherTable";
 import { Divider } from "@mui/material";
-import React from "react";
 
 const page = async () => {
   const currentYear = new Date().getFullYear();

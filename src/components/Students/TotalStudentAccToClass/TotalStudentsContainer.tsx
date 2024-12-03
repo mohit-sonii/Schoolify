@@ -1,33 +1,31 @@
-"use server"
+"use client";
+import { useEffect, useState } from "react";
+import TotalStudents from "./TotalStudents";
+import useModalStore from "@/utils/store";
+import { fetchTotalStudents } from "../FetchStudents";
 
-import prisma from "@/utils/db"
-import TotalStudents from "./TotalStudents"
+const TotalStudentsContainer = () => {
+  const currValue = useModalStore((state) => state.studentRenderState);
+  const [fetchResult, setFetchResult] = useState<
+    { count: number; className: number }[]
+  >([]);
 
-const TotalStudentsContainer = async () => {
-
-  const result = await prisma.class.groupBy({
-    by: ["id"],
-    _count: true
-  }).then((res) => {
-    const arr = res.map((val) => {
-      const filterClass = parseInt(val.id.replace("class_", ""))
-      return {
-        count: val._count,
-        className: filterClass
-      }
-    })
-    arr.sort((a, b) => a.className - b.className)
-    return{
-      arr
-    }
-  })
+  useEffect(() => {
+    const fetch = async () => {
+      const result = await fetchTotalStudents();
+      setFetchResult(result);
+    };
+    fetch()
+  }, [currValue]);
 
   return (
     <div className="w-full flex flex-col flex-wrap gap-2">
-      <h1 className="font-semibold text-gray-800">Number of Students Per Class</h1>
-      <TotalStudents range={result.arr} />
+      <h1 className="font-semibold text-gray-800">
+        Number of Students Per Class
+      </h1>
+      <TotalStudents range={fetchResult} />
     </div>
-  )
-}
+  );
+};
 
-export default TotalStudentsContainer
+export default TotalStudentsContainer;
