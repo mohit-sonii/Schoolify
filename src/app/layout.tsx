@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Montserrat } from 'next/font/google'
-import { Toaster } from 'react-hot-toast';
+import { Montserrat } from "next/font/google";
+import { Toaster } from "react-hot-toast";
+import { ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 
-
-const inter = Montserrat({ subsets: ['latin'] })
-
+const inter = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Schoolify",
-  description: "School DashBoard"
-}
+  description: "School DashBoard",
+};
 
 export default function RootLayout({
   children,
@@ -18,16 +17,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.png"  />
-      </head>
-      <body
-        className={`${inter.className} bg-slate-200`}
-      >
-        <Toaster />
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <head>
+          <link rel="icon" href="/favicon.png" />
+        </head>
+        <body className={`${inter.className} bg-slate-200`}>
+          <main>{children}</main>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

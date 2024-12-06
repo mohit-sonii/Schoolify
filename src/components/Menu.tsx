@@ -7,32 +7,32 @@ const menuItem = [
     items: [
       {
         icon: '/home.svg',
-        href: '/admin',
+        href: '/dashboard/home',
         label: 'Home',
       },
       {
         icon: '/finance.svg',
-        href: '/finance',
+        href: '/dashboard/finance',
         label:'Finance'
       },
       {
         icon: '/expense.svg',
-        href: '/expense',
+        href: '/dashboard/expense',
         label: 'Expense'
       },
       {
         icon: '/profit.svg',
-        href: '/profit',
+        href: '/dashboard/profit',
         label: 'Profit'
       },
       {
         icon: '/student.svg',
-        href: '/students',
+        href: '/dashboard/students',
         label: 'Student',
       },
       {
         icon: '/teacher.svg',
-        href: '/teachers',
+        href: '/dashboard/teachers',
         label: 'Teacher',
       },
       // {
@@ -42,12 +42,12 @@ const menuItem = [
       // },
       {
         icon: '/class.svg',
-        href: '/classes',
+        href: '/dashboard/classes',
         label: 'Class',
       },
       {
         icon: '/subjects.svg',
-        href: '/subjects',
+        href: '/dashboard/subjects',
         label: 'Subjects',
       },
       // {
@@ -55,16 +55,6 @@ const menuItem = [
       //   href: '/exams',
       //   label: 'Exam',
       // }
-    ]
-  },
-  {
-    title: 'Others',
-    items: [
-      {
-        icon: '/logout.svg',
-        href: '/logout',
-        label: 'Logout',
-      },
     ]
   }
 ]
