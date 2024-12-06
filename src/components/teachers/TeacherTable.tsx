@@ -7,7 +7,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import { useState, useEffect, ChangeEvent } from "react";
-C
 import { getAllTeachers, teacherType } from "./Functions";
 import Image from "next/image";
 import { months } from "../Extra";
