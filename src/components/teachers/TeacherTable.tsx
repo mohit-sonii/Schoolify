@@ -4,6 +4,7 @@ import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
+import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import { useState, useEffect, ChangeEvent } from "react";
@@ -13,6 +14,7 @@ import { months } from "../Extra";
 import { refining, years } from "./refining";
 import { useRouter } from "next/navigation";
 import useModalStore from "@/utils/store";
+import { TableRow } from "@mui/material";
 
 function Row(props: { row: teacherType }) {
   const { row } = props;
