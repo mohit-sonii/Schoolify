@@ -5,24 +5,26 @@ import { averageSalary } from "./Functions";
 import { years } from "../Extra";
 import useModalStore from "@/utils/store";
 
-const AverageSalary = ({ value }: { value: number }) => {
+const AverageSalary = () => {
   const [optionValue, setOptionValue] = useState<number>(
     new Date().getFullYear()
   );
-  const [total, setTotal] = useState<number>(value);
+  const [value, setValue] = useState<number>(0);
   const currValue = useModalStore((state) => state.teacherRenderState)
+
   const handleChange = async (e: ChangeEvent<HTMLSelectElement>) => {
     const current = parseInt(e.target.value, 10);
     setOptionValue(current);
     const result = await averageSalary(current);
-    setTotal(result);
+    setValue(result);
   };
 
   useEffect(() => {
     const fetch = async () => {
-      return await averageSalary(new Date().getFullYear())
+      const avg = await averageSalary(new Date().getFullYear())
+      setValue(avg)
     }
-    fetch().then((val) => setTotal(val))
+    fetch()
   }, [currValue])
 
   return (
@@ -50,7 +52,7 @@ const AverageSalary = ({ value }: { value: number }) => {
             ))}
           </select>
         </div>
-        <h1 className="w-max text-2xl font-bold text-green-600">{`$${total}`}</h1>
+        <h1 className="w-max text-2xl font-bold text-green-600">{`$${value}`}</h1>
       </div>
     </div>
   );

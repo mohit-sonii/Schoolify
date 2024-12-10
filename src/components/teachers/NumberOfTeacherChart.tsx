@@ -2,7 +2,7 @@
 import { LineChart } from "@mui/x-charts";
 import React, { ChangeEvent } from "react";
 import { useState, useRef, useEffect } from "react";
-import {teacherJoiningMonth } from "./Functions";
+import { teacherJoiningMonth } from "./Functions";
 import { years } from "../Extra";
 import useModalStore from "@/utils/store";
 
@@ -25,12 +25,12 @@ const NumberOfTeacherChart = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      const result = await teacherJoiningMonth(currentYear)
-      setKeys(result[0])
-      setValues(result[1])
-    }
-    fetch()
-  }, [currValue])
+      const result = await teacherJoiningMonth(currentYear);
+      setKeys(result[0]);
+      setValues(result[1]);
+    };
+    fetch();
+  }, [currValue]);
 
   useEffect(() => {
     const result = async () => {
@@ -76,6 +76,7 @@ const NumberOfTeacherChart = () => {
       </div>
 
       <LineChart
+        className="overflow-x-scroll"
         xAxis={[
           {
             data: keys,

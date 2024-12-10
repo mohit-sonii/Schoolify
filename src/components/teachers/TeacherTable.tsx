@@ -43,27 +43,25 @@ function Row(props: { row: teacherType }) {
   );
 }
 
-export default function TeacherTable({
-  teachers,
-}: {
-  teachers: teacherType[];
-}) {
+export default function TeacherTable() {
   const [yearMonth, setYearMonth] = useState<{ year: number; month: string }>({
     year: 2024,
     month: "",
   });
+  const [teachers, setTeachers] = useState<teacherType[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
   const [mapping, setMapping] = useState<teacherType[] | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [sortOrder, setSortOrder] = useState<string>("");
-  const currValue = useModalStore((state)=>state.teacherRenderState)
+  const currValue = useModalStore((state) => state.teacherRenderState);
 
   useEffect(() => {
-    const fetch = async() => {
-      return await getAllTeachers()
-    }
-    fetch().then((val) => setMapping(val))
-  },[currValue])
+    const fetch = async () => {
+      const res = await getAllTeachers();
+      setTeachers(res);
+    };
+    fetch();
+  }, [currValue]);
 
   const optionChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
