@@ -16,11 +16,11 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import {  incomeType } from "./Functions";
+import { AllIncomeData, incomeType } from "./Functions";
 import { refineResult } from "../Expenses/objectExport";
-// import Button from "../Button";
 import Image from "next/image";
 import { months } from "../Extra";
+import useModalStore from "@/utils/store";
 
 //each row
 function Row(props: { row: incomeType }) {
@@ -63,34 +63,31 @@ function Row(props: { row: incomeType }) {
   );
 }
 
-export default function IncomeTable({
-  gain,
-}: {
-  gain: incomeType[];
-}) {
+export default function IncomeTable() {
   const [yearMonth, setYearMonth] = useState<{ year: number; month: string }>({
     year: 0,
     month: "",
   });
+  const [gain, setGain] = useState<incomeType[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
   const [mapping, setMapping] = useState<incomeType[] | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [sortOrder, setSortOrder] = useState<string>("");
+
+  const currState = useModalStore((state) => state.profitRenderState);
+
   const optionChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setYearMonth((prev) => {
       const updatedState = { ...prev, [name]: value };
-      const response = refineResult(
-        gain,
-        yearMonth.year,
-        yearMonth.month
-      );
+      const response = refineResult(gain, yearMonth.year, yearMonth.month);
       if (response.length === 0) setVisible(true);
       else setVisible(false);
       setMapping(response);
       return updatedState;
     });
   };
+
   const handleClick = () => {
     const response = refineResult(
       gain,
@@ -115,6 +112,14 @@ export default function IncomeTable({
     if (response.length === 0) setVisible(true);
     else setVisible(false);
   }, [yearMonth, gain, sortOrder]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const incomeData = await AllIncomeData();
+      setGain(incomeData);
+    };
+    fetch();
+  }, [currState]);
 
   return (
     <div className="flex flex-col w-full gap-5 mb-5">

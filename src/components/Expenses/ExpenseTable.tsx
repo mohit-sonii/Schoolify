@@ -23,7 +23,6 @@ import Button from "../Button";
 import Image from "next/image";
 import { months } from "../Extra";
 import ExpenseForm from "../AddPopUps/Expenses/ExpenseForm";
-//each row
 function Row(props: { row: expenseType }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
@@ -69,7 +68,6 @@ export default function ExpenseTable({
 }: {
   expenditure: expenseType[];
 }) {
-  const currentYear = new Date().getFullYear();
   const [yearMonth, setYearMonth] = useState<{ year: number; month: string }>({
     year: 2024,
     month: "",
@@ -78,6 +76,7 @@ export default function ExpenseTable({
   const [mapping, setMapping] = useState<expenseType[] | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [sortOrder, setSortOrder] = useState<string>("");
+
   const optionChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setYearMonth((prev) => {

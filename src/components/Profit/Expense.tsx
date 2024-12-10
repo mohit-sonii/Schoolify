@@ -3,9 +3,24 @@ import useModalStore from "@/utils/store";
 import Button from "../Button";
 import { Divider } from "@mui/material";
 import ExpenseForm from "../AddPopUps/Expenses/ExpenseForm";
+import { useState, useEffect } from 'react'
+import { calculateTotalExpense } from "./Functions";
 
-const Expense = ({ value }: { value: number }) => {
+
+const Expense = () => {
   const openModal = useModalStore((state) => state.openModal)
+  const currState = useModalStore((state) => state.expenseRenderState)
+  const globalExpenseSet  = useModalStore((state)=>state.setTotalExpense)
+  const [value, setValue] = useState<number>(0);
+  useEffect(()=>{
+    const fetch = async () => {
+      const year = new Date().getFullYear();
+      const expense = await calculateTotalExpense(year);
+      setValue(expense);
+      globalExpenseSet(expense)
+    }
+    fetch();
+  },[currState])
 
   const expensePage = () => {
     openModal(

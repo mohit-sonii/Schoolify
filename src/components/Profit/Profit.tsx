@@ -1,9 +1,18 @@
 "use client";
 import React from "react";
 import { Divider } from "@mui/material";
+import useModalStore from "@/utils/store";
+import { useState, useEffect } from "react";
 
-const Profit = ({value}:{value:number}) => {
+const Profit = () => {
+  const expenses = useModalStore((state) => state.totalExpense);
+  const incomes = useModalStore((state) => state.totalIncome);
 
+  const [value, setValue] = useState<number>(incomes - expenses);
+
+  useEffect(() => {
+    setValue(incomes - expenses);
+  }, [expenses, incomes]);
 
   return (
     <div className="flex w-full gap-4">

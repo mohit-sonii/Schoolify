@@ -13,7 +13,7 @@ import { ActionReturnType } from "../ReturnType";
 
 const ExpenseForm = () => {
   const { closeModal } = useModalStore();
-  const changeRender = useModalStore((state)=>state.changeRender)
+  const changeRender = useModalStore((state)=>state.changeExpenseRender)
 
   const {
     register,
@@ -48,7 +48,6 @@ const ExpenseForm = () => {
       }
     }
   });
-  const changeState = () => {};
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       for (const field in errors) {

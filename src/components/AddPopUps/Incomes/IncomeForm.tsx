@@ -13,7 +13,7 @@ import { ActionReturnType } from "../ReturnType";
 import { AddIncomeAction } from "./Actions";
 
 const IncomeForm = () => {
-  const changeRender = useModalStore((state) => state.changeRender)
+  const changeProfitRender = useModalStore((state) => state.changeProfitRender)
   const { closeModal } = useModalStore();
   const {
     register,
@@ -48,7 +48,7 @@ const IncomeForm = () => {
       });
       if (result.success) {
         reset();
-        changeRender()
+        changeProfitRender()
         toast.dismiss(toastLoading);
         toast.success(result.message);
       }

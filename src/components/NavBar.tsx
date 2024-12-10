@@ -14,7 +14,7 @@ const NavBar = () => {
       </div>
       <div className='flex gap-6 w-auto items-center justify-center'>
         <div className='flex flex-col'>
-          <span className=" font-bold">{user?.username}</span>
+          <span className=" font-bold">{user?.username?.charAt(0).toUpperCase().concat(user?.username.substring(1))}</span>
           <span className='self-end text-[10px]'>Admin</span>
         </div>
         <div className='w-max h-max'>

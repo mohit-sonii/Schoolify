@@ -1,17 +1,32 @@
 "use client";
 import useModalStore from "@/utils/store";
 import Button from "../Button";
-import { calculateTotalProfit } from "./Functions";
 import { Divider } from "@mui/material";
 import IncomeForm from "../AddPopUps/Incomes/IncomeForm";
+import { useEffect, useState } from "react";
+import { calculateTotalProfit } from "./Functions";
 
-const Income = ({ value }: { value: number }) => {
+const Income = () => {
   const openModal = useModalStore((state) => state.openModal)
+  const currState = useModalStore((state) => state.profitRenderState);
+  const globalIncomeSet = useModalStore((state)=>state.setTotalIncome)
+  
+  const [value, setValue] = useState<number>(0);
+
   const incomePage = () => {
     openModal(
-      <IncomeForm/>
+      <IncomeForm />
     )
   }
+  useEffect(() => {
+    const fetch = async () => {
+      const year = new Date().getFullYear()
+      const income = await calculateTotalProfit(year);
+      setValue(income);
+      globalIncomeSet(income);
+    }
+    fetch();
+  }, [currState])
   return (
     <div className="flex w-full gap-4">
       <div className="flex flex-col gap-5 w-full">
@@ -22,7 +37,7 @@ const Income = ({ value }: { value: number }) => {
               Current Year
             </span>
           </h3>
-          <Button innerText="Add Income" click = {incomePage} />
+          <Button innerText="Add Income" click={incomePage} />
         </div>
         <h1 className={`w-max text-2xl font-bold ${value > 0 ? 'text-green-600' : 'text-gray-600'}`}>{`$${value}`}</h1>
       </div>

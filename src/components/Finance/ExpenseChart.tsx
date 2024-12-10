@@ -4,10 +4,12 @@ import { ChangeEvent, useState, useEffect } from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { monthlyExpense } from "./Functions";
 import { months } from "../Extra";
+import useModalStore from "@/utils/store";
 
 const ExpenseChart = () => {
   const currentMonthIdx = new Date().getMonth() - 1;
   const currentMonth = months[currentMonthIdx];
+  const currState = useModalStore((state) => state.changeRender)
   const [optionValue, setOptionValue] = useState<string>(currentMonth);
   const [total, setTotal] = useState<number>(0);
   const [apiResult, setApiResult] = useState<
@@ -33,7 +35,7 @@ const ExpenseChart = () => {
       setTotal(abc[1])
     };
     res();
-  }, []);
+  }, [currState]);
 
   return (
     <>

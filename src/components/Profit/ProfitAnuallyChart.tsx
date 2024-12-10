@@ -4,12 +4,14 @@ import React, { ChangeEvent } from "react";
 import { useState, useRef, useEffect } from "react";
 import { calculateProfit } from "./Functions";
 import { years } from "../Extra";
+import useModalStore from "@/utils/store";
 
 const ProfitAnuallyChart = () => {
   const currentYear = new Date().getFullYear();
   const [width, setWidth] = useState(500);
   const widthRef = useRef<HTMLDivElement>(null);
   const [keys, setKeys] = useState<string[]>([]);
+  const currState = useModalStore((state)=>state.profitRenderState)
   const [values, setValues] = useState<number[]>([]);
   const [optionValue, setOptionValue] = useState<number>(currentYear);
 
@@ -35,7 +37,7 @@ const ProfitAnuallyChart = () => {
     setResize();
     window.addEventListener("resize", setResize);
     return () => window.removeEventListener("resize", setResize);
-  }, []);
+  }, [currState]);
   return (
     <div ref={widthRef} className="w-full flex flex-col gap-3">
       <h3 className="text-sm font-semibold text-gray-900 flex flex-col">
@@ -61,7 +63,7 @@ const ProfitAnuallyChart = () => {
         </select>
       </div>
 
-      <LineChart
+      <LineChart className="overflow-x-scroll"
         xAxis={[
           {
             data: keys,

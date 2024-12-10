@@ -4,15 +4,17 @@ import { LineChart } from "@mui/x-charts/LineChart";
 import { annuallyTrack } from "@/components/Expenses/Functions";
 import React from "react";
 import { years } from "../Extra";
+import useModalStore from "@/utils/store";
+
 const AnnualyChart = () => {
+
   const widthRef = useRef<HTMLDivElement>(null);
   const year = new Date().getFullYear();
- 
   const [width, setWidth] = useState<number>(500);
   const [optionValue, setOptionValue] = useState<number>(year);
   const [keys, setKeys] = useState<string[]>([]);
   const [values, setValues] = useState<number[]>([]);
-
+  const currState = useModalStore((state) => state.expenseRenderState)
   const handleChange = async (e: ChangeEvent<HTMLSelectElement>) => {
     const change = parseInt(e.target.value, 10);
     setOptionValue(change);
@@ -36,7 +38,7 @@ const AnnualyChart = () => {
     reSize();
     window.addEventListener("resize", reSize);
     return () => window.removeEventListener("resize", reSize);
-  }, []);
+  }, [currState]);
 
   return (
     <div ref={widthRef} className="w-full flex flex-col gap-3">
@@ -53,7 +55,7 @@ const AnnualyChart = () => {
         </select>
       </div>
 
-      <LineChart
+      <LineChart className="overflow-x-scroll"
         xAxis={[
           {
             data: keys,
