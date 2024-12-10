@@ -1,8 +1,14 @@
 import { Divider } from "@mui/material";
+import { Metadata } from "next";
+
 import React from "react";
 import ResultTable from "@/components/Results/ResultTable";
 import { fetchSubjectForClass } from "@/components/Results/Functions";
 
+export const metadata: Metadata = {
+  title: "Schoolify | Results",
+  description: "results",
+};
 const page = async () => {
   const subject: string[] = await fetchSubjectForClass("class_12");
   return (

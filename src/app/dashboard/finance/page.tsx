@@ -8,6 +8,13 @@ import TotalCollectionFromFees from "@/components/Finance/TotalCollectionFromFee
 import TotalOutstandingSalary from "@/components/Finance/TotalOutstandingSalary";
 import TotalSalaryPaid from "@/components/Finance/TotalSalaryPaid";
 import Divider from "@mui/material/Divider";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "Schoolify | Finance",
+  description: "Finance",
+};
 
 const page = async () => {
   return (

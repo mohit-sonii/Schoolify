@@ -2,9 +2,15 @@ import IncomeTable from "@/components/Profit/IncomeTable";
 import Income from "@/components/Profit/Income";
 import Expense from "@/components/Profit/Expense";
 import Profit from "@/components/Profit/Profit";
+import { Metadata } from "next";
+
 import ProfitAnuallyChart from "@/components/Profit/ProfitAnuallyChart";
 import { Divider } from "@mui/material";
 
+export const metadata: Metadata = {
+  title: "Schoolify | Profit",
+  description: "Profit",
+};
 const page = async () => {
   return (
     <div className="flex flex-col gap-5">

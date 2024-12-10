@@ -15,7 +15,7 @@ export default function TotalStudents({
 ) {
   const widthRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState(500);
-
+  
   useEffect(() => {
     function handleResize() {
       if (widthRef.current) {
@@ -27,13 +27,13 @@ export default function TotalStudents({
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
-  const classes = range.map((val) => (val.className))
+  const classes = range.map((val) => (val.className.toString().concat("th")))
   const counting = range.map((val) => (val.count))
 
   return (
 
     <div ref={widthRef} className="w-full">
-      <LineChart
+      <LineChart className="overflow-x-scroll"
         xAxis={
           [
             {

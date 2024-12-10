@@ -10,6 +10,16 @@ import { dataType } from "@/components/Class/Type";
 import StudentsGenderChart from "@/components/Class/StudentsGenderChart";
 import ClassOutstandingFees from "@/components/Class/ClassOutstandingFees";
 
+
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "Schoolify | Classes",
+  description: "classes",
+};
+
+
 const page = async () => {
   const result: dataType[] = await fetchTeacherForEachClass();
 

@@ -18,15 +18,12 @@ import useModalStore from "@/utils/store";
 import StudentForm from "@/components/AddPopUps/Students/StudentForm";
 import { StudentsFetch } from "../FetchStudents";
 
-export const StudentTable = ({
-  students,
-}: {
-  students: StudentTableSchema[];
-}) => {
+export const StudentTable = () => {
   const [optionClass, setOptionClass] = useState<string>("");
   const [optionAdmission, setOptionAdmission] = useState<number | undefined>(
     undefined
   );
+  const [students,setStudents] = useState<StudentTableSchema[]>([])
   const currValue = useModalStore((state) => state.studentRenderState);
   const [optionFees, setOptionFees] = useState<string>("");
   const [filterResult, setFilterResults] = useState<StudentTableSchema[]>([]);
@@ -37,7 +34,7 @@ export const StudentTable = ({
   useEffect(() => {
     const fetch = async () => {
       const result = await StudentsFetch();
-      students = result.arr;
+      setStudents(result.arr)
     };
     fetch();
   }, [currValue]);
@@ -79,6 +76,7 @@ export const StudentTable = ({
     optionFees,
     optionAdmission,
     optionClass,
+    students,
     sortingAdmissionValue,
     sortingFeesValue,
   ]);
@@ -241,7 +239,7 @@ export const StudentTable = ({
       </div>
       <TableContainer
         component={Paper}
-        className="bg-gray-100 border shadow-xl rounded-xl border-gray-400"
+        className="bg-gray-100 border shadow-md rounded-xl border-gray-400"
       >
         <Table aria-label="collapsible table">
           <TableHead>

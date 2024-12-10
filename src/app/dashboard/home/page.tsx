@@ -4,7 +4,13 @@ import AttendanceChartContainer from "../../../components/Admin/AttendenceChart/
 import AdmissionChartContainer from "@/components/Admin/AdmissionChart/AdmissionChartContainer";
 import OutstandingDuesContainer from "@/components/Admin/OutstandingDues/OutstandingDuesContainer";
 import { Divider } from "@mui/material";
+import { Metadata } from "next";
 
+
+export const metadata: Metadata = {
+  title: "Schoolify | Home",
+  description: "Home",
+};
 const page = () => {
   return (
     <div className="flex flex-wrap gap-4 w-full ">

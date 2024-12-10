@@ -17,7 +17,6 @@ const TotalStudentsContainer = () => {
     };
     fetch()
   }, [currValue]);
-
   return (
     <div className="w-full flex flex-col flex-wrap gap-2">
       <h1 className="font-semibold text-gray-800">

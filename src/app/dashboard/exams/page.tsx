@@ -2,6 +2,14 @@
 // import { findExams } from '@/components/Exams/Functions'
 // import { Divider } from '@mui/material'
 import React from 'react'
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "Schoolify | Exams",
+  description: "exams",
+};
+ 
 
 // const page = async () => {
 //   await findExams("May", "class_12")

@@ -2,7 +2,12 @@ import CreateSubjectButton from '@/components/Subjects/CreateSubjectButton'
 import { Divider } from '@mui/material'
 import React from 'react'
 import { ShowSubjects } from '../../../components/Subjects/ShowSubjects'
+import { Metadata } from 'next';
 
+export const metadata: Metadata = {
+  title: "Schoolify | Subjects",
+  description: "subjects",
+};
 const page = () => {
   return (
     <div className="flex flex-col gap-5">

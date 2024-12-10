@@ -8,7 +8,12 @@ import NumberOfTeacherChart from "@/components/teachers/NumberOfTeacherChart";
 import TeacherCount from "@/components/teachers/TeacherCount";
 import TeacherTable from "@/components/teachers/TeacherTable";
 import { Divider } from "@mui/material";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Schoolify | Teachers",
+  description: "teachers",
+};
 const page = async () => {
   const currentYear = new Date().getFullYear();
   const totalTeachers = await teacherCount();
