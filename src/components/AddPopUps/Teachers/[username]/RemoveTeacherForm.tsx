@@ -16,7 +16,7 @@ const RemoveTeacherForm = ({ username }: { username: string }) => {
       if (result.success) {
         toast.success(result.message);
         closeModal()
-        router.replace("/teachers")
+        router.replace("/dashboard/teachers")
       } else {
         toast.error(result.message);
       }

@@ -10,7 +10,7 @@ import { Divider } from "@mui/material";
 import React from "react";
 import Header from "@/components/teachers/SingleTeacher/Header";
 
-const page = async ({ params }: { params: { username: string } }) => {
+const page = async ({ params }: { params: any }) => {
   const res = await params;
   const data = await teacherData(res.username);
   const {
@@ -49,8 +49,7 @@ const page = async ({ params }: { params: { username: string } }) => {
           monthsPending={pendingMonths}
         />
         <Divider />
-        {/* <Subjects subject={data.Subject } classes={data.Classes} /> */}
-        <Subjects classes={data.Classes} />
+        <Subjects subjectAndClasses={data.subjectAndClasses} />
       </div>
     </div>
   );

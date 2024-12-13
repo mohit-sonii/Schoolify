@@ -59,7 +59,6 @@ export const teacherJoiningMonth = async (
     });
   const allKeys: string[] = Object.keys(monthWiseData);
   const allValues: number[] = Object.values(monthWiseData);
-  console.log(allKeys,allValues)
   return [allKeys, allValues];
 };
 

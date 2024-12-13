@@ -11,6 +11,7 @@ export type Teacher = {
   "Last Paid": string;
   Salary: number;
   Gender: string;
-  // Subject: string[];
-  Classes:string[]
+  subjectAndClasses: {
+    [key:string]:string[]
+  }[]
 };

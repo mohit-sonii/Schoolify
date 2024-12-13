@@ -26,7 +26,9 @@ function Row(props: { row: teacherType }) {
         <TableCell
           component="th"
           scope="row"
-          onClick={() => router.push(`/teachers/${row.username}`)}
+          onClick={() => {
+            router.push(`/dashboard/teachers/${row.username}`);
+          }}
           className="cursor-pointer hover:font-semibold text-black"
         >
           {row.username}

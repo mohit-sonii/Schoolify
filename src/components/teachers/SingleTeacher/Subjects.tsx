@@ -1,34 +1,33 @@
-"use server"
+"use server";
 import React from "react";
 const Subjects = ({
-  // subject,
-  classes,
+  subjectAndClasses,
 }: {
-  // subject: string[];
-  classes: string[];
+  subjectAndClasses: {
+    [key: string]: string[];
+  }[];
 }) => {
   return (
     <div className="w-full h-max bg-orange-200 flex text-xs flex-row items-center justify-between rounded-lg p-4 gap-3 ">
-      {/* <div className="w-[45%]  h-max flex flex-col gap-5">
-        <h1 className="text-sm font-semibold text-gray-900 ">
-          Subjects
-        </h1>
+      <div className="w-full flex flex-col gap-5">
+        <h1 className="text-sm font-semibold text-gray-900 ">Classes And Subjects</h1>
         <div className="flex flex-col gap-2 text-xs font-light  w-full ">
-          {subject.map((val,index) => (
-            <span key={index} className="text-gray-700 text-xs font-semibold flex-wrap">
-              {val}
-            </span>
-          ))}
-        </div>
-      </div> */}
-      <div className="w-[45%] flex flex-col gap-5">
-        <h1 className="text-sm font-semibold text-gray-900 ">
-          Classes
-        </h1>
-        <div className="flex flex-col gap-2 text-xs font-light  w-full ">
-          {classes.map((val,index) => (
-            <span key={index} className="text-gray-700 text-xs font-semibold">{val}</span>
-          ))}
+          {subjectAndClasses.map((val) => {
+            const key = Object.keys(val)[0];
+            const values = val[key];
+            return (
+              <div className="w-full flex flex-col gap-3">
+                <p className="w-max text-xs font-bold px-4 py-2 flex items-center justify-center bg-white rounded-md">
+                  {key.replace("class_", "Class ")}
+                </p>
+                <div className="w-full xl:w-[80%] m-auto flex ">
+                  {values.map((str) => (
+                    <p className="w-max font-normal bg-gray-400 rounded-md px-4 py-2 text-xs">{str}</p>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

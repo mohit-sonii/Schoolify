@@ -18,11 +18,11 @@ const Salary = ({
       <div className="flex flex-col gap-2 text-xs font-light  w-full ">
         <h3 className="font-semibold text-gray-700">
           Salary :{" "}
-          <span className="font-normal text-gray-500">{`${amount}`}</span>
+          <span className="font-normal text-black">{`${amount}`}</span>
         </h3>
         <h3 className="font-semibold text-gray-700">
           Last Paid :{" "}
-          <span className="font-normal text-gray-500">{`${lastPaid}`}</span>
+          <span className="font-normal text-black">{`${lastPaid}`}</span>
         </h3>
         <h3 className="font-semibold text-gray-700 flex flex-wrap gap-3 items-center">
           Pending For :{" "}
@@ -30,18 +30,18 @@ const Salary = ({
             monthsPending.map((val) => (
               <span
                 key={val}
-                className="text-gray-600 font-light text-xs rounded-sm shadow-sm px-4 py-1  bg-white w-max flex gap-2 "
+                className="text-black font-light text-xs rounded-sm shadow-sm px-4 py-1  bg-white w-max flex gap-2 "
               >
                 {val}
               </span>
             ))
           ) : (
-            <span className="font-normal text-gray-500">Upto date</span>
+            <span className="font-normal text-black">Upto date</span>
           )}
         </h3>
         <h3 className="font-semibold text-gray-700">
           Total Pending Amount :{" "}
-          <span className="font-bold text-gray-500">{`${pendingAmount}`}</span>
+          <span className="font-bold text-black">{`${pendingAmount}`}</span>
         </h3>
       </div>
     </div>

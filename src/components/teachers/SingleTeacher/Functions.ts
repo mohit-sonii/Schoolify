@@ -23,26 +23,24 @@ export const teacherData = async (user: string): Promise<Teacher> => {
         gender: true,
         servedPresent: true,
         servedTill: true,
-        // subjects: true
+        subjects: true,
       },
     })
     .then((res) => {
-      // const subjectsName: string[] = [];
-      const classNames: string[] = [];
-      // Array.isArray(res.subjects) ? res.subjects.forEach((val) => {
-      //   if (typeof val === 'object' && val !== null) {
-      //     const subjectsArray = val.subjects as { subject: string }[];
-      //     const className = val.classname as string;
-
-      //     if (Array.isArray(subjectsArray)) {
-      //       subjectsArray.forEach((sub) => {
-      //         if (sub.subject) {
-      //           subjectsName.push(sub.subject);
-      //         }
-      //       });
-      //     }
-      // }) : []
-      // console.log(subjectsName)
+      let filter: {
+        [key: string]: string[]
+      }[] = [{
+        "": []
+      }]
+      if (res.subjects != null) {
+        const data: {
+          subjects: string[];
+          classname: string;
+        }[] = res.subjects as any;
+        filter = data.map((val) => {
+          return { [val.classname.toString()]: val.subjects }
+        });
+      }
       return {
         "Joinne Id": res.id,
         Address: res.address,
@@ -56,28 +54,27 @@ export const teacherData = async (user: string): Promise<Teacher> => {
         "Last Serve":
           res.servedTill?.toString() == "" ? "---" : res.servedTill?.toString(),
         "Last Paid": res.lastSalaryPaid.toString(),
-        // Subject: subjectsName,
-        Classes: classNames,
-        Gender: res.gender.toString()
+        subjectAndClasses: filter,
+        Gender: res.gender.toString(),
       };
     });
   return result;
 };
 
-export const findPending = async (lastPaid: string, salary: number): Promise<{ pendingMonths: string[], pendingTotalAmount: number }> => {
-  const pending: string[] = []
+export const findPending = async (
+  lastPaid: string,
+  salary: number
+): Promise<{ pendingMonths: string[]; pendingTotalAmount: number }> => {
+  const pending: string[] = [];
   let amount: number = 0;
-  const currentMonthIdx = new Date().getMonth() - 1
-  let lastPaidIdx = months.indexOf(lastPaid) + 1
+  const currentMonthIdx = new Date().getMonth() - 1;
+  let lastPaidIdx = months.indexOf(lastPaid) + 1;
   while (lastPaidIdx <= currentMonthIdx) {
-    pending.push(months[lastPaidIdx++])
+    pending.push(months[lastPaidIdx++]);
     amount += salary;
   }
   return {
     pendingMonths: pending,
-    pendingTotalAmount: amount
-  }
-
-}
-
-
+    pendingTotalAmount: amount,
+  };
+};
