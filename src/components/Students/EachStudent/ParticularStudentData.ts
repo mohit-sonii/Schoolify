@@ -2,7 +2,7 @@ import prisma from "@/utils/db"
 import { ClassData, Student } from "./EachStudentTypes"
 
 export const StudentData = async (user: string): Promise<Student> => {
-  return await prisma.student.findFirstOrThrow({
+  return await prisma.student.findFirst({
     where: {
       username: user
     },

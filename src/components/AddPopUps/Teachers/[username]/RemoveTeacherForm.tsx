@@ -2,9 +2,9 @@
 
 import useModalStore from "@/utils/store";
 import React from "react";
-import { DeleteTeacher } from "./Action";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { DeleteAction } from "@/utils/DeleteAction";
 
 const RemoveTeacherForm = ({ username }: { username: string }) => {
   const router = useRouter()
@@ -12,7 +12,7 @@ const RemoveTeacherForm = ({ username }: { username: string }) => {
   const handleDelete = async () => {
     const setLoading = toast.loading("Please Wait..");
     try {
-      const result = await DeleteTeacher(username);
+      const result = await DeleteAction(username,"teacher");
       if (result.success) {
         toast.success(result.message);
         closeModal()

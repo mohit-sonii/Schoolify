@@ -96,7 +96,7 @@ export const StudentTable = () => {
           <TableCell
             component="th"
             scope="row"
-            onClick={() => router.push(`/students/${row.Username}`)}
+            onClick={() => router.push(`/dashboard/students/${row.Username}`)}
             className="cursor-pointer hover:font-semibold text-black"
           >
             {row.StudentId}
